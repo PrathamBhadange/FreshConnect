@@ -1,12 +1,383 @@
-import PlaceholderPage from "./PlaceholderPage";
-import { Store } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { 
+  Search, 
+  Filter, 
+  MapPin, 
+  Star, 
+  Clock, 
+  Truck,
+  MessageCircle,
+  ShoppingCart,
+  Store,
+  Leaf,
+  Apple,
+  Carrot,
+  Wheat,
+  Fish,
+  Milk,
+  ChefHat,
+  CheckCircle,
+  Eye
+} from "lucide-react";
+
+interface Supplier {
+  id: string;
+  name: string;
+  description: string;
+  rating: number;
+  reviews: number;
+  distance: string;
+  deliveryTime: string;
+  categories: string[];
+  products: Product[];
+  verified: boolean;
+  image: string;
+  location: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  unit: string;
+  stock: number;
+  image: string;
+  category: string;
+  fresh: boolean;
+}
 
 export default function Marketplace() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [sortBy, setSortBy] = useState("distance");
+  const [viewMode, setViewMode] = useState<"suppliers" | "products">("suppliers");
+
+  // Mock data - in real app, this would come from API
+  const mockSuppliers: Supplier[] = [
+    {
+      id: "1",
+      name: "Fresh Valley Farms",
+      description: "Premium organic fruits and vegetables directly from our farms",
+      rating: 4.8,
+      reviews: 124,
+      distance: "2.3 km",
+      deliveryTime: "30-45 min",
+      categories: ["Fruits", "Vegetables"],
+      verified: true,
+      image: "/placeholder.svg",
+      location: "Sector 15, Gurgaon",
+      products: [
+        { id: "1", name: "Fresh Tomatoes", price: 40, unit: "kg", stock: 150, image: "/placeholder.svg", category: "Vegetables", fresh: true },
+        { id: "2", name: "Organic Onions", price: 35, unit: "kg", stock: 200, image: "/placeholder.svg", category: "Vegetables", fresh: true },
+        { id: "3", name: "Fresh Apples", price: 120, unit: "kg", stock: 80, image: "/placeholder.svg", category: "Fruits", fresh: true }
+      ]
+    },
+    {
+      id: "2",
+      name: "Spice Kingdom",
+      description: "Authentic Indian spices and masalas for street food vendors",
+      rating: 4.9,
+      reviews: 89,
+      distance: "1.8 km",
+      deliveryTime: "20-30 min",
+      categories: ["Spices", "Masalas"],
+      verified: true,
+      image: "/placeholder.svg",
+      location: "Old Delhi Market",
+      products: [
+        { id: "4", name: "Garam Masala", price: 280, unit: "kg", stock: 50, image: "/placeholder.svg", category: "Spices", fresh: false },
+        { id: "5", name: "Red Chili Powder", price: 200, unit: "kg", stock: 75, image: "/placeholder.svg", category: "Spices", fresh: false },
+        { id: "6", name: "Turmeric Powder", price: 150, unit: "kg", stock: 100, image: "/placeholder.svg", category: "Spices", fresh: false }
+      ]
+    },
+    {
+      id: "3",
+      name: "Metro Dairy Products",
+      description: "Fresh dairy products delivered daily from local farms",
+      rating: 4.7,
+      reviews: 156,
+      distance: "3.1 km",
+      deliveryTime: "45-60 min",
+      categories: ["Dairy", "Milk"],
+      verified: true,
+      image: "/placeholder.svg",
+      location: "Dairy Colony, Delhi",
+      products: [
+        { id: "7", name: "Fresh Milk", price: 55, unit: "liter", stock: 300, image: "/placeholder.svg", category: "Dairy", fresh: true },
+        { id: "8", name: "Paneer", price: 280, unit: "kg", stock: 40, image: "/placeholder.svg", category: "Dairy", fresh: true },
+        { id: "9", name: "Curd", price: 60, unit: "kg", stock: 80, image: "/placeholder.svg", category: "Dairy", fresh: true }
+      ]
+    }
+  ];
+
+  const categories = [
+    { id: "all", name: "All Categories", icon: <Store className="h-4 w-4" /> },
+    { id: "fruits", name: "Fruits", icon: <Apple className="h-4 w-4" /> },
+    { id: "vegetables", name: "Vegetables", icon: <Carrot className="h-4 w-4" /> },
+    { id: "spices", name: "Spices", icon: <ChefHat className="h-4 w-4" /> },
+    { id: "grains", name: "Grains", icon: <Wheat className="h-4 w-4" /> },
+    { id: "dairy", name: "Dairy", icon: <Milk className="h-4 w-4" /> },
+    { id: "meat", name: "Meat & Fish", icon: <Fish className="h-4 w-4" /> }
+  ];
+
+  const filteredSuppliers = mockSuppliers.filter(supplier => {
+    const matchesSearch = supplier.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         supplier.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || 
+                           supplier.categories.some(cat => cat.toLowerCase().includes(selectedCategory.toLowerCase()));
+    return matchesSearch && matchesCategory;
+  });
+
+  const allProducts = mockSuppliers.flatMap(supplier => 
+    supplier.products.map(product => ({ ...product, supplierName: supplier.name, supplierId: supplier.id }))
+  );
+
+  const filteredProducts = allProducts.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || 
+                           product.category.toLowerCase().includes(selectedCategory.toLowerCase());
+    return matchesSearch && matchesCategory;
+  });
+
   return (
-    <PlaceholderPage
-      title="Marketplace"
-      description="Browse suppliers and their fresh products"
-      icon={<Store className="h-12 w-12 text-supplier" />}
-    />
+    <div className="container mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight">Marketplace</h1>
+        <p className="text-muted-foreground mt-2">Discover fresh ingredients from verified suppliers</p>
+      </div>
+
+      {/* Search and Filters */}
+      <div className="mb-8 space-y-4">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Search suppliers or products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          
+          <div className="flex gap-4">
+            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((category) => (
+                  <SelectItem key={category.id} value={category.id}>
+                    <div className="flex items-center space-x-2">
+                      {category.icon}
+                      <span>{category.name}</span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="w-[150px]">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="distance">Distance</SelectItem>
+                <SelectItem value="rating">Rating</SelectItem>
+                <SelectItem value="delivery">Delivery Time</SelectItem>
+                <SelectItem value="price">Price</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* View Toggle */}
+        <div className="flex items-center gap-2">
+          <Button
+            variant={viewMode === "suppliers" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setViewMode("suppliers")}
+          >
+            <Store className="mr-2 h-4 w-4" />
+            Suppliers ({filteredSuppliers.length})
+          </Button>
+          <Button
+            variant={viewMode === "products" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setViewMode("products")}
+          >
+            <ShoppingCart className="mr-2 h-4 w-4" />
+            Products ({filteredProducts.length})
+          </Button>
+        </div>
+      </div>
+
+      {/* Category Filter Pills */}
+      <div className="mb-6 flex flex-wrap gap-2">
+        {categories.map((category) => (
+          <Button
+            key={category.id}
+            variant={selectedCategory === category.id ? "default" : "outline"}
+            size="sm"
+            onClick={() => setSelectedCategory(category.id)}
+            className="h-9"
+          >
+            {category.icon}
+            <span className="ml-2">{category.name}</span>
+          </Button>
+        ))}
+      </div>
+
+      {/* Results */}
+      {viewMode === "suppliers" ? (
+        /* Suppliers View */
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {filteredSuppliers.map((supplier) => (
+            <Card key={supplier.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="aspect-video relative bg-muted">
+                <img 
+                  src={supplier.image} 
+                  alt={supplier.name}
+                  className="object-cover w-full h-full"
+                />
+                {supplier.verified && (
+                  <Badge className="absolute top-3 right-3 bg-green-500">
+                    <CheckCircle className="mr-1 h-3 w-3" />
+                    Verified
+                  </Badge>
+                )}
+              </div>
+              
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <CardTitle className="text-lg">{supplier.name}</CardTitle>
+                    <CardDescription className="mt-1">{supplier.description}</CardDescription>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
+                  <div className="flex items-center gap-1">
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <span className="font-medium">{supplier.rating}</span>
+                    <span>({supplier.reviews})</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <MapPin className="h-4 w-4" />
+                    <span>{supplier.distance}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{supplier.deliveryTime}</span>
+                  </div>
+                </div>
+              </CardHeader>
+
+              <CardContent className="pt-0">
+                <div className="flex flex-wrap gap-1 mb-4">
+                  {supplier.categories.map((category, index) => (
+                    <Badge key={index} variant="secondary" className="text-xs">
+                      {category}
+                    </Badge>
+                  ))}
+                </div>
+
+                <div className="space-y-2 mb-4">
+                  <div className="text-sm font-medium">Popular Products:</div>
+                  {supplier.products.slice(0, 3).map((product) => (
+                    <div key={product.id} className="flex justify-between items-center text-sm">
+                      <span className="flex items-center gap-2">
+                        {product.fresh && <Leaf className="h-3 w-3 text-green-500" />}
+                        {product.name}
+                      </span>
+                      <span className="font-medium">₹{product.price}/{product.unit}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Separator className="my-4" />
+
+                <div className="flex gap-2">
+                  <Button size="sm" className="flex-1">
+                    <Eye className="mr-2 h-4 w-4" />
+                    View Store
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    <MessageCircle className="h-4 w-4" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        /* Products View */
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {filteredProducts.map((product) => (
+            <Card key={`${product.supplierId}-${product.id}`} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="aspect-square relative bg-muted">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="object-cover w-full h-full"
+                />
+                {product.fresh && (
+                  <Badge className="absolute top-2 right-2 bg-green-500" size="sm">
+                    <Leaf className="mr-1 h-2 w-2" />
+                    Fresh
+                  </Badge>
+                )}
+              </div>
+              
+              <CardContent className="p-4">
+                <h3 className="font-semibold text-sm mb-1">{product.name}</h3>
+                <p className="text-xs text-muted-foreground mb-2">{product.supplierName}</p>
+                
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-bold text-lg">₹{product.price}</span>
+                  <span className="text-xs text-muted-foreground">/{product.unit}</span>
+                </div>
+                
+                <div className="text-xs text-muted-foreground mb-3">
+                  Stock: {product.stock} {product.unit}
+                </div>
+                
+                <Button size="sm" className="w-full">
+                  <ShoppingCart className="mr-2 h-3 w-3" />
+                  Add to Cart
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {/* Empty State */}
+      {(viewMode === "suppliers" ? filteredSuppliers : filteredProducts).length === 0 && (
+        <div className="text-center py-12">
+          <div className="mx-auto w-24 h-24 bg-muted rounded-full flex items-center justify-center mb-4">
+            <Search className="h-8 w-8 text-muted-foreground" />
+          </div>
+          <h3 className="text-lg font-semibold mb-2">No {viewMode} found</h3>
+          <p className="text-muted-foreground mb-4">
+            Try adjusting your search or filter criteria
+          </p>
+          <Button onClick={() => {
+            setSearchQuery("");
+            setSelectedCategory("all");
+          }}>
+            Clear Filters
+          </Button>
+        </div>
+      )}
+    </div>
   );
 }
