@@ -290,6 +290,7 @@ export default function Map() {
   // Get user's current location
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
+      setIsLoadingLocation(true);
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const location = {
@@ -298,13 +299,19 @@ export default function Map() {
           };
           setUserLocation(location);
           setMapCenter(location);
+          setAutoLocationEnabled(true);
 
           // Get location name and show confirmation
           const locationName = await getLocationName(location.lat, location.lng);
-          alert(`Location detected: ${locationName}\nFinding nearby suppliers...`);
+          setCurrentLocationName(locationName);
+          setIsLoadingLocation(false);
+
+          // Clear search query when using location
+          setSearchQuery("");
         },
         (error) => {
           console.error("Error getting location:", error);
+          setIsLoadingLocation(false);
           let errorMessage = "Unable to get your location. ";
 
           switch(error.code) {
