@@ -68,6 +68,7 @@ interface Product {
 
 export default function Marketplace() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("distance");
   const [viewMode, setViewMode] = useState<"suppliers" | "products">(
