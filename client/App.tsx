@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Marketplace from "./pages/Marketplace";
+import SupplierStore from "./pages/SupplierStore";
+import Messages from "./pages/Messages";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 import { MapPin, MessageCircle, ShoppingCart, User, Truck, Store } from "lucide-react";
@@ -24,9 +26,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/marketplace" element={<Layout><Marketplace /></Layout>} />
+          <Route path="/supplier/:supplierId" element={<Layout><SupplierStore /></Layout>} />
           <Route path="/map" element={<Layout><PlaceholderPage title="Find Suppliers" description="Locate nearby suppliers with real-time locations and stock" icon={<MapPin className="h-12 w-12 text-primary" />} /></Layout>} />
           <Route path="/orders" element={<Layout><PlaceholderPage title="My Orders" description="Track your orders and order history" icon={<ShoppingCart className="h-12 w-12 text-primary" />} /></Layout>} />
-          <Route path="/messages" element={<Layout><PlaceholderPage title="Messages" description="Chat with suppliers and vendors" icon={<MessageCircle className="h-12 w-12 text-primary" />} /></Layout>} />
+          <Route path="/messages" element={<Layout><Messages /></Layout>} />
           <Route path="/profile" element={<Layout><PlaceholderPage title="Profile" description="Manage your account settings" icon={<User className="h-12 w-12 text-primary" />} /></Layout>} />
           <Route path="/vendor-signup" element={<Layout><PlaceholderPage title="Vendor Registration" description="Join as a street food vendor" icon={<Truck className="h-12 w-12 text-vendor" />} /></Layout>} />
           <Route path="/supplier-signup" element={<Layout><PlaceholderPage title="Supplier Registration" description="Register as a fresh produce supplier" icon={<Store className="h-12 w-12 text-supplier" />} /></Layout>} />
