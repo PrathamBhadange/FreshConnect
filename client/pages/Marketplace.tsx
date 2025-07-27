@@ -154,7 +154,7 @@ export default function Marketplace() {
       deliveryTime: "20-30 min",
       categories: ["Spices", "Masalas"],
       verified: true,
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop&crop=center",
       location: "Old Delhi Market",
       products: [
         {
