@@ -75,6 +75,14 @@ export default function Marketplace() {
     "suppliers",
   );
 
+  // Handle URL search parameters
+  useEffect(() => {
+    const searchParam = searchParams.get('search');
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+  }, [searchParams]);
+
   // Mock data - in real app, this would come from API
   const mockSuppliers: Supplier[] = [
     {
