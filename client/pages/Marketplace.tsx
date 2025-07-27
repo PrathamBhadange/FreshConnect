@@ -137,7 +137,7 @@ export default function Marketplace() {
           price: 120,
           unit: "kg",
           stock: 80,
-          image: "/placeholder.svg",
+          image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300&h=300&fit=crop&crop=center",
           category: "Fruits",
           fresh: true,
         },
