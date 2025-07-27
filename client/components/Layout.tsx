@@ -2,15 +2,15 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { 
-  Store, 
-  Truck, 
-  MessageCircle, 
-  MapPin, 
-  User, 
-  Menu, 
+import {
+  Store,
+  Truck,
+  MessageCircle,
+  MapPin,
+  User,
+  Menu,
   X,
-  ShoppingCart
+  ShoppingCart,
 } from "lucide-react";
 
 interface LayoutProps {
@@ -40,7 +40,9 @@ export default function Layout({ children }: LayoutProps) {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-supplier text-supplier-foreground">
               <Store className="h-5 w-5" />
             </div>
-            <span className="text-xl font-bold text-foreground">FreshConnect</span>
+            <span className="text-xl font-bold text-foreground">
+              FreshConnect
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -53,7 +55,7 @@ export default function Layout({ children }: LayoutProps) {
                   "flex items-center space-x-2 text-sm font-medium transition-colors hover:text-primary",
                   isActive(item.href)
                     ? "text-primary"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground",
                 )}
               >
                 <item.icon className="h-4 w-4" />
@@ -79,7 +81,12 @@ export default function Layout({ children }: LayoutProps) {
               </Button>
             </div>
 
-            <Button variant="ghost" size="icon" asChild className="hidden md:flex">
+            <Button
+              variant="ghost"
+              size="icon"
+              asChild
+              className="hidden md:flex"
+            >
               <Link to="/profile">
                 <User className="h-4 w-4" />
               </Link>
@@ -113,7 +120,7 @@ export default function Layout({ children }: LayoutProps) {
                     "flex items-center space-x-3 text-sm font-medium transition-colors hover:text-primary py-2",
                     isActive(item.href)
                       ? "text-primary"
-                      : "text-muted-foreground"
+                      : "text-muted-foreground",
                   )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -121,21 +128,35 @@ export default function Layout({ children }: LayoutProps) {
                   <span>{item.name}</span>
                 </Link>
               ))}
-              
+
               <div className="pt-4 border-t space-y-2">
-                <Button variant="outline" className="w-full justify-start" asChild>
-                  <Link to="/vendor-signup" onClick={() => setMobileMenuOpen(false)}>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  asChild
+                >
+                  <Link
+                    to="/vendor-signup"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
                     <Truck className="mr-2 h-4 w-4" />
                     I'm a Vendor
                   </Link>
                 </Button>
                 <Button className="w-full justify-start" asChild>
-                  <Link to="/supplier-signup" onClick={() => setMobileMenuOpen(false)}>
+                  <Link
+                    to="/supplier-signup"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
                     <Store className="mr-2 h-4 w-4" />
                     I'm a Supplier
                   </Link>
                 </Button>
-                <Button variant="ghost" className="w-full justify-start" asChild>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start"
+                  asChild
+                >
                   <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
                     <User className="mr-2 h-4 w-4" />
                     Profile
@@ -148,9 +169,7 @@ export default function Layout({ children }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1">
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
 
       {/* Footer */}
       <footer className="border-t bg-background">
@@ -164,38 +183,102 @@ export default function Layout({ children }: LayoutProps) {
                 <span className="font-semibold">FreshConnect</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Connecting street food vendors with quality suppliers for fresh ingredients.
+                Connecting street food vendors with quality suppliers for fresh
+                ingredients.
               </p>
             </div>
-            
+
             <div>
               <h3 className="font-semibold mb-3">For Vendors</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/vendor-signup" className="hover:text-foreground transition-colors">Sign Up</Link></li>
-                <li><Link to="/marketplace" className="hover:text-foreground transition-colors">Browse Suppliers</Link></li>
-                <li><Link to="/how-it-works-vendor" className="hover:text-foreground transition-colors">How It Works</Link></li>
+                <li>
+                  <Link
+                    to="/vendor-signup"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Sign Up
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/marketplace"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Browse Suppliers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/how-it-works-vendor"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    How It Works
+                  </Link>
+                </li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="font-semibold mb-3">For Suppliers</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/supplier-signup" className="hover:text-foreground transition-colors">Join Now</Link></li>
-                <li><Link to="/supplier-dashboard" className="hover:text-foreground transition-colors">Dashboard</Link></li>
-                <li><Link to="/how-it-works-supplier" className="hover:text-foreground transition-colors">How It Works</Link></li>
+                <li>
+                  <Link
+                    to="/supplier-signup"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Join Now
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/supplier-dashboard"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/how-it-works-supplier"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    How It Works
+                  </Link>
+                </li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="font-semibold mb-3">Support</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/help" className="hover:text-foreground transition-colors">Help Center</Link></li>
-                <li><Link to="/contact" className="hover:text-foreground transition-colors">Contact Us</Link></li>
-                <li><Link to="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link></li>
+                <li>
+                  <Link
+                    to="/help"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Contact Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/terms"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Terms of Service
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
-          
+
           <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
             <p>&copy; 2024 FreshConnect. All rights reserved.</p>
           </div>

@@ -17,7 +17,7 @@ import {
   User,
   CheckCheck,
   Clock,
-  MessageCircle
+  MessageCircle,
 } from "lucide-react";
 
 interface Message {
@@ -50,14 +50,16 @@ interface ChatProps {
   compact?: boolean;
 }
 
-export default function Chat({ 
-  currentUserId = "user1", 
+export default function Chat({
+  currentUserId = "user1",
   currentUserType = "vendor",
   conversationId,
-  compact = false 
+  compact = false,
 }: ChatProps) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
-  const [activeConversation, setActiveConversation] = useState<string | null>(conversationId || null);
+  const [activeConversation, setActiveConversation] = useState<string | null>(
+    conversationId || null,
+  );
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -71,10 +73,11 @@ export default function Chat({
         participantName: "Fresh Valley Farms",
         participantType: "supplier",
         participantAvatar: "/placeholder.svg",
-        lastMessage: "Your order has been confirmed and will be delivered tomorrow morning.",
+        lastMessage:
+          "Your order has been confirmed and will be delivered tomorrow morning.",
         lastMessageTime: new Date(Date.now() - 10 * 60 * 1000), // 10 minutes ago
         unreadCount: 0,
-        online: true
+        online: true,
       },
       {
         id: "conv2",
@@ -85,7 +88,7 @@ export default function Chat({
         lastMessage: "Do you need the premium quality masala or regular?",
         lastMessageTime: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
         unreadCount: 2,
-        online: false
+        online: false,
       },
       {
         id: "conv3",
@@ -96,65 +99,71 @@ export default function Chat({
         lastMessage: "Thanks for the quick delivery!",
         lastMessageTime: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
         unreadCount: 0,
-        online: true
-      }
+        online: true,
+      },
     ];
 
     const mockMessages: Message[] = [
       {
         id: "msg1",
-        content: "Hi! I'm interested in placing a bulk order for fresh vegetables.",
+        content:
+          "Hi! I'm interested in placing a bulk order for fresh vegetables.",
         timestamp: new Date(Date.now() - 60 * 60 * 1000),
         senderId: currentUserId,
         senderName: "You",
         senderType: currentUserType,
-        status: "read"
+        status: "read",
       },
       {
         id: "msg2",
-        content: "Hello! Thank you for reaching out. What quantities are you looking for?",
+        content:
+          "Hello! Thank you for reaching out. What quantities are you looking for?",
         timestamp: new Date(Date.now() - 55 * 60 * 1000),
         senderId: "supplier1",
         senderName: "Fresh Valley Farms",
         senderType: "supplier",
-        status: "read"
+        status: "read",
       },
       {
         id: "msg3",
-        content: "I need about 50kg tomatoes, 30kg onions, and 20kg potatoes daily for my street food stall.",
+        content:
+          "I need about 50kg tomatoes, 30kg onions, and 20kg potatoes daily for my street food stall.",
         timestamp: new Date(Date.now() - 50 * 60 * 1000),
         senderId: currentUserId,
         senderName: "You",
         senderType: currentUserType,
-        status: "read"
+        status: "read",
       },
       {
         id: "msg4",
-        content: "Perfect! We can definitely supply those quantities. For bulk orders like this, I can offer you a 15% discount. Would you like me to prepare a quote?",
+        content:
+          "Perfect! We can definitely supply those quantities. For bulk orders like this, I can offer you a 15% discount. Would you like me to prepare a quote?",
         timestamp: new Date(Date.now() - 45 * 60 * 1000),
         senderId: "supplier1",
         senderName: "Fresh Valley Farms",
         senderType: "supplier",
-        status: "read"
+        status: "read",
       },
       {
         id: "msg5",
-        content: "That sounds great! Yes, please send me the quote. Also, what's your delivery schedule?",
+        content:
+          "That sounds great! Yes, please send me the quote. Also, what's your delivery schedule?",
         timestamp: new Date(Date.now() - 40 * 60 * 1000),
         senderId: currentUserId,
         senderName: "You",
         senderType: currentUserType,
-        status: "read"
+        status: "read",
       },
       {
         id: "msg6",
-        content: "We deliver fresh produce every morning between 6-8 AM. I'll send you the detailed quote with pricing in a few minutes.",
+        content:
+          "We deliver fresh produce every morning between 6-8 AM. I'll send you the detailed quote with pricing in a few minutes.",
         timestamp: new Date(Date.now() - 35 * 60 * 1000),
         senderId: "supplier1",
         senderName: "Fresh Valley Farms",
         senderType: "supplier",
-        status: "read"
-      }
+        status: "read",
+      },
     ];
 
     setConversations(mockConversations);
@@ -178,18 +187,18 @@ export default function Chat({
       senderId: currentUserId,
       senderName: "You",
       senderType: currentUserType,
-      status: "sent"
+      status: "sent",
     };
 
-    setMessages(prev => [...prev, message]);
+    setMessages((prev) => [...prev, message]);
     setNewMessage("");
 
     // Simulate delivery confirmation
     setTimeout(() => {
-      setMessages(prev => 
-        prev.map(msg => 
-          msg.id === message.id ? { ...msg, status: "delivered" } : msg
-        )
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === message.id ? { ...msg, status: "delivered" } : msg,
+        ),
       );
     }, 1000);
   };
@@ -209,7 +218,7 @@ export default function Chat({
   };
 
   const getActiveConversation = () => {
-    return conversations.find(conv => conv.id === activeConversation);
+    return conversations.find((conv) => conv.id === activeConversation);
   };
 
   if (compact) {
@@ -227,7 +236,9 @@ export default function Chat({
                   key={message.id}
                   className={cn(
                     "flex",
-                    message.senderId === currentUserId ? "justify-end" : "justify-start"
+                    message.senderId === currentUserId
+                      ? "justify-end"
+                      : "justify-start",
                   )}
                 >
                   <div
@@ -235,7 +246,7 @@ export default function Chat({
                       "max-w-[80%] rounded-lg px-3 py-2 text-sm",
                       message.senderId === currentUserId
                         ? "bg-primary text-primary-foreground"
-                        : "bg-muted"
+                        : "bg-muted",
                     )}
                   >
                     <p>{message.content}</p>
@@ -279,7 +290,7 @@ export default function Chat({
                 key={conversation.id}
                 className={cn(
                   "p-4 border-b cursor-pointer hover:bg-muted transition-colors",
-                  activeConversation === conversation.id && "bg-muted"
+                  activeConversation === conversation.id && "bg-muted",
                 )}
                 onClick={() => setActiveConversation(conversation.id)}
               >
@@ -299,12 +310,17 @@ export default function Chat({
                       <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
                     )}
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <p className="font-medium truncate">{conversation.participantName}</p>
+                      <p className="font-medium truncate">
+                        {conversation.participantName}
+                      </p>
                       {conversation.unreadCount > 0 && (
-                        <Badge variant="default" className="ml-2 h-5 w-5 p-0 text-xs">
+                        <Badge
+                          variant="default"
+                          className="ml-2 h-5 w-5 p-0 text-xs"
+                        >
                           {conversation.unreadCount}
                         </Badge>
                       )}
@@ -332,9 +348,12 @@ export default function Chat({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-10 w-10">
-                    <AvatarImage src={getActiveConversation()?.participantAvatar} />
+                    <AvatarImage
+                      src={getActiveConversation()?.participantAvatar}
+                    />
                     <AvatarFallback>
-                      {getActiveConversation()?.participantType === "supplier" ? (
+                      {getActiveConversation()?.participantType ===
+                      "supplier" ? (
                         <Store className="h-5 w-5" />
                       ) : (
                         <User className="h-5 w-5" />
@@ -342,13 +361,15 @@ export default function Chat({
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-medium">{getActiveConversation()?.participantName}</p>
+                    <p className="font-medium">
+                      {getActiveConversation()?.participantName}
+                    </p>
                     <p className="text-sm text-muted-foreground">
                       {getActiveConversation()?.online ? "Online" : "Offline"}
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
                   <Button variant="ghost" size="sm">
                     <Phone className="h-4 w-4" />
@@ -372,15 +393,20 @@ export default function Chat({
                       key={message.id}
                       className={cn(
                         "flex",
-                        message.senderId === currentUserId ? "justify-end" : "justify-start"
+                        message.senderId === currentUserId
+                          ? "justify-end"
+                          : "justify-start",
                       )}
                     >
                       <div className="flex items-start gap-2 max-w-[80%]">
                         {message.senderId !== currentUserId && (
                           <Avatar className="h-6 w-6">
-                            <AvatarImage src={getActiveConversation()?.participantAvatar} />
+                            <AvatarImage
+                              src={getActiveConversation()?.participantAvatar}
+                            />
                             <AvatarFallback>
-                              {getActiveConversation()?.participantType === "supplier" ? (
+                              {getActiveConversation()?.participantType ===
+                              "supplier" ? (
                                 <Store className="h-3 w-3" />
                               ) : (
                                 <User className="h-3 w-3" />
@@ -388,13 +414,13 @@ export default function Chat({
                             </AvatarFallback>
                           </Avatar>
                         )}
-                        
+
                         <div
                           className={cn(
                             "rounded-lg px-3 py-2",
                             message.senderId === currentUserId
                               ? "bg-primary text-primary-foreground"
-                              : "bg-muted"
+                              : "bg-muted",
                           )}
                         >
                           <p className="text-sm">{message.content}</p>
@@ -453,7 +479,9 @@ export default function Chat({
               <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
                 <MessageCircle className="h-8 w-8 text-muted-foreground" />
               </div>
-              <p className="text-muted-foreground">Select a conversation to start chatting</p>
+              <p className="text-muted-foreground">
+                Select a conversation to start chatting
+              </p>
             </div>
           </CardContent>
         )}

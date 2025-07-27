@@ -1,20 +1,32 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { 
+import {
   ArrowLeft,
-  Star, 
-  MapPin, 
-  Clock, 
+  Star,
+  MapPin,
+  Clock,
   MessageCircle,
   ShoppingCart,
   Phone,
@@ -25,7 +37,7 @@ import {
   Minus,
   Info,
   Truck,
-  Store
+  Store,
 } from "lucide-react";
 
 interface Product {
@@ -79,7 +91,8 @@ export default function SupplierStore() {
     const mockSupplier: Supplier = {
       id: supplierId || "1",
       name: "Fresh Valley Farms",
-      description: "Premium organic fruits and vegetables directly from our farms. We've been serving the Delhi NCR region for over 15 years with the freshest produce.",
+      description:
+        "Premium organic fruits and vegetables directly from our farms. We've been serving the Delhi NCR region for over 15 years with the freshest produce.",
       rating: 4.8,
       reviews: 124,
       distance: "2.3 km",
@@ -93,91 +106,101 @@ export default function SupplierStore() {
       operatingHours: "6:00 AM - 8:00 PM",
       minimumOrder: 500,
       products: [
-        { 
-          id: "1", 
-          name: "Fresh Tomatoes", 
-          price: 40, 
-          unit: "kg", 
-          stock: 150, 
-          image: "/placeholder.svg", 
-          category: "Vegetables", 
+        {
+          id: "1",
+          name: "Fresh Tomatoes",
+          price: 40,
+          unit: "kg",
+          stock: 150,
+          image: "/placeholder.svg",
+          category: "Vegetables",
           fresh: true,
-          description: "Fresh, ripe tomatoes perfect for curries and salads. Grown without pesticides."
+          description:
+            "Fresh, ripe tomatoes perfect for curries and salads. Grown without pesticides.",
         },
-        { 
-          id: "2", 
-          name: "Organic Onions", 
-          price: 35, 
-          unit: "kg", 
-          stock: 200, 
-          image: "/placeholder.svg", 
-          category: "Vegetables", 
+        {
+          id: "2",
+          name: "Organic Onions",
+          price: 35,
+          unit: "kg",
+          stock: 200,
+          image: "/placeholder.svg",
+          category: "Vegetables",
           fresh: true,
-          description: "Premium quality organic onions, essential for every Indian kitchen."
+          description:
+            "Premium quality organic onions, essential for every Indian kitchen.",
         },
-        { 
-          id: "3", 
-          name: "Fresh Apples", 
-          price: 120, 
-          unit: "kg", 
-          stock: 80, 
-          image: "/placeholder.svg", 
-          category: "Fruits", 
+        {
+          id: "3",
+          name: "Fresh Apples",
+          price: 120,
+          unit: "kg",
+          stock: 80,
+          image: "/placeholder.svg",
+          category: "Fruits",
           fresh: true,
-          description: "Crisp and sweet apples, perfect for fruit chats and desserts."
+          description:
+            "Crisp and sweet apples, perfect for fruit chats and desserts.",
         },
-        { 
-          id: "4", 
-          name: "Green Chilies", 
-          price: 60, 
-          unit: "kg", 
-          stock: 50, 
-          image: "/placeholder.svg", 
-          category: "Vegetables", 
+        {
+          id: "4",
+          name: "Green Chilies",
+          price: 60,
+          unit: "kg",
+          stock: 50,
+          image: "/placeholder.svg",
+          category: "Vegetables",
           fresh: true,
-          description: "Spicy green chilies that add heat to your street food preparations."
+          description:
+            "Spicy green chilies that add heat to your street food preparations.",
         },
-        { 
-          id: "5", 
-          name: "Fresh Coriander", 
-          price: 20, 
-          unit: "bunch", 
-          stock: 100, 
-          image: "/placeholder.svg", 
-          category: "Herbs", 
+        {
+          id: "5",
+          name: "Fresh Coriander",
+          price: 20,
+          unit: "bunch",
+          stock: 100,
+          image: "/placeholder.svg",
+          category: "Herbs",
           fresh: true,
-          description: "Fresh coriander leaves for garnishing and flavoring."
+          description: "Fresh coriander leaves for garnishing and flavoring.",
         },
-        { 
-          id: "6", 
-          name: "Potatoes", 
-          price: 25, 
-          unit: "kg", 
-          stock: 300, 
-          image: "/placeholder.svg", 
-          category: "Vegetables", 
+        {
+          id: "6",
+          name: "Potatoes",
+          price: 25,
+          unit: "kg",
+          stock: 300,
+          image: "/placeholder.svg",
+          category: "Vegetables",
           fresh: true,
-          description: "High-quality potatoes perfect for aloo tikki, samosas, and more."
-        }
-      ]
+          description:
+            "High-quality potatoes perfect for aloo tikki, samosas, and more.",
+        },
+      ],
     };
     setSupplier(mockSupplier);
   }, [supplierId]);
 
-  const categories = ["all", ...Array.from(new Set(supplier?.products.map(p => p.category) || []))];
+  const categories = [
+    "all",
+    ...Array.from(new Set(supplier?.products.map((p) => p.category) || [])),
+  ];
 
-  const filteredProducts = supplier?.products.filter(product => 
-    selectedCategory === "all" || product.category === selectedCategory
-  ) || [];
+  const filteredProducts =
+    supplier?.products.filter(
+      (product) =>
+        selectedCategory === "all" || product.category === selectedCategory,
+    ) || [];
 
   const addToCart = (productId: string) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.productId === productId);
+    setCart((prev) => {
+      const existing = prev.find((item) => item.productId === productId);
       if (existing) {
-        return prev.map(item => 
-          item.productId === productId 
+        return prev.map((item) =>
+          item.productId === productId
             ? { ...item, quantity: item.quantity + 1 }
-            : item
+            : item,
         );
       }
       return [...prev, { productId, quantity: 1 }];
@@ -185,27 +208,27 @@ export default function SupplierStore() {
   };
 
   const removeFromCart = (productId: string) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.productId === productId);
+    setCart((prev) => {
+      const existing = prev.find((item) => item.productId === productId);
       if (existing && existing.quantity > 1) {
-        return prev.map(item => 
-          item.productId === productId 
+        return prev.map((item) =>
+          item.productId === productId
             ? { ...item, quantity: item.quantity - 1 }
-            : item
+            : item,
         );
       }
-      return prev.filter(item => item.productId !== productId);
+      return prev.filter((item) => item.productId !== productId);
     });
   };
 
   const getCartQuantity = (productId: string) => {
-    return cart.find(item => item.productId === productId)?.quantity || 0;
+    return cart.find((item) => item.productId === productId)?.quantity || 0;
   };
 
   const getTotalAmount = () => {
     if (!supplier) return 0;
     return cart.reduce((total, item) => {
-      const product = supplier.products.find(p => p.id === item.productId);
+      const product = supplier.products.find((p) => p.id === item.productId);
       return total + (product ? product.price * item.quantity : 0);
     }, 0);
   };
@@ -238,7 +261,9 @@ export default function SupplierStore() {
               <div className="flex-shrink-0">
                 <Avatar className="w-24 h-24">
                   <AvatarImage src={supplier.image} alt={supplier.name} />
-                  <AvatarFallback><Store className="h-12 w-12" /></AvatarFallback>
+                  <AvatarFallback>
+                    <Store className="h-12 w-12" />
+                  </AvatarFallback>
                 </Avatar>
               </div>
 
@@ -254,11 +279,16 @@ export default function SupplierStore() {
                         </Badge>
                       )}
                     </div>
-                    <p className="text-muted-foreground text-lg">{supplier.description}</p>
+                    <p className="text-muted-foreground text-lg">
+                      {supplier.description}
+                    </p>
                   </div>
-                  
+
                   <div className="flex gap-2">
-                    <Dialog open={isMessageDialogOpen} onOpenChange={setIsMessageDialogOpen}>
+                    <Dialog
+                      open={isMessageDialogOpen}
+                      onOpenChange={setIsMessageDialogOpen}
+                    >
                       <DialogTrigger asChild>
                         <Button variant="outline">
                           <MessageCircle className="mr-2 h-4 w-4" />
@@ -267,7 +297,9 @@ export default function SupplierStore() {
                       </DialogTrigger>
                       <DialogContent>
                         <DialogHeader>
-                          <DialogTitle>Send Message to {supplier.name}</DialogTitle>
+                          <DialogTitle>
+                            Send Message to {supplier.name}
+                          </DialogTitle>
                         </DialogHeader>
                         <div className="space-y-4">
                           <div>
@@ -276,7 +308,9 @@ export default function SupplierStore() {
                               id="subject"
                               placeholder="Order inquiry..."
                               value={messageSubject}
-                              onChange={(e) => setMessageSubject(e.target.value)}
+                              onChange={(e) =>
+                                setMessageSubject(e.target.value)
+                              }
                             />
                           </div>
                           <div>
@@ -286,19 +320,28 @@ export default function SupplierStore() {
                               placeholder="Hi, I'm interested in placing a bulk order..."
                               rows={4}
                               value={messageContent}
-                              onChange={(e) => setMessageContent(e.target.value)}
+                              onChange={(e) =>
+                                setMessageContent(e.target.value)
+                              }
                             />
                           </div>
                           <Button
                             className="w-full"
                             onClick={() => {
-                              if (messageSubject.trim() && messageContent.trim()) {
-                                alert(`Message sent to ${supplier.name}!\n\nSubject: ${messageSubject}\nMessage: ${messageContent}`);
+                              if (
+                                messageSubject.trim() &&
+                                messageContent.trim()
+                              ) {
+                                alert(
+                                  `Message sent to ${supplier.name}!\n\nSubject: ${messageSubject}\nMessage: ${messageContent}`,
+                                );
                                 setMessageSubject("");
                                 setMessageContent("");
                                 setIsMessageDialogOpen(false);
                               } else {
-                                alert("Please fill in both subject and message.");
+                                alert(
+                                  "Please fill in both subject and message.",
+                                );
                               }
                             }}
                           >
@@ -307,14 +350,16 @@ export default function SupplierStore() {
                         </div>
                       </DialogContent>
                     </Dialog>
-                    
-                    <Button onClick={() => {
-                      if (supplier?.phone) {
-                        window.open(`tel:${supplier.phone}`, '_self');
-                      } else {
-                        alert('Phone number not available');
-                      }
-                    }}>
+
+                    <Button
+                      onClick={() => {
+                        if (supplier?.phone) {
+                          window.open(`tel:${supplier.phone}`, "_self");
+                        } else {
+                          alert("Phone number not available");
+                        }
+                      }}
+                    >
                       <Phone className="mr-2 h-4 w-4" />
                       Call Now
                     </Button>
@@ -325,7 +370,9 @@ export default function SupplierStore() {
                   <div className="flex items-center gap-2">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <span className="font-medium">{supplier.rating}</span>
-                    <span className="text-muted-foreground">({supplier.reviews} reviews)</span>
+                    <span className="text-muted-foreground">
+                      ({supplier.reviews} reviews)
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <MapPin className="h-4 w-4" />
@@ -363,14 +410,16 @@ export default function SupplierStore() {
               <TabsTrigger value="about">About</TabsTrigger>
               <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="products" className="mt-6">
               {/* Category Filter */}
               <div className="mb-6 flex flex-wrap gap-2">
                 {categories.map((category) => (
                   <Button
                     key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
+                    variant={
+                      selectedCategory === category ? "default" : "outline"
+                    }
                     size="sm"
                     onClick={() => setSelectedCategory(category)}
                   >
@@ -384,8 +433,8 @@ export default function SupplierStore() {
                 {filteredProducts.map((product) => (
                   <Card key={product.id} className="overflow-hidden">
                     <div className="aspect-square relative bg-muted">
-                      <img 
-                        src={product.image} 
+                      <img
+                        src={product.image}
                         alt={product.name}
                         className="object-cover w-full h-full"
                       />
@@ -396,22 +445,28 @@ export default function SupplierStore() {
                         </Badge>
                       )}
                     </div>
-                    
+
                     <CardContent className="p-4">
                       <h3 className="font-semibold mb-1">{product.name}</h3>
                       {product.description && (
-                        <p className="text-sm text-muted-foreground mb-2">{product.description}</p>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {product.description}
+                        </p>
                       )}
-                      
+
                       <div className="flex items-center justify-between mb-3">
-                        <span className="font-bold text-lg">₹{product.price}</span>
-                        <span className="text-sm text-muted-foreground">/{product.unit}</span>
+                        <span className="font-bold text-lg">
+                          ₹{product.price}
+                        </span>
+                        <span className="text-sm text-muted-foreground">
+                          /{product.unit}
+                        </span>
                       </div>
-                      
+
                       <div className="text-sm text-muted-foreground mb-4">
                         Stock: {product.stock} {product.unit}
                       </div>
-                      
+
                       {getCartQuantity(product.id) > 0 ? (
                         <div className="flex items-center justify-between">
                           <Button
@@ -421,7 +476,9 @@ export default function SupplierStore() {
                           >
                             <Minus className="h-4 w-4" />
                           </Button>
-                          <span className="font-medium">{getCartQuantity(product.id)}</span>
+                          <span className="font-medium">
+                            {getCartQuantity(product.id)}
+                          </span>
                           <Button
                             size="sm"
                             variant="outline"
@@ -431,7 +488,11 @@ export default function SupplierStore() {
                           </Button>
                         </div>
                       ) : (
-                        <Button size="sm" className="w-full" onClick={() => addToCart(product.id)}>
+                        <Button
+                          size="sm"
+                          className="w-full"
+                          onClick={() => addToCart(product.id)}
+                        >
                           <ShoppingCart className="mr-2 h-3 w-3" />
                           Add to Cart
                         </Button>
@@ -441,13 +502,15 @@ export default function SupplierStore() {
                 ))}
               </div>
             </TabsContent>
-            
+
             <TabsContent value="about" className="mt-6">
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-semibold mb-2">Contact Information</h3>
+                      <h3 className="font-semibold mb-2">
+                        Contact Information
+                      </h3>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <MapPin className="h-4 w-4" />
@@ -467,9 +530,11 @@ export default function SupplierStore() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div>
-                      <h3 className="font-semibold mb-2">Delivery Information</h3>
+                      <h3 className="font-semibold mb-2">
+                        Delivery Information
+                      </h3>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <Truck className="h-4 w-4" />
@@ -485,13 +550,15 @@ export default function SupplierStore() {
                 </CardContent>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="reviews" className="mt-6">
               <Card>
                 <CardContent className="p-6">
                   <div className="text-center py-8">
                     <Star className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <p className="text-muted-foreground">Reviews feature coming soon!</p>
+                    <p className="text-muted-foreground">
+                      Reviews feature coming soon!
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -510,18 +577,27 @@ export default function SupplierStore() {
             </CardHeader>
             <CardContent>
               {cart.length === 0 ? (
-                <p className="text-muted-foreground text-center py-4">Your cart is empty</p>
+                <p className="text-muted-foreground text-center py-4">
+                  Your cart is empty
+                </p>
               ) : (
                 <div className="space-y-4">
                   {cart.map((item) => {
-                    const product = supplier.products.find(p => p.id === item.productId);
+                    const product = supplier.products.find(
+                      (p) => p.id === item.productId,
+                    );
                     if (!product) return null;
-                    
+
                     return (
-                      <div key={item.productId} className="flex items-center justify-between">
+                      <div
+                        key={item.productId}
+                        className="flex items-center justify-between"
+                      >
                         <div className="flex-1">
                           <p className="font-medium text-sm">{product.name}</p>
-                          <p className="text-xs text-muted-foreground">₹{product.price}/{product.unit}</p>
+                          <p className="text-xs text-muted-foreground">
+                            ₹{product.price}/{product.unit}
+                          </p>
                         </div>
                         <div className="flex items-center gap-2">
                           <Button
@@ -545,7 +621,7 @@ export default function SupplierStore() {
                       </div>
                     );
                   })}
-                  
+
                   <div className="border-t pt-4">
                     <div className="flex justify-between font-bold">
                       <span>Total: ₹{getTotalAmount()}</span>
@@ -556,26 +632,36 @@ export default function SupplierStore() {
                       </p>
                     )}
                   </div>
-                  
+
                   <Button
                     className="w-full"
                     disabled={getTotalAmount() < supplier.minimumOrder}
                     onClick={() => {
                       if (cart.length === 0) {
-                        alert('Your cart is empty. Please add some items first.');
+                        alert(
+                          "Your cart is empty. Please add some items first.",
+                        );
                         return;
                       }
                       if (getTotalAmount() < supplier.minimumOrder) {
-                        alert(`Minimum order amount is ₹${supplier.minimumOrder}. Please add more items.`);
+                        alert(
+                          `Minimum order amount is ₹${supplier.minimumOrder}. Please add more items.`,
+                        );
                         return;
                       }
 
-                      const orderDetails = cart.map(item => {
-                        const product = supplier.products.find(p => p.id === item.productId);
-                        return `${product?.name} x ${item.quantity} = ₹${product ? product.price * item.quantity : 0}`;
-                      }).join('\n');
+                      const orderDetails = cart
+                        .map((item) => {
+                          const product = supplier.products.find(
+                            (p) => p.id === item.productId,
+                          );
+                          return `${product?.name} x ${item.quantity} = ₹${product ? product.price * item.quantity : 0}`;
+                        })
+                        .join("\n");
 
-                      alert(`Order placed successfully!\n\nOrder Details:\n${orderDetails}\n\nTotal: ₹${getTotalAmount()}\n\nYou will receive a confirmation call from ${supplier.name} shortly.`);
+                      alert(
+                        `Order placed successfully!\n\nOrder Details:\n${orderDetails}\n\nTotal: ₹${getTotalAmount()}\n\nYou will receive a confirmation call from ${supplier.name} shortly.`,
+                      );
                       setCart([]);
                       setIsOrderPlaced(true);
 
@@ -583,7 +669,7 @@ export default function SupplierStore() {
                       setTimeout(() => setIsOrderPlaced(false), 3000);
                     }}
                   >
-                    {isOrderPlaced ? 'Order Placed! ✓' : 'Place Order'}
+                    {isOrderPlaced ? "Order Placed! ✓" : "Place Order"}
                   </Button>
                 </div>
               )}

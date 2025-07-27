@@ -1,14 +1,26 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { 
-  MapPin, 
-  Search, 
+import {
+  MapPin,
+  Search,
   Filter,
   Navigation,
   Star,
@@ -20,7 +32,7 @@ import {
   Phone,
   CheckCircle,
   Leaf,
-  RotateCcw
+  RotateCcw,
 } from "lucide-react";
 
 interface Supplier {
@@ -38,7 +50,12 @@ interface Supplier {
   coordinates: { lat: number; lng: number };
   phone: string;
   operatingHours: string;
-  stockItems: { name: string; available: boolean; quantity: number; unit: string }[];
+  stockItems: {
+    name: string;
+    available: boolean;
+    quantity: number;
+    unit: string;
+  }[];
   lastUpdated: Date;
 }
 
@@ -47,27 +64,41 @@ export default function Map() {
   const [selectedSupplier, setSelectedSupplier] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
-  const [mapCenter, setMapCenter] = useState({ lat: 28.6139, lng: 77.2090 }); // Default to Delhi
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [mapCenter, setMapCenter] = useState({ lat: 28.6139, lng: 77.209 }); // Default to Delhi
+  const [userLocation, setUserLocation] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [currentLocationName, setCurrentLocationName] = useState("Delhi");
   const [autoLocationEnabled, setAutoLocationEnabled] = useState(false);
 
   // Calculate distance between two coordinates using Haversine formula
-  const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number) => {
+  const calculateDistance = (
+    lat1: number,
+    lng1: number,
+    lat2: number,
+    lng2: number,
+  ) => {
     const R = 6371; // Earth's radius in kilometers
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLng = ((lng2 - lng1) * Math.PI) / 180;
     const a =
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-      Math.sin(dLng/2) * Math.sin(dLng/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c; // Distance in kilometers
   };
 
   // Generate suppliers based on user location or search query
-  const generateSuppliersForLocation = (centerLat: number, centerLng: number, locationName: string) => {
+  const generateSuppliersForLocation = (
+    centerLat: number,
+    centerLng: number,
+    locationName: string,
+  ) => {
     const baseSuppliers = [
       {
         name: "Fresh Valley Farms",
@@ -77,8 +108,8 @@ export default function Map() {
           { name: "Tomatoes", available: true, quantity: 150, unit: "kg" },
           { name: "Onions", available: true, quantity: 200, unit: "kg" },
           { name: "Apples", available: true, quantity: 80, unit: "kg" },
-          { name: "Bananas", available: false, quantity: 0, unit: "kg" }
-        ]
+          { name: "Bananas", available: false, quantity: 0, unit: "kg" },
+        ],
       },
       {
         name: "Spice Kingdom",
@@ -86,32 +117,62 @@ export default function Map() {
         categories: ["Spices", "Masalas"],
         stockItems: [
           { name: "Garam Masala", available: true, quantity: 50, unit: "kg" },
-          { name: "Red Chili Powder", available: true, quantity: 75, unit: "kg" },
+          {
+            name: "Red Chili Powder",
+            available: true,
+            quantity: 75,
+            unit: "kg",
+          },
           { name: "Turmeric", available: true, quantity: 100, unit: "kg" },
-          { name: "Coriander Seeds", available: true, quantity: 60, unit: "kg" }
-        ]
+          {
+            name: "Coriander Seeds",
+            available: true,
+            quantity: 60,
+            unit: "kg",
+          },
+        ],
       },
       {
         name: "Local Dairy Products",
         description: "Fresh dairy products delivered daily",
         categories: ["Dairy", "Milk"],
         stockItems: [
-          { name: "Fresh Milk", available: true, quantity: 300, unit: "liters" },
+          {
+            name: "Fresh Milk",
+            available: true,
+            quantity: 300,
+            unit: "liters",
+          },
           { name: "Paneer", available: true, quantity: 40, unit: "kg" },
           { name: "Curd", available: true, quantity: 80, unit: "kg" },
-          { name: "Butter", available: true, quantity: 20, unit: "kg" }
-        ]
+          { name: "Butter", available: true, quantity: 20, unit: "kg" },
+        ],
       },
       {
         name: "Green Leaf Organics",
         description: "Certified organic produce and herbs",
         categories: ["Vegetables", "Herbs"],
         stockItems: [
-          { name: "Organic Spinach", available: true, quantity: 25, unit: "kg" },
-          { name: "Fresh Mint", available: true, quantity: 15, unit: "bunches" },
-          { name: "Organic Carrots", available: true, quantity: 40, unit: "kg" },
-          { name: "Cilantro", available: true, quantity: 30, unit: "bunches" }
-        ]
+          {
+            name: "Organic Spinach",
+            available: true,
+            quantity: 25,
+            unit: "kg",
+          },
+          {
+            name: "Fresh Mint",
+            available: true,
+            quantity: 15,
+            unit: "bunches",
+          },
+          {
+            name: "Organic Carrots",
+            available: true,
+            quantity: 40,
+            unit: "kg",
+          },
+          { name: "Cilantro", available: true, quantity: 30, unit: "bunches" },
+        ],
       },
       {
         name: "Premium Fruits Co.",
@@ -121,8 +182,8 @@ export default function Map() {
           { name: "Mangoes", available: true, quantity: 60, unit: "kg" },
           { name: "Grapes", available: true, quantity: 45, unit: "kg" },
           { name: "Oranges", available: true, quantity: 90, unit: "kg" },
-          { name: "Pomegranates", available: true, quantity: 30, unit: "kg" }
-        ]
+          { name: "Pomegranates", available: true, quantity: 30, unit: "kg" },
+        ],
       },
       {
         name: "Veggie Mart",
@@ -132,9 +193,9 @@ export default function Map() {
           { name: "Potatoes", available: true, quantity: 300, unit: "kg" },
           { name: "Cauliflower", available: true, quantity: 50, unit: "kg" },
           { name: "Cabbage", available: true, quantity: 80, unit: "kg" },
-          { name: "Green Peas", available: false, quantity: 0, unit: "kg" }
-        ]
-      }
+          { name: "Green Peas", available: false, quantity: 0, unit: "kg" },
+        ],
+      },
     ];
 
     return baseSuppliers.map((supplier, index) => {
@@ -145,9 +206,14 @@ export default function Map() {
       const lng = centerLng + radius * Math.sin(angle);
 
       const distance = calculateDistance(centerLat, centerLng, lat, lng);
-      const deliveryTime = distance < 2 ? "20-30 min" :
-                          distance < 5 ? "30-45 min" :
-                          distance < 10 ? "45-60 min" : "60-90 min";
+      const deliveryTime =
+        distance < 2
+          ? "20-30 min"
+          : distance < 5
+            ? "30-45 min"
+            : distance < 10
+              ? "45-60 min"
+              : "60-90 min";
 
       return {
         id: `${index + 1}`,
@@ -162,7 +228,7 @@ export default function Map() {
         coordinates: { lat, lng },
         phone: `+91 9876${String(543210 + index).slice(-6)}`,
         operatingHours: "6:00 AM - 8:00 PM",
-        lastUpdated: new Date(Date.now() - Math.random() * 30 * 60 * 1000) // Random time within last 30 minutes
+        lastUpdated: new Date(Date.now() - Math.random() * 30 * 60 * 1000), // Random time within last 30 minutes
       };
     });
   };
@@ -171,20 +237,25 @@ export default function Map() {
   const getLocationName = async (lat: number, lng: number) => {
     // Mock location detection based on major Indian cities
     const locations = [
-      { name: "Delhi", lat: 28.6139, lng: 77.2090 },
-      { name: "Mumbai", lat: 19.0760, lng: 72.8777 },
+      { name: "Delhi", lat: 28.6139, lng: 77.209 },
+      { name: "Mumbai", lat: 19.076, lng: 72.8777 },
       { name: "Bangalore", lat: 12.9716, lng: 77.5946 },
       { name: "Chennai", lat: 13.0827, lng: 80.2707 },
       { name: "Pune", lat: 18.5204, lng: 73.8567 },
-      { name: "Hyderabad", lat: 17.3850, lng: 78.4867 },
+      { name: "Hyderabad", lat: 17.385, lng: 78.4867 },
       { name: "Kolkata", lat: 22.5726, lng: 88.3639 },
       { name: "Ahmedabad", lat: 23.0225, lng: 72.5714 },
       { name: "Jaipur", lat: 26.9124, lng: 75.7873 },
-      { name: "Nashik", lat: 19.9975, lng: 73.7898 }
+      { name: "Nashik", lat: 19.9975, lng: 73.7898 },
     ];
 
     let closestLocation = locations[0];
-    let minDistance = calculateDistance(lat, lng, locations[0].lat, locations[0].lng);
+    let minDistance = calculateDistance(
+      lat,
+      lng,
+      locations[0].lat,
+      locations[0].lng,
+    );
 
     for (const location of locations) {
       const distance = calculateDistance(lat, lng, location.lat, location.lng);
@@ -206,13 +277,16 @@ export default function Map() {
           async (position) => {
             const location = {
               lat: position.coords.latitude,
-              lng: position.coords.longitude
+              lng: position.coords.longitude,
             };
             setUserLocation(location);
             setMapCenter(location);
             setAutoLocationEnabled(true);
 
-            const locationName = await getLocationName(location.lat, location.lng);
+            const locationName = await getLocationName(
+              location.lat,
+              location.lng,
+            );
             setCurrentLocationName(locationName);
             setIsLoadingLocation(false);
           },
@@ -224,8 +298,8 @@ export default function Map() {
           {
             enableHighAccuracy: false,
             timeout: 5000,
-            maximumAge: 300000
-          }
+            maximumAge: 300000,
+          },
         );
       }
     };
@@ -250,17 +324,19 @@ export default function Map() {
       // If there's a search query, try to match it to a city
       else if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase().trim();
-        const cityMap: { [key: string]: { lat: number; lng: number; name: string } } = {
-          'delhi': { lat: 28.6139, lng: 77.2090, name: 'Delhi' },
-          'mumbai': { lat: 19.0760, lng: 72.8777, name: 'Mumbai' },
-          'bangalore': { lat: 12.9716, lng: 77.5946, name: 'Bangalore' },
-          'chennai': { lat: 13.0827, lng: 80.2707, name: 'Chennai' },
-          'pune': { lat: 18.5204, lng: 73.8567, name: 'Pune' },
-          'hyderabad': { lat: 17.3850, lng: 78.4867, name: 'Hyderabad' },
-          'kolkata': { lat: 22.5726, lng: 88.3639, name: 'Kolkata' },
-          'ahmedabad': { lat: 23.0225, lng: 72.5714, name: 'Ahmedabad' },
-          'jaipur': { lat: 26.9124, lng: 75.7873, name: 'Jaipur' },
-          'nashik': { lat: 19.9975, lng: 73.7898, name: 'Nashik' }
+        const cityMap: {
+          [key: string]: { lat: number; lng: number; name: string };
+        } = {
+          delhi: { lat: 28.6139, lng: 77.209, name: "Delhi" },
+          mumbai: { lat: 19.076, lng: 72.8777, name: "Mumbai" },
+          bangalore: { lat: 12.9716, lng: 77.5946, name: "Bangalore" },
+          chennai: { lat: 13.0827, lng: 80.2707, name: "Chennai" },
+          pune: { lat: 18.5204, lng: 73.8567, name: "Pune" },
+          hyderabad: { lat: 17.385, lng: 78.4867, name: "Hyderabad" },
+          kolkata: { lat: 22.5726, lng: 88.3639, name: "Kolkata" },
+          ahmedabad: { lat: 23.0225, lng: 72.5714, name: "Ahmedabad" },
+          jaipur: { lat: 26.9124, lng: 75.7873, name: "Jaipur" },
+          nashik: { lat: 19.9975, lng: 73.7898, name: "Nashik" },
         };
 
         if (cityMap[query]) {
@@ -272,12 +348,16 @@ export default function Map() {
         }
       }
 
-      const generatedSuppliers = generateSuppliersForLocation(lat, lng, locationName);
+      const generatedSuppliers = generateSuppliersForLocation(
+        lat,
+        lng,
+        locationName,
+      );
 
       // Sort by distance
       const sortedSuppliers = generatedSuppliers.sort((a, b) => {
-        const distanceA = parseFloat(a.distance.replace(' km', ''));
-        const distanceB = parseFloat(b.distance.replace(' km', ''));
+        const distanceA = parseFloat(a.distance.replace(" km", ""));
+        const distanceB = parseFloat(b.distance.replace(" km", ""));
         return distanceA - distanceB;
       });
 
@@ -295,14 +375,17 @@ export default function Map() {
         async (position) => {
           const location = {
             lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lng: position.coords.longitude,
           };
           setUserLocation(location);
           setMapCenter(location);
           setAutoLocationEnabled(true);
 
           // Get location name and show confirmation
-          const locationName = await getLocationName(location.lat, location.lng);
+          const locationName = await getLocationName(
+            location.lat,
+            location.lng,
+          );
           setCurrentLocationName(locationName);
           setIsLoadingLocation(false);
 
@@ -314,9 +397,10 @@ export default function Map() {
           setIsLoadingLocation(false);
           let errorMessage = "Unable to get your location. ";
 
-          switch(error.code) {
+          switch (error.code) {
             case error.PERMISSION_DENIED:
-              errorMessage += "Location access was denied. Please enable location permissions.";
+              errorMessage +=
+                "Location access was denied. Please enable location permissions.";
               break;
             case error.POSITION_UNAVAILABLE:
               errorMessage += "Location information is unavailable.";
@@ -334,19 +418,25 @@ export default function Map() {
         {
           enableHighAccuracy: true,
           timeout: 10000,
-          maximumAge: 300000 // 5 minutes
-        }
+          maximumAge: 300000, // 5 minutes
+        },
       );
     } else {
-      alert("Geolocation is not supported by this browser. Showing suppliers for Delhi area.");
+      alert(
+        "Geolocation is not supported by this browser. Showing suppliers for Delhi area.",
+      );
     }
   };
 
-  const filteredSuppliers = suppliers.filter(supplier => {
-    const matchesSearch = supplier.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         supplier.location.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = categoryFilter === "all" || 
-                           supplier.categories.some(cat => cat.toLowerCase().includes(categoryFilter.toLowerCase()));
+  const filteredSuppliers = suppliers.filter((supplier) => {
+    const matchesSearch =
+      supplier.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      supplier.location.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory =
+      categoryFilter === "all" ||
+      supplier.categories.some((cat) =>
+        cat.toLowerCase().includes(categoryFilter.toLowerCase()),
+      );
     return matchesSearch && matchesCategory;
   });
 
@@ -354,7 +444,7 @@ export default function Map() {
     const now = new Date();
     const diffMs = now.getTime() - date.getTime();
     const diffMins = Math.floor(diffMs / (1000 * 60));
-    
+
     if (diffMins < 1) return "Just updated";
     if (diffMins < 60) return `${diffMins}m ago`;
     const diffHours = Math.floor(diffMins / 60);
@@ -379,12 +469,12 @@ export default function Map() {
 
       {/* User Location */}
       {userLocation && (
-        <div 
+        <div
           className="absolute w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg animate-pulse"
           style={{
             left: `${50}%`,
             top: `${50}%`,
-            transform: 'translate(-50%, -50%)'
+            transform: "translate(-50%, -50%)",
           }}
         />
       )}
@@ -395,19 +485,21 @@ export default function Map() {
           key={supplier.id}
           className={cn(
             "absolute w-8 h-8 cursor-pointer transition-all duration-200 hover:scale-110",
-            selectedSupplier === supplier.id && "scale-125 z-10"
+            selectedSupplier === supplier.id && "scale-125 z-10",
           )}
           style={{
-            left: `${20 + (index * 15) % 60}%`,
-            top: `${20 + (index * 12) % 60}%`,
-            transform: 'translate(-50%, -50%)'
+            left: `${20 + ((index * 15) % 60)}%`,
+            top: `${20 + ((index * 12) % 60)}%`,
+            transform: "translate(-50%, -50%)",
           }}
           onClick={() => setSelectedSupplier(supplier.id)}
         >
-          <div className={cn(
-            "w-8 h-8 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-white text-xs font-bold",
-            supplier.verified ? "bg-supplier" : "bg-gray-500"
-          )}>
+          <div
+            className={cn(
+              "w-8 h-8 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-white text-xs font-bold",
+              supplier.verified ? "bg-supplier" : "bg-gray-500",
+            )}
+          >
             <Store className="h-4 w-4" />
           </div>
           {supplier.verified && (
@@ -430,7 +522,7 @@ export default function Map() {
           size="sm"
           variant="secondary"
           onClick={() => {
-            setMapCenter({ lat: 28.6139, lng: 77.2090 });
+            setMapCenter({ lat: 28.6139, lng: 77.209 });
             setSelectedSupplier(null);
           }}
           className="bg-white shadow-lg"
@@ -443,7 +535,7 @@ export default function Map() {
       {selectedSupplier && (
         <div className="absolute bottom-4 left-4 right-4">
           {(() => {
-            const supplier = suppliers.find(s => s.id === selectedSupplier);
+            const supplier = suppliers.find((s) => s.id === selectedSupplier);
             if (!supplier) return null;
             return (
               <Card className="shadow-lg">
@@ -451,7 +543,9 @@ export default function Map() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <h3 className="font-semibold">{supplier.name}</h3>
-                      <p className="text-sm text-muted-foreground">{supplier.location}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {supplier.location}
+                      </p>
                       <div className="flex items-center gap-2 mt-1">
                         <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                         <span className="text-sm">{supplier.rating}</span>
@@ -485,24 +579,27 @@ export default function Map() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Find Suppliers</h1>
+            <h1 className="text-3xl font-bold tracking-tight">
+              Find Suppliers
+            </h1>
             <p className="text-muted-foreground mt-2">
-              {isLoadingLocation ? (
-                "Detecting your location..."
-              ) : userLocation ? (
-                `Showing suppliers near ${currentLocationName}`
-              ) : searchQuery ? (
-                `Showing suppliers in ${currentLocationName}`
-              ) : (
-                "Locate nearby suppliers with real-time locations and stock"
-              )}
+              {isLoadingLocation
+                ? "Detecting your location..."
+                : userLocation
+                  ? `Showing suppliers near ${currentLocationName}`
+                  : searchQuery
+                    ? `Showing suppliers in ${currentLocationName}`
+                    : "Locate nearby suppliers with real-time locations and stock"}
             </p>
           </div>
 
           {/* Location Status */}
           <div className="text-right">
             {userLocation && (
-              <Badge variant="secondary" className="bg-green-100 text-green-700">
+              <Badge
+                variant="secondary"
+                className="bg-green-100 text-green-700"
+              >
                 <Navigation className="mr-1 h-3 w-3" />
                 Location Enabled
               </Badge>
@@ -529,7 +626,7 @@ export default function Map() {
               className="pl-10"
             />
           </div>
-          
+
           <div className="flex gap-4">
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger className="w-[180px]">
@@ -558,7 +655,7 @@ export default function Map() {
               ) : (
                 <>
                   <Navigation className="mr-2 h-4 w-4" />
-                  {userLocation ? 'Update Location' : 'My Location'}
+                  {userLocation ? "Update Location" : "My Location"}
                 </>
               )}
             </Button>
@@ -581,11 +678,11 @@ export default function Map() {
 
           <div className="space-y-4 max-h-96 overflow-y-auto">
             {filteredSuppliers.map((supplier) => (
-              <Card 
-                key={supplier.id} 
+              <Card
+                key={supplier.id}
                 className={cn(
                   "cursor-pointer transition-all duration-200 hover:shadow-md",
-                  selectedSupplier === supplier.id && "ring-2 ring-primary"
+                  selectedSupplier === supplier.id && "ring-2 ring-primary",
                 )}
                 onClick={() => setSelectedSupplier(supplier.id)}
               >
@@ -603,8 +700,10 @@ export default function Map() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-muted-foreground mb-2">{supplier.description}</p>
-                  
+                  <p className="text-xs text-muted-foreground mb-2">
+                    {supplier.description}
+                  </p>
+
                   <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
                     <div className="flex items-center gap-1">
                       <MapPin className="h-3 w-3" />
@@ -626,15 +725,23 @@ export default function Map() {
                     </div>
                     <div className="grid grid-cols-2 gap-1">
                       {supplier.stockItems.slice(0, 4).map((item, index) => (
-                        <div key={index} className="flex items-center gap-1 text-xs">
-                          <div className={cn(
-                            "w-2 h-2 rounded-full",
-                            item.available ? "bg-green-500" : "bg-red-500"
-                          )} />
-                          <span className={cn(
-                            "truncate",
-                            !item.available && "line-through text-muted-foreground"
-                          )}>
+                        <div
+                          key={index}
+                          className="flex items-center gap-1 text-xs"
+                        >
+                          <div
+                            className={cn(
+                              "w-2 h-2 rounded-full",
+                              item.available ? "bg-green-500" : "bg-red-500",
+                            )}
+                          />
+                          <span
+                            className={cn(
+                              "truncate",
+                              !item.available &&
+                                "line-through text-muted-foreground",
+                            )}
+                          >
                             {item.name}
                           </span>
                           {item.available && (
