@@ -203,20 +203,102 @@ export default function Index() {
               and grow your business.
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto" ref={searchRef}>
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   placeholder="Search suppliers, products..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setSearchQuery(value);
+
+                    if (value.length > 0) {
+                      // Generate suggestions based on input
+                      const allSuggestions = [
+                        'Fresh tomatoes',
+                        'Organic vegetables',
+                        'Spices and masalas',
+                        'Fresh fruits',
+                        'Dairy products',
+                        'Green vegetables',
+                        'Fresh herbs',
+                        'Seasonal fruits',
+                        'Premium spices',
+                        'Organic produce',
+                        'Local suppliers near me',
+                        'Fresh Valley Farms',
+                        'Spice Kingdom',
+                        'Wholesale vegetables',
+                        'Street food ingredients'
+                      ];
+
+                      const filtered = allSuggestions.filter(suggestion =>
+                        suggestion.toLowerCase().includes(value.toLowerCase())
+                      ).slice(0, 5);
+
+                      setSuggestions(filtered);
+                      setShowSuggestions(filtered.length > 0);
+                    } else {
+                      setShowSuggestions(false);
+                    }
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearch();
+                    }
+                  }}
+                  onFocus={() => {
+                    if (searchQuery.length > 0 && suggestions.length > 0) {
+                      setShowSuggestions(true);
+                    }
+                  }}
                   className="pl-10"
                 />
+
+                {/* Search Suggestions Dropdown */}
+                {showSuggestions && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-border rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+                    {suggestions.map((suggestion, index) => (
+                      <button
+                        key={index}
+                        className="w-full text-left px-4 py-2 hover:bg-muted transition-colors flex items-center gap-2"
+                        onClick={() => {
+                          setSearchQuery(suggestion);
+                          setShowSuggestions(false);
+                          handleSearch(suggestion);
+                        }}
+                      >
+                        <Search className="h-4 w-4 text-muted-foreground" />
+                        <span>{suggestion}</span>
+                      </button>
+                    ))}
+
+                    {searchQuery && (
+                      <button
+                        className="w-full text-left px-4 py-2 hover:bg-muted transition-colors flex items-center gap-2 border-t font-medium text-primary"
+                        onClick={() => {
+                          handleSearch();
+                        }}
+                      >
+                        <ArrowRight className="h-4 w-4" />
+                        <span>Search for "{searchQuery}"</span>
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
-              <Button size="lg" asChild>
+              <Button
+                size="lg"
+                onClick={handleSearch}
+                disabled={!searchQuery.trim()}
+              >
+                <span>Search</span>
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button size="lg" variant="outline" asChild>
                 <Link to="/marketplace">
-                  <span>Explore</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <span>Explore All</span>
                 </Link>
               </Button>
             </div>
