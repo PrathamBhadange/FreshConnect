@@ -459,6 +459,110 @@ export default function Marketplace() {
         ))}
       </div>
 
+      {/* Cart Sidebar */}
+      {showCart && (
+        <div className="fixed inset-0 z-50 bg-black/20" onClick={() => setShowCart(false)}>
+          <div
+            className="fixed right-0 top-0 h-full w-96 bg-background border-l shadow-lg overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold">Shopping Cart</h2>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowCart(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+
+              {cart.length === 0 ? (
+                <div className="text-center py-8">
+                  <ShoppingCart className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <p className="text-muted-foreground">Your cart is empty</p>
+                  <Button
+                    variant="outline"
+                    className="mt-4"
+                    onClick={() => setShowCart(false)}
+                  >
+                    Continue Shopping
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {cart.map((item) => (
+                    <Card key={`${item.supplierId}-${item.productId}`}>
+                      <CardContent className="p-4">
+                        <div className="flex items-start gap-3">
+                          <img
+                            src={item.product.image}
+                            alt={item.product.name}
+                            className="w-16 h-16 rounded object-cover"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-medium text-sm truncate">{item.product.name}</h3>
+                            <p className="text-xs text-muted-foreground">{item.product.supplierName}</p>
+                            <p className="text-sm font-medium">₹{item.product.price}/{item.product.unit}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between mt-3">
+                          <div className="flex items-center gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 w-8 p-0"
+                              onClick={() => removeFromCart(item.productId, item.supplierId)}
+                            >
+                              <Minus className="h-3 w-3" />
+                            </Button>
+                            <span className="font-medium w-8 text-center">{item.quantity}</span>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 w-8 p-0"
+                              onClick={() => addToCart(item.product)}
+                              disabled={item.quantity >= item.product.stock}
+                            >
+                              <Plus className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          <div className="text-right">
+                            <p className="font-semibold">₹{item.product.price * item.quantity}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+
+                  <div className="border-t pt-4 space-y-4">
+                    <div className="flex justify-between text-lg font-semibold">
+                      <span>Total ({getTotalItems()} items)</span>
+                      <span>₹{getTotalAmount()}</span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Button className="w-full" size="lg">
+                        Proceed to Checkout
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={clearCart}
+                      >
+                        Clear Cart
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Results */}
       {viewMode === "suppliers" ? (
         /* Suppliers View */
