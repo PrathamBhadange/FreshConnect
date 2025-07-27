@@ -108,7 +108,7 @@ export default function Marketplace() {
       deliveryTime: "30-45 min",
       categories: ["Fruits", "Vegetables"],
       verified: true,
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center",
       location: "Sector 15, Gurgaon",
       products: [
         {
