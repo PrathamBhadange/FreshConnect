@@ -280,6 +280,75 @@ export default function Marketplace() {
     return matchesSearch && matchesCategory;
   });
 
+  // Cart management functions
+  const addToCart = (product: Product & { supplierName: string; supplierId: string }) => {
+    setCart(prev => {
+      const existingItem = prev.find(item =>
+        item.productId === product.id && item.supplierId === product.supplierId
+      );
+
+      if (existingItem) {
+        if (existingItem.quantity < product.stock) {
+          return prev.map(item =>
+            item.productId === product.id && item.supplierId === product.supplierId
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        } else {
+          alert(`Only ${product.stock} ${product.unit} available in stock`);
+          return prev;
+        }
+      } else {
+        return [...prev, {
+          productId: product.id,
+          supplierId: product.supplierId,
+          quantity: 1,
+          product
+        }];
+      }
+    });
+  };
+
+  const removeFromCart = (productId: string, supplierId: string) => {
+    setCart(prev => {
+      const existingItem = prev.find(item =>
+        item.productId === productId && item.supplierId === supplierId
+      );
+
+      if (existingItem && existingItem.quantity > 1) {
+        return prev.map(item =>
+          item.productId === productId && item.supplierId === supplierId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        );
+      } else {
+        return prev.filter(item =>
+          !(item.productId === productId && item.supplierId === supplierId)
+        );
+      }
+    });
+  };
+
+  const getCartQuantity = (productId: string, supplierId: string) => {
+    const item = cart.find(item =>
+      item.productId === productId && item.supplierId === supplierId
+    );
+    return item?.quantity || 0;
+  };
+
+  const getTotalItems = () => {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const getTotalAmount = () => {
+    return cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+  };
+
+  const clearCart = () => {
+    setCart([]);
+    setShowCart(false);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
