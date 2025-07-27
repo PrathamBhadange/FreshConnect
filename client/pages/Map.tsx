@@ -545,9 +545,22 @@ export default function Map() {
               </SelectContent>
             </Select>
 
-            <Button onClick={getCurrentLocation} variant="outline">
-              <Navigation className="mr-2 h-4 w-4" />
-              My Location
+            <Button
+              onClick={getCurrentLocation}
+              variant="outline"
+              disabled={isLoadingLocation}
+            >
+              {isLoadingLocation ? (
+                <>
+                  <RotateCcw className="mr-2 h-4 w-4 animate-spin" />
+                  Detecting...
+                </>
+              ) : (
+                <>
+                  <Navigation className="mr-2 h-4 w-4" />
+                  {userLocation ? 'Update Location' : 'My Location'}
+                </>
+              )}
             </Button>
           </div>
         </div>
