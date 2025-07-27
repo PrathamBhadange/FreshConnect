@@ -50,105 +50,201 @@ export default function Map() {
   const [mapCenter, setMapCenter] = useState({ lat: 28.6139, lng: 77.2090 }); // Default to Delhi
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
 
-  // Mock data for suppliers
-  useEffect(() => {
-    const mockSuppliers: Supplier[] = [
+  // Calculate distance between two coordinates using Haversine formula
+  const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number) => {
+    const R = 6371; // Earth's radius in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLng/2) * Math.sin(dLng/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c; // Distance in kilometers
+  };
+
+  // Generate suppliers based on user location or search query
+  const generateSuppliersForLocation = (centerLat: number, centerLng: number, locationName: string) => {
+    const baseSuppliers = [
       {
-        id: "1",
         name: "Fresh Valley Farms",
         description: "Premium organic fruits and vegetables",
-        rating: 4.8,
-        reviews: 124,
-        distance: "2.3 km",
-        deliveryTime: "30-45 min",
         categories: ["Fruits", "Vegetables"],
-        verified: true,
-        image: "/placeholder.svg",
-        location: "Sector 15, Gurgaon",
-        coordinates: { lat: 28.4595, lng: 77.0266 },
-        phone: "+91 98765 43210",
-        operatingHours: "6:00 AM - 8:00 PM",
         stockItems: [
           { name: "Tomatoes", available: true, quantity: 150, unit: "kg" },
           { name: "Onions", available: true, quantity: 200, unit: "kg" },
           { name: "Apples", available: true, quantity: 80, unit: "kg" },
           { name: "Bananas", available: false, quantity: 0, unit: "kg" }
-        ],
-        lastUpdated: new Date(Date.now() - 10 * 60 * 1000) // 10 minutes ago
+        ]
       },
       {
-        id: "2",
         name: "Spice Kingdom",
         description: "Authentic Indian spices and masalas",
-        rating: 4.9,
-        reviews: 89,
-        distance: "1.8 km",
-        deliveryTime: "20-30 min",
         categories: ["Spices", "Masalas"],
-        verified: true,
-        image: "/placeholder.svg",
-        location: "Old Delhi Market",
-        coordinates: { lat: 28.6506, lng: 77.2334 },
-        phone: "+91 98765 43211",
-        operatingHours: "7:00 AM - 9:00 PM",
         stockItems: [
           { name: "Garam Masala", available: true, quantity: 50, unit: "kg" },
           { name: "Red Chili Powder", available: true, quantity: 75, unit: "kg" },
           { name: "Turmeric", available: true, quantity: 100, unit: "kg" },
           { name: "Coriander Seeds", available: true, quantity: 60, unit: "kg" }
-        ],
-        lastUpdated: new Date(Date.now() - 5 * 60 * 1000) // 5 minutes ago
+        ]
       },
       {
-        id: "3",
-        name: "Metro Dairy Products",
+        name: "Local Dairy Products",
         description: "Fresh dairy products delivered daily",
-        rating: 4.7,
-        reviews: 156,
-        distance: "3.1 km",
-        deliveryTime: "45-60 min",
         categories: ["Dairy", "Milk"],
-        verified: true,
-        image: "/placeholder.svg",
-        location: "Dairy Colony, Delhi",
-        coordinates: { lat: 28.5355, lng: 77.3910 },
-        phone: "+91 98765 43212",
-        operatingHours: "5:00 AM - 10:00 PM",
         stockItems: [
           { name: "Fresh Milk", available: true, quantity: 300, unit: "liters" },
           { name: "Paneer", available: true, quantity: 40, unit: "kg" },
           { name: "Curd", available: true, quantity: 80, unit: "kg" },
-          { name: "Butter", available: false, quantity: 0, unit: "kg" }
-        ],
-        lastUpdated: new Date(Date.now() - 15 * 60 * 1000) // 15 minutes ago
+          { name: "Butter", available: true, quantity: 20, unit: "kg" }
+        ]
       },
       {
-        id: "4",
         name: "Green Leaf Organics",
         description: "Certified organic produce and herbs",
-        rating: 4.6,
-        reviews: 78,
-        distance: "4.2 km",
-        deliveryTime: "60-90 min",
         categories: ["Vegetables", "Herbs"],
-        verified: true,
-        image: "/placeholder.svg",
-        location: "Noida Sector 18",
-        coordinates: { lat: 28.5678, lng: 77.3261 },
-        phone: "+91 98765 43213",
-        operatingHours: "6:00 AM - 7:00 PM",
         stockItems: [
           { name: "Organic Spinach", available: true, quantity: 25, unit: "kg" },
           { name: "Fresh Mint", available: true, quantity: 15, unit: "bunches" },
           { name: "Organic Carrots", available: true, quantity: 40, unit: "kg" },
           { name: "Cilantro", available: true, quantity: 30, unit: "bunches" }
-        ],
-        lastUpdated: new Date(Date.now() - 2 * 60 * 1000) // 2 minutes ago
+        ]
+      },
+      {
+        name: "Premium Fruits Co.",
+        description: "Fresh seasonal fruits and exotic varieties",
+        categories: ["Fruits"],
+        stockItems: [
+          { name: "Mangoes", available: true, quantity: 60, unit: "kg" },
+          { name: "Grapes", available: true, quantity: 45, unit: "kg" },
+          { name: "Oranges", available: true, quantity: 90, unit: "kg" },
+          { name: "Pomegranates", available: true, quantity: 30, unit: "kg" }
+        ]
+      },
+      {
+        name: "Veggie Mart",
+        description: "Fresh vegetables at wholesale prices",
+        categories: ["Vegetables"],
+        stockItems: [
+          { name: "Potatoes", available: true, quantity: 300, unit: "kg" },
+          { name: "Cauliflower", available: true, quantity: 50, unit: "kg" },
+          { name: "Cabbage", available: true, quantity: 80, unit: "kg" },
+          { name: "Green Peas", available: false, quantity: 0, unit: "kg" }
+        ]
       }
     ];
 
-    setSuppliers(mockSuppliers);
-  }, []);
+    return baseSuppliers.map((supplier, index) => {
+      // Generate random coordinates within 20km radius of center
+      const angle = Math.random() * 2 * Math.PI;
+      const radius = Math.random() * 0.2; // ~20km radius in degrees
+      const lat = centerLat + radius * Math.cos(angle);
+      const lng = centerLng + radius * Math.sin(angle);
+
+      const distance = calculateDistance(centerLat, centerLng, lat, lng);
+      const deliveryTime = distance < 2 ? "20-30 min" :
+                          distance < 5 ? "30-45 min" :
+                          distance < 10 ? "45-60 min" : "60-90 min";
+
+      return {
+        id: `${index + 1}`,
+        ...supplier,
+        rating: 4.5 + Math.random() * 0.5,
+        reviews: Math.floor(Math.random() * 200) + 50,
+        distance: `${distance.toFixed(1)} km`,
+        deliveryTime,
+        verified: Math.random() > 0.2, // 80% chance of being verified
+        image: "/placeholder.svg",
+        location: `${locationName} Area ${index + 1}`,
+        coordinates: { lat, lng },
+        phone: `+91 9876${String(543210 + index).slice(-6)}`,
+        operatingHours: "6:00 AM - 8:00 PM",
+        lastUpdated: new Date(Date.now() - Math.random() * 30 * 60 * 1000) // Random time within last 30 minutes
+      };
+    });
+  };
+
+  // Get location name from coordinates (mock implementation)
+  const getLocationName = async (lat: number, lng: number) => {
+    // Mock location detection based on major Indian cities
+    const locations = [
+      { name: "Delhi", lat: 28.6139, lng: 77.2090 },
+      { name: "Mumbai", lat: 19.0760, lng: 72.8777 },
+      { name: "Bangalore", lat: 12.9716, lng: 77.5946 },
+      { name: "Chennai", lat: 13.0827, lng: 80.2707 },
+      { name: "Pune", lat: 18.5204, lng: 73.8567 },
+      { name: "Hyderabad", lat: 17.3850, lng: 78.4867 },
+      { name: "Kolkata", lat: 22.5726, lng: 88.3639 },
+      { name: "Ahmedabad", lat: 23.0225, lng: 72.5714 },
+      { name: "Jaipur", lat: 26.9124, lng: 75.7873 },
+      { name: "Nashik", lat: 19.9975, lng: 73.7898 }
+    ];
+
+    let closestLocation = locations[0];
+    let minDistance = calculateDistance(lat, lng, locations[0].lat, locations[0].lng);
+
+    for (const location of locations) {
+      const distance = calculateDistance(lat, lng, location.lat, location.lng);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestLocation = location;
+      }
+    }
+
+    return closestLocation.name;
+  };
+
+  // Load suppliers based on location
+  useEffect(() => {
+    const loadSuppliers = async () => {
+      let lat = mapCenter.lat;
+      let lng = mapCenter.lng;
+      let locationName = "Delhi";
+
+      // If user has a location, use that
+      if (userLocation) {
+        lat = userLocation.lat;
+        lng = userLocation.lng;
+        locationName = await getLocationName(lat, lng);
+      }
+      // If there's a search query, try to match it to a city
+      else if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase().trim();
+        const cityMap: { [key: string]: { lat: number; lng: number; name: string } } = {
+          'delhi': { lat: 28.6139, lng: 77.2090, name: 'Delhi' },
+          'mumbai': { lat: 19.0760, lng: 72.8777, name: 'Mumbai' },
+          'bangalore': { lat: 12.9716, lng: 77.5946, name: 'Bangalore' },
+          'chennai': { lat: 13.0827, lng: 80.2707, name: 'Chennai' },
+          'pune': { lat: 18.5204, lng: 73.8567, name: 'Pune' },
+          'hyderabad': { lat: 17.3850, lng: 78.4867, name: 'Hyderabad' },
+          'kolkata': { lat: 22.5726, lng: 88.3639, name: 'Kolkata' },
+          'ahmedabad': { lat: 23.0225, lng: 72.5714, name: 'Ahmedabad' },
+          'jaipur': { lat: 26.9124, lng: 75.7873, name: 'Jaipur' },
+          'nashik': { lat: 19.9975, lng: 73.7898, name: 'Nashik' }
+        };
+
+        if (cityMap[query]) {
+          lat = cityMap[query].lat;
+          lng = cityMap[query].lng;
+          locationName = cityMap[query].name;
+          setMapCenter({ lat, lng });
+        }
+      }
+
+      const generatedSuppliers = generateSuppliersForLocation(lat, lng, locationName);
+
+      // Sort by distance
+      const sortedSuppliers = generatedSuppliers.sort((a, b) => {
+        const distanceA = parseFloat(a.distance.replace(' km', ''));
+        const distanceB = parseFloat(b.distance.replace(' km', ''));
+        return distanceA - distanceB;
+      });
+
+      setSuppliers(sortedSuppliers);
+    };
+
+    loadSuppliers();
+  }, [userLocation, searchQuery, mapCenter]);
 
   // Get user's current location
   const getCurrentLocation = () => {
