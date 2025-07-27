@@ -163,7 +163,7 @@ export default function Marketplace() {
           price: 280,
           unit: "kg",
           stock: 50,
-          image: "/placeholder.svg",
+          image: "https://images.unsplash.com/photo-1599909533047-f58b8d68fa44?w=300&h=300&fit=crop&crop=center",
           category: "Spices",
           fresh: false,
         },
