@@ -197,18 +197,55 @@ export default function Map() {
     return closestLocation.name;
   };
 
+  // Auto-detect location on mount
+  useEffect(() => {
+    const autoDetectLocation = () => {
+      if (navigator.geolocation && !userLocation && !searchQuery.trim()) {
+        setIsLoadingLocation(true);
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const location = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            setUserLocation(location);
+            setMapCenter(location);
+            setAutoLocationEnabled(true);
+
+            const locationName = await getLocationName(location.lat, location.lng);
+            setCurrentLocationName(locationName);
+            setIsLoadingLocation(false);
+          },
+          (error) => {
+            console.log("Auto-location failed:", error.message);
+            setIsLoadingLocation(false);
+            setCurrentLocationName("Delhi");
+          },
+          {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 300000
+          }
+        );
+      }
+    };
+
+    autoDetectLocation();
+  }, []);
+
   // Load suppliers based on location
   useEffect(() => {
     const loadSuppliers = async () => {
       let lat = mapCenter.lat;
       let lng = mapCenter.lng;
-      let locationName = "Delhi";
+      let locationName = currentLocationName;
 
       // If user has a location, use that
       if (userLocation) {
         lat = userLocation.lat;
         lng = userLocation.lng;
         locationName = await getLocationName(lat, lng);
+        setCurrentLocationName(locationName);
       }
       // If there's a search query, try to match it to a city
       else if (searchQuery.trim()) {
@@ -231,6 +268,7 @@ export default function Map() {
           lng = cityMap[query].lng;
           locationName = cityMap[query].name;
           setMapCenter({ lat, lng });
+          setCurrentLocationName(locationName);
         }
       }
 
@@ -247,7 +285,7 @@ export default function Map() {
     };
 
     loadSuppliers();
-  }, [userLocation, searchQuery, mapCenter]);
+  }, [userLocation, searchQuery, mapCenter, currentLocationName]);
 
   // Get user's current location
   const getCurrentLocation = () => {
