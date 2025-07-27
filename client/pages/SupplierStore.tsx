@@ -70,6 +70,9 @@ export default function SupplierStore() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isMessageDialogOpen, setIsMessageDialogOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [messageSubject, setMessageSubject] = useState("");
+  const [messageContent, setMessageContent] = useState("");
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   // Mock data - in real app, this would come from API
   useEffect(() => {
@@ -269,22 +272,49 @@ export default function SupplierStore() {
                         <div className="space-y-4">
                           <div>
                             <Label htmlFor="subject">Subject</Label>
-                            <Input id="subject" placeholder="Order inquiry..." />
+                            <Input
+                              id="subject"
+                              placeholder="Order inquiry..."
+                              value={messageSubject}
+                              onChange={(e) => setMessageSubject(e.target.value)}
+                            />
                           </div>
                           <div>
                             <Label htmlFor="message">Message</Label>
-                            <Textarea 
-                              id="message" 
-                              placeholder="Hi, I'm interested in placing a bulk order..." 
+                            <Textarea
+                              id="message"
+                              placeholder="Hi, I'm interested in placing a bulk order..."
                               rows={4}
+                              value={messageContent}
+                              onChange={(e) => setMessageContent(e.target.value)}
                             />
                           </div>
-                          <Button className="w-full">Send Message</Button>
+                          <Button
+                            className="w-full"
+                            onClick={() => {
+                              if (messageSubject.trim() && messageContent.trim()) {
+                                alert(`Message sent to ${supplier.name}!\n\nSubject: ${messageSubject}\nMessage: ${messageContent}`);
+                                setMessageSubject("");
+                                setMessageContent("");
+                                setIsMessageDialogOpen(false);
+                              } else {
+                                alert("Please fill in both subject and message.");
+                              }
+                            }}
+                          >
+                            Send Message
+                          </Button>
                         </div>
                       </DialogContent>
                     </Dialog>
                     
-                    <Button>
+                    <Button onClick={() => {
+                      if (supplier?.phone) {
+                        window.open(`tel:${supplier.phone}`, '_self');
+                      } else {
+                        alert('Phone number not available');
+                      }
+                    }}>
                       <Phone className="mr-2 h-4 w-4" />
                       Call Now
                     </Button>
@@ -527,11 +557,33 @@ export default function SupplierStore() {
                     )}
                   </div>
                   
-                  <Button 
-                    className="w-full" 
+                  <Button
+                    className="w-full"
                     disabled={getTotalAmount() < supplier.minimumOrder}
+                    onClick={() => {
+                      if (cart.length === 0) {
+                        alert('Your cart is empty. Please add some items first.');
+                        return;
+                      }
+                      if (getTotalAmount() < supplier.minimumOrder) {
+                        alert(`Minimum order amount is ₹${supplier.minimumOrder}. Please add more items.`);
+                        return;
+                      }
+
+                      const orderDetails = cart.map(item => {
+                        const product = supplier.products.find(p => p.id === item.productId);
+                        return `${product?.name} x ${item.quantity} = ₹${product ? product.price * item.quantity : 0}`;
+                      }).join('\n');
+
+                      alert(`Order placed successfully!\n\nOrder Details:\n${orderDetails}\n\nTotal: ₹${getTotalAmount()}\n\nYou will receive a confirmation call from ${supplier.name} shortly.`);
+                      setCart([]);
+                      setIsOrderPlaced(true);
+
+                      // Reset success message after 3 seconds
+                      setTimeout(() => setIsOrderPlaced(false), 3000);
+                    }}
                   >
-                    Place Order
+                    {isOrderPlaced ? 'Order Placed! ✓' : 'Place Order'}
                   </Button>
                 </div>
               )}
