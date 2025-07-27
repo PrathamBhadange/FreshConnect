@@ -424,6 +424,22 @@ export default function Marketplace() {
             <ShoppingCart className="mr-2 h-4 w-4" />
             Products ({filteredProducts.length})
           </Button>
+
+          {/* Cart Button */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowCart(!showCart)}
+            className="relative"
+          >
+            <ShoppingCart className="mr-2 h-4 w-4" />
+            Cart
+            {getTotalItems() > 0 && (
+              <Badge className="absolute -top-2 -right-2 h-5 w-5 p-0 text-xs">
+                {getTotalItems()}
+              </Badge>
+            )}
+          </Button>
         </div>
       </div>
 
