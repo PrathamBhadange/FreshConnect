@@ -250,21 +250,47 @@ export default function Map() {
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const location = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
           setUserLocation(location);
           setMapCenter(location);
+
+          // Get location name and show confirmation
+          const locationName = await getLocationName(location.lat, location.lng);
+          alert(`Location detected: ${locationName}\nFinding nearby suppliers...`);
         },
         (error) => {
           console.error("Error getting location:", error);
-          alert("Unable to get your location. Showing default area.");
+          let errorMessage = "Unable to get your location. ";
+
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage += "Location access was denied. Please enable location permissions.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage += "Location information is unavailable.";
+              break;
+            case error.TIMEOUT:
+              errorMessage += "Location request timed out.";
+              break;
+            default:
+              errorMessage += "An unknown error occurred.";
+              break;
+          }
+
+          alert(errorMessage + " Showing suppliers for Delhi area.");
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 300000 // 5 minutes
         }
       );
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert("Geolocation is not supported by this browser. Showing suppliers for Delhi area.");
     }
   };
 
