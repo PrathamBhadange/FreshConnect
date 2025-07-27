@@ -38,6 +38,9 @@ import {
   ChefHat,
   CheckCircle,
   Eye,
+  Plus,
+  Minus,
+  X,
 } from "lucide-react";
 
 interface Supplier {
@@ -66,6 +69,13 @@ interface Product {
   fresh: boolean;
 }
 
+interface CartItem {
+  productId: string;
+  supplierId: string;
+  quantity: number;
+  product: Product & { supplierName: string };
+}
+
 export default function Marketplace() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchParams] = useSearchParams();
@@ -74,6 +84,8 @@ export default function Marketplace() {
   const [viewMode, setViewMode] = useState<"suppliers" | "products">(
     "suppliers",
   );
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [showCart, setShowCart] = useState(false);
 
   // Handle URL search parameters
   useEffect(() => {
