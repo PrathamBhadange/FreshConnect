@@ -117,7 +117,7 @@ export default function Marketplace() {
           price: 40,
           unit: "kg",
           stock: 150,
-          image: "/placeholder.svg",
+          image: "https://images.unsplash.com/photo-1546470427-227e13439cd0?w=300&h=300&fit=crop&crop=center",
           category: "Vegetables",
           fresh: true,
         },
