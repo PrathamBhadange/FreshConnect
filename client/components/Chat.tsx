@@ -6,17 +6,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { 
-  Send, 
-  MoreVertical, 
-  Phone, 
-  Video, 
+import {
+  Send,
+  MoreVertical,
+  Phone,
+  Video,
   Paperclip,
   Smile,
   Store,
   User,
   CheckCheck,
-  Clock
+  Clock,
+  MessageCircle
 } from "lucide-react";
 
 interface Message {
