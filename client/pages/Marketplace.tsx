@@ -583,10 +583,40 @@ export default function Marketplace() {
                   Stock: {product.stock} {product.unit}
                 </div>
 
-                <Button size="sm" className="w-full">
-                  <ShoppingCart className="mr-2 h-3 w-3" />
-                  Add to Cart
-                </Button>
+                {getCartQuantity(product.id, product.supplierId) > 0 ? (
+                  <div className="flex items-center justify-between">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-8 w-8 p-0"
+                      onClick={() => removeFromCart(product.id, product.supplierId)}
+                    >
+                      <Minus className="h-3 w-3" />
+                    </Button>
+                    <span className="font-medium">
+                      {getCartQuantity(product.id, product.supplierId)}
+                    </span>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-8 w-8 p-0"
+                      onClick={() => addToCart(product)}
+                      disabled={getCartQuantity(product.id, product.supplierId) >= product.stock}
+                    >
+                      <Plus className="h-3 w-3" />
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    size="sm"
+                    className="w-full"
+                    onClick={() => addToCart(product)}
+                    disabled={product.stock === 0}
+                  >
+                    <ShoppingCart className="mr-2 h-3 w-3" />
+                    {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))}
