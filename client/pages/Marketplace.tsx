@@ -218,7 +218,7 @@ export default function Marketplace() {
           price: 280,
           unit: "kg",
           stock: 40,
-          image: "/placeholder.svg",
+          image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=300&fit=crop&crop=center",
           category: "Dairy",
           fresh: true,
         },
