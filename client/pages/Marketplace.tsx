@@ -199,7 +199,7 @@ export default function Marketplace() {
       deliveryTime: "45-60 min",
       categories: ["Dairy", "Milk"],
       verified: true,
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400&h=300&fit=crop&crop=center",
       location: "Dairy Colony, Delhi",
       products: [
         {
