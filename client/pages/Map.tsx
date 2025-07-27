@@ -483,8 +483,38 @@ export default function Map() {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">Find Suppliers</h1>
-        <p className="text-muted-foreground mt-2">Locate nearby suppliers with real-time locations and stock</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Find Suppliers</h1>
+            <p className="text-muted-foreground mt-2">
+              {isLoadingLocation ? (
+                "Detecting your location..."
+              ) : userLocation ? (
+                `Showing suppliers near ${currentLocationName}`
+              ) : searchQuery ? (
+                `Showing suppliers in ${currentLocationName}`
+              ) : (
+                "Locate nearby suppliers with real-time locations and stock"
+              )}
+            </p>
+          </div>
+
+          {/* Location Status */}
+          <div className="text-right">
+            {userLocation && (
+              <Badge variant="secondary" className="bg-green-100 text-green-700">
+                <Navigation className="mr-1 h-3 w-3" />
+                Location Enabled
+              </Badge>
+            )}
+            {isLoadingLocation && (
+              <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                <RotateCcw className="mr-1 h-3 w-3 animate-spin" />
+                Detecting...
+              </Badge>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Search and Filters */}
