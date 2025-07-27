@@ -49,6 +49,9 @@ export default function Map() {
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [mapCenter, setMapCenter] = useState({ lat: 28.6139, lng: 77.2090 }); // Default to Delhi
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [isLoadingLocation, setIsLoadingLocation] = useState(false);
+  const [currentLocationName, setCurrentLocationName] = useState("Delhi");
+  const [autoLocationEnabled, setAutoLocationEnabled] = useState(false);
 
   // Calculate distance between two coordinates using Haversine formula
   const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number) => {
