@@ -306,12 +306,16 @@ export default function Marketplace() {
                 <Separator className="my-4" />
 
                 <div className="flex gap-2">
-                  <Button size="sm" className="flex-1">
-                    <Eye className="mr-2 h-4 w-4" />
-                    View Store
+                  <Button size="sm" className="flex-1" asChild>
+                    <Link to={`/supplier/${supplier.id}`}>
+                      <Eye className="mr-2 h-4 w-4" />
+                      View Store
+                    </Link>
                   </Button>
-                  <Button size="sm" variant="outline">
-                    <MessageCircle className="h-4 w-4" />
+                  <Button size="sm" variant="outline" asChild>
+                    <Link to={`/messages?supplier=${supplier.id}`}>
+                      <MessageCircle className="h-4 w-4" />
+                    </Link>
                   </Button>
                 </div>
               </CardContent>
