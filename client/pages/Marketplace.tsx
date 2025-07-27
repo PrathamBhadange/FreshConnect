@@ -89,7 +89,7 @@ export default function Marketplace() {
 
   // Handle URL search parameters
   useEffect(() => {
-    const searchParam = searchParams.get('search');
+    const searchParam = searchParams.get("search");
     if (searchParam) {
       setSearchQuery(searchParam);
     }
@@ -108,7 +108,8 @@ export default function Marketplace() {
       deliveryTime: "30-45 min",
       categories: ["Fruits", "Vegetables"],
       verified: true,
-      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center",
+      image:
+        "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center",
       location: "Sector 15, Gurgaon",
       products: [
         {
@@ -117,7 +118,8 @@ export default function Marketplace() {
           price: 40,
           unit: "kg",
           stock: 150,
-          image: "https://images.unsplash.com/photo-1546470427-227e13439cd0?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1546470427-227e13439cd0?w=300&h=300&fit=crop&crop=center",
           category: "Vegetables",
           fresh: true,
         },
@@ -127,7 +129,8 @@ export default function Marketplace() {
           price: 35,
           unit: "kg",
           stock: 200,
-          image: "https://images.unsplash.com/photo-1508313880080-c4bec8ca91a4?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1508313880080-c4bec8ca91a4?w=300&h=300&fit=crop&crop=center",
           category: "Vegetables",
           fresh: true,
         },
@@ -137,7 +140,8 @@ export default function Marketplace() {
           price: 120,
           unit: "kg",
           stock: 80,
-          image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300&h=300&fit=crop&crop=center",
           category: "Fruits",
           fresh: true,
         },
@@ -154,7 +158,8 @@ export default function Marketplace() {
       deliveryTime: "20-30 min",
       categories: ["Spices", "Masalas"],
       verified: true,
-      image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop&crop=center",
+      image:
+        "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop&crop=center",
       location: "Old Delhi Market",
       products: [
         {
@@ -163,7 +168,8 @@ export default function Marketplace() {
           price: 280,
           unit: "kg",
           stock: 50,
-          image: "https://images.unsplash.com/photo-1599909533047-f58b8d68fa44?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1599909533047-f58b8d68fa44?w=300&h=300&fit=crop&crop=center",
           category: "Spices",
           fresh: false,
         },
@@ -173,7 +179,8 @@ export default function Marketplace() {
           price: 200,
           unit: "kg",
           stock: 75,
-          image: "https://images.unsplash.com/photo-1505253213348-cd54c92b37ed?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1505253213348-cd54c92b37ed?w=300&h=300&fit=crop&crop=center",
           category: "Spices",
           fresh: false,
         },
@@ -183,7 +190,8 @@ export default function Marketplace() {
           price: 150,
           unit: "kg",
           stock: 100,
-          image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300&h=300&fit=crop&crop=center",
           category: "Spices",
           fresh: false,
         },
@@ -199,7 +207,8 @@ export default function Marketplace() {
       deliveryTime: "45-60 min",
       categories: ["Dairy", "Milk"],
       verified: true,
-      image: "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400&h=300&fit=crop&crop=center",
+      image:
+        "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400&h=300&fit=crop&crop=center",
       location: "Dairy Colony, Delhi",
       products: [
         {
@@ -208,7 +217,8 @@ export default function Marketplace() {
           price: 55,
           unit: "liter",
           stock: 300,
-          image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&h=300&fit=crop&crop=center",
           category: "Dairy",
           fresh: true,
         },
@@ -218,7 +228,8 @@ export default function Marketplace() {
           price: 280,
           unit: "kg",
           stock: 40,
-          image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=300&fit=crop&crop=center",
           category: "Dairy",
           fresh: true,
         },
@@ -228,7 +239,8 @@ export default function Marketplace() {
           price: 60,
           unit: "kg",
           stock: 80,
-          image: "https://images.unsplash.com/photo-1571212515416-fac4e2be089b?w=300&h=300&fit=crop&crop=center",
+          image:
+            "https://images.unsplash.com/photo-1571212515416-fac4e2be089b?w=300&h=300&fit=crop&crop=center",
           category: "Dairy",
           fresh: true,
         },
@@ -281,57 +293,67 @@ export default function Marketplace() {
   });
 
   // Cart management functions
-  const addToCart = (product: Product & { supplierName: string; supplierId: string }) => {
-    setCart(prev => {
-      const existingItem = prev.find(item =>
-        item.productId === product.id && item.supplierId === product.supplierId
+  const addToCart = (
+    product: Product & { supplierName: string; supplierId: string },
+  ) => {
+    setCart((prev) => {
+      const existingItem = prev.find(
+        (item) =>
+          item.productId === product.id &&
+          item.supplierId === product.supplierId,
       );
 
       if (existingItem) {
         if (existingItem.quantity < product.stock) {
-          return prev.map(item =>
-            item.productId === product.id && item.supplierId === product.supplierId
+          return prev.map((item) =>
+            item.productId === product.id &&
+            item.supplierId === product.supplierId
               ? { ...item, quantity: item.quantity + 1 }
-              : item
+              : item,
           );
         } else {
           alert(`Only ${product.stock} ${product.unit} available in stock`);
           return prev;
         }
       } else {
-        return [...prev, {
-          productId: product.id,
-          supplierId: product.supplierId,
-          quantity: 1,
-          product
-        }];
+        return [
+          ...prev,
+          {
+            productId: product.id,
+            supplierId: product.supplierId,
+            quantity: 1,
+            product,
+          },
+        ];
       }
     });
   };
 
   const removeFromCart = (productId: string, supplierId: string) => {
-    setCart(prev => {
-      const existingItem = prev.find(item =>
-        item.productId === productId && item.supplierId === supplierId
+    setCart((prev) => {
+      const existingItem = prev.find(
+        (item) =>
+          item.productId === productId && item.supplierId === supplierId,
       );
 
       if (existingItem && existingItem.quantity > 1) {
-        return prev.map(item =>
+        return prev.map((item) =>
           item.productId === productId && item.supplierId === supplierId
             ? { ...item, quantity: item.quantity - 1 }
-            : item
+            : item,
         );
       } else {
-        return prev.filter(item =>
-          !(item.productId === productId && item.supplierId === supplierId)
+        return prev.filter(
+          (item) =>
+            !(item.productId === productId && item.supplierId === supplierId),
         );
       }
     });
   };
 
   const getCartQuantity = (productId: string, supplierId: string) => {
-    const item = cart.find(item =>
-      item.productId === productId && item.supplierId === supplierId
+    const item = cart.find(
+      (item) => item.productId === productId && item.supplierId === supplierId,
     );
     return item?.quantity || 0;
   };
@@ -341,7 +363,10 @@ export default function Marketplace() {
   };
 
   const getTotalAmount = () => {
-    return cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+    return cart.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0,
+    );
   };
 
   const clearCart = () => {
@@ -461,7 +486,10 @@ export default function Marketplace() {
 
       {/* Cart Sidebar */}
       {showCart && (
-        <div className="fixed inset-0 z-50 bg-black/20" onClick={() => setShowCart(false)}>
+        <div
+          className="fixed inset-0 z-50 bg-black/20"
+          onClick={() => setShowCart(false)}
+        >
           <div
             className="fixed right-0 top-0 h-full w-96 bg-background border-l shadow-lg overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
@@ -502,9 +530,15 @@ export default function Marketplace() {
                             className="w-16 h-16 rounded object-cover"
                           />
                           <div className="flex-1 min-w-0">
-                            <h3 className="font-medium text-sm truncate">{item.product.name}</h3>
-                            <p className="text-xs text-muted-foreground">{item.product.supplierName}</p>
-                            <p className="text-sm font-medium">₹{item.product.price}/{item.product.unit}</p>
+                            <h3 className="font-medium text-sm truncate">
+                              {item.product.name}
+                            </h3>
+                            <p className="text-xs text-muted-foreground">
+                              {item.product.supplierName}
+                            </p>
+                            <p className="text-sm font-medium">
+                              ₹{item.product.price}/{item.product.unit}
+                            </p>
                           </div>
                         </div>
 
@@ -514,11 +548,15 @@ export default function Marketplace() {
                               size="sm"
                               variant="outline"
                               className="h-8 w-8 p-0"
-                              onClick={() => removeFromCart(item.productId, item.supplierId)}
+                              onClick={() =>
+                                removeFromCart(item.productId, item.supplierId)
+                              }
                             >
                               <Minus className="h-3 w-3" />
                             </Button>
-                            <span className="font-medium w-8 text-center">{item.quantity}</span>
+                            <span className="font-medium w-8 text-center">
+                              {item.quantity}
+                            </span>
                             <Button
                               size="sm"
                               variant="outline"
@@ -530,7 +568,9 @@ export default function Marketplace() {
                             </Button>
                           </div>
                           <div className="text-right">
-                            <p className="font-semibold">₹{item.product.price * item.quantity}</p>
+                            <p className="font-semibold">
+                              ₹{item.product.price * item.quantity}
+                            </p>
                           </div>
                         </div>
                       </CardContent>
@@ -709,7 +749,9 @@ export default function Marketplace() {
                       size="sm"
                       variant="outline"
                       className="h-8 w-8 p-0"
-                      onClick={() => removeFromCart(product.id, product.supplierId)}
+                      onClick={() =>
+                        removeFromCart(product.id, product.supplierId)
+                      }
                     >
                       <Minus className="h-3 w-3" />
                     </Button>
@@ -721,7 +763,10 @@ export default function Marketplace() {
                       variant="outline"
                       className="h-8 w-8 p-0"
                       onClick={() => addToCart(product)}
-                      disabled={getCartQuantity(product.id, product.supplierId) >= product.stock}
+                      disabled={
+                        getCartQuantity(product.id, product.supplierId) >=
+                        product.stock
+                      }
                     >
                       <Plus className="h-3 w-3" />
                     </Button>
@@ -734,7 +779,7 @@ export default function Marketplace() {
                     disabled={product.stock === 0}
                   >
                     <ShoppingCart className="mr-2 h-3 w-3" />
-                    {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                    {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
                   </Button>
                 )}
               </CardContent>

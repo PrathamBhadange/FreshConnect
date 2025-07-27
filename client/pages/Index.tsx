@@ -49,14 +49,17 @@ export default function Index() {
   // Handle clicks outside search to close suggestions
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
         setShowSuggestions(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -203,7 +206,10 @@ export default function Index() {
               and grow your business.
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto" ref={searchRef}>
+            <div
+              className="mt-10 flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
+              ref={searchRef}
+            >
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -216,26 +222,30 @@ export default function Index() {
                     if (value.length > 0) {
                       // Generate suggestions based on input
                       const allSuggestions = [
-                        'Fresh tomatoes',
-                        'Organic vegetables',
-                        'Spices and masalas',
-                        'Fresh fruits',
-                        'Dairy products',
-                        'Green vegetables',
-                        'Fresh herbs',
-                        'Seasonal fruits',
-                        'Premium spices',
-                        'Organic produce',
-                        'Local suppliers near me',
-                        'Fresh Valley Farms',
-                        'Spice Kingdom',
-                        'Wholesale vegetables',
-                        'Street food ingredients'
+                        "Fresh tomatoes",
+                        "Organic vegetables",
+                        "Spices and masalas",
+                        "Fresh fruits",
+                        "Dairy products",
+                        "Green vegetables",
+                        "Fresh herbs",
+                        "Seasonal fruits",
+                        "Premium spices",
+                        "Organic produce",
+                        "Local suppliers near me",
+                        "Fresh Valley Farms",
+                        "Spice Kingdom",
+                        "Wholesale vegetables",
+                        "Street food ingredients",
                       ];
 
-                      const filtered = allSuggestions.filter(suggestion =>
-                        suggestion.toLowerCase().includes(value.toLowerCase())
-                      ).slice(0, 5);
+                      const filtered = allSuggestions
+                        .filter((suggestion) =>
+                          suggestion
+                            .toLowerCase()
+                            .includes(value.toLowerCase()),
+                        )
+                        .slice(0, 5);
 
                       setSuggestions(filtered);
                       setShowSuggestions(filtered.length > 0);
@@ -244,7 +254,7 @@ export default function Index() {
                     }
                   }}
                   onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
+                    if (e.key === "Enter") {
                       handleSearch();
                     }
                   }}
