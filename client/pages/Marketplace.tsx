@@ -481,11 +481,24 @@ export default function Marketplace() {
             key={category.id}
             variant={selectedCategory === category.id ? "default" : "outline"}
             size="sm"
-            onClick={() => setSelectedCategory(category.id)}
-            className="h-9"
+            onClick={() => {
+              setSelectedCategory(category.id);
+              // Show visual feedback
+              console.log(`Filtering by ${category.name}`);
+            }}
+            className={`h-9 transition-all duration-200 hover:scale-105 ${
+              selectedCategory === category.id
+                ? 'shadow-md ring-2 ring-primary/20'
+                : 'hover:shadow-sm'
+            }`}
           >
             {category.icon}
             <span className="ml-2">{category.name}</span>
+            {selectedCategory === category.id && (
+              <span className="ml-2 px-1.5 py-0.5 bg-white/20 rounded text-xs">
+                ✓
+              </span>
+            )}
           </Button>
         ))}
       </div>
