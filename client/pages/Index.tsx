@@ -187,20 +187,31 @@ export default function Index() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-fresh via-background to-supplier/5 py-20 lg:py-32">
-        <div className="container relative">
+      <section className="relative overflow-hidden py-20 lg:py-32">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920&h=1080&fit=crop&crop=center&q=80"
+            alt="Fresh vegetables market background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-supplier/20 via-transparent to-fresh/10"></div>
+        </div>
+
+        <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
             <Badge variant="secondary" className="mb-4">
               <Leaf className="mr-1 h-3 w-3" />
               Connecting Fresh • Building Communities
             </Badge>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-white drop-shadow-lg">
               Fresh Ingredients,
-              <span className="text-supplier block">Direct Connection</span>
+              <span className="text-green-400 block">Direct Connection</span>
             </h1>
 
-            <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
+            <p className="mt-6 text-lg leading-8 text-white/90 max-w-2xl mx-auto drop-shadow">
               The marketplace that connects street food vendors with quality
               suppliers. Get fresh ingredients delivered, chat with suppliers,
               and grow your business.
@@ -311,24 +322,31 @@ export default function Index() {
                   <span>Explore All</span>
                 </Link>
               </Button>
+              <Button size="lg" variant="secondary" className="bg-orange-500 hover:bg-orange-600 text-white border-0">
+                <svg width="24" height="24" className="lucide lucide-credit-card mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="20" height="14" x="2" y="5" rx="2"/>
+                  <line x1="2" x2="22" y1="10" y2="10"/>
+                </svg>
+                Demo Payment
+              </Button>
             </div>
 
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-supplier">500+</div>
-                <div className="text-sm text-muted-foreground">
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="text-2xl font-bold text-green-400">500+</div>
+                <div className="text-sm text-white/80">
                   Active Suppliers
                 </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-vendor">1000+</div>
-                <div className="text-sm text-muted-foreground">
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="text-2xl font-bold text-orange-400">1000+</div>
+                <div className="text-sm text-white/80">
                   Street Food Vendors
                 </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">10k+</div>
-                <div className="text-sm text-muted-foreground">
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="text-2xl font-bold text-yellow-400">10k+</div>
+                <div className="text-sm text-white/80">
                   Orders Completed
                 </div>
               </div>
