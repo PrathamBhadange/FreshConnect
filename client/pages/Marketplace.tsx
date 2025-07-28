@@ -275,7 +275,10 @@ export default function Marketplace() {
     { id: "meat", name: "Meat & Fish", icon: <Fish className="h-4 w-4" /> },
   ];
 
-  const filteredSuppliers = mockSuppliers.filter((supplier) => {
+  // Combine mock suppliers with registered suppliers
+  const allSuppliers = [...mockSuppliers, ...registeredSuppliers];
+
+  const filteredSuppliers = allSuppliers.filter((supplier) => {
     const matchesSearch =
       supplier.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       supplier.description.toLowerCase().includes(searchQuery.toLowerCase());
