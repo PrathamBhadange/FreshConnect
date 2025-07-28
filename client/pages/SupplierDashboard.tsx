@@ -537,7 +537,7 @@ export default function SupplierDashboard() {
                     </div>
                     <p className="text-sm font-medium">{order.customerName}</p>
                     <p className="text-sm text-muted-foreground mb-2">
-                      {order.items.length} items �� ₹{order.total}
+                      {order.items.length} items • ₹{order.total}
                     </p>
                     {order.status === 'pending' && (
                       <Button size="sm" onClick={() => confirmOrder(order.id)}>
@@ -553,12 +553,37 @@ export default function SupplierDashboard() {
           {/* Notifications */}
           <Card>
             <CardHeader>
-              <CardTitle>Notifications</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Notifications</CardTitle>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setNotifications(prev => prev.map(n => ({...n, read: true})));
+                    alert("All notifications marked as read!");
+                  }}
+                >
+                  Mark All Read
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 {notifications.map((notification) => (
-                  <div key={notification.id} className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
+                  <div
+                    key={notification.id}
+                    className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
+                      notification.read ? 'bg-muted/30' : 'bg-blue-50 border border-blue-200'
+                    }`}
+                    onClick={() => {
+                      setNotifications(prev =>
+                        prev.map(n => n.id === notification.id ? {...n, read: true} : n)
+                      );
+                      if (notification.type === 'order') {
+                        alert("Opening order details...");
+                      }
+                    }}
+                  >
                     <div className={`p-1 rounded ${
                       notification.type === 'order' ? 'bg-blue-100' :
                       notification.type === 'stock' ? 'bg-yellow-100' : 'bg-green-100'
@@ -568,11 +593,35 @@ export default function SupplierDashboard() {
                        <IndianRupee className="h-3 w-3" />}
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm">{notification.message}</p>
+                      <p className={`text-sm ${!notification.read ? 'font-semibold' : ''}`}>
+                        {notification.message}
+                      </p>
                       <p className="text-xs text-muted-foreground">{notification.time}</p>
+                      {!notification.read && (
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-1"></div>
+                      )}
                     </div>
                   </div>
                 ))}
+
+                {/* Add New Notification Button for Demo */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => {
+                    const newNotification = {
+                      id: notifications.length + 1,
+                      message: "New order from Street Food Express",
+                      type: "order" as const,
+                      time: "Just now",
+                      read: false
+                    };
+                    setNotifications(prev => [newNotification, ...prev]);
+                  }}
+                >
+                  + Simulate New Order Notification
+                </Button>
               </div>
             </CardContent>
           </Card>
