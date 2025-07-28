@@ -191,8 +191,8 @@ export default function Index() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920&h=1080&fit=crop&crop=center&q=80"
-            alt="Fresh vegetables market background"
+            src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=1920&h=1080&fit=crop&crop=center&q=80"
+            alt="Fresh vegetables and produce background"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60"></div>
