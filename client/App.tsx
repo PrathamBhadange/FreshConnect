@@ -11,6 +11,7 @@ import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Marketplace from "./pages/Marketplace";
 import SupplierStore from "./pages/SupplierStore";
+import SupplierStoreEnhanced from "./pages/SupplierStoreEnhanced";
 import Messages from "./pages/Messages";
 import Map from "./pages/Map";
 import SupplierDashboard from "./pages/SupplierDashboard";
