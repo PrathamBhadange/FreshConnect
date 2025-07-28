@@ -114,11 +114,22 @@ export default function SupplierDashboard() {
     image: ""
   });
 
-  const [notifications] = useState([
-    { id: 1, message: "New order from Raj's Chaat Corner", type: "order", time: "2 min ago" },
-    { id: 2, message: "Organic Onions running low (5 kg left)", type: "stock", time: "15 min ago" },
-    { id: 3, message: "Payment received for Order #ORD-002", type: "payment", time: "1 hour ago" }
+  const [notifications, setNotifications] = useState([
+    { id: 1, message: "New order from Raj's Chaat Corner", type: "order", time: "2 min ago", read: false },
+    { id: 2, message: "Organic Onions running low (5 kg left)", type: "stock", time: "15 min ago", read: false },
+    { id: 3, message: "Payment received for Order #ORD-002", type: "payment", time: "1 hour ago", read: true }
   ]);
+
+  const [marketInfo, setMarketInfo] = useState({
+    name: "Fresh Valley Farms",
+    location: "Sector 15, Gurgaon",
+    description: "Premium organic fruits and vegetables",
+    operatingHours: "6:00 AM - 8:00 PM",
+    deliveryRadius: "10 km",
+    minimumOrder: "500"
+  });
+
+  const [isEditMarketOpen, setIsEditMarketOpen] = useState(false);
 
   const addProduct = () => {
     if (newProduct.name && newProduct.price && newProduct.unit && newProduct.stock && newProduct.category) {
