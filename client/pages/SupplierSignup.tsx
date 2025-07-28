@@ -84,10 +84,19 @@ export default function SupplierSignup() {
     if (currentStep < 4) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Submit form
-      console.log("Form submitted:", formData);
-      alert("🎉 Registration Successful!\n\nWelcome to FreshConnect!\nYour supplier account has been created.\n\nWhat's next:\n• Add your products\n• Set up inventory\n• Start receiving orders");
-      navigate("/supplier-dashboard");
+      try {
+        // Register the supplier using the storage service
+        const registeredSupplier = supplierService.registerSupplier(formData);
+        console.log("Supplier registered successfully:", registeredSupplier);
+
+        alert(`🎉 Registration Successful!\n\nWelcome to FreshConnect, ${formData.shopName}!\nYour supplier account has been created and you're now visible to vendors.\n\nSupplier ID: ${registeredSupplier.id}\n\nWhat's next:\n• You'll appear in marketplace search results\n• Vendors can now discover your products\n• Start receiving orders from local vendors`);
+
+        // Navigate to dashboard with the new supplier ID
+        navigate(`/supplier-dashboard?id=${registeredSupplier.id}`);
+      } catch (error) {
+        console.error("Registration failed:", error);
+        alert("Registration failed. Please try again.");
+      }
     }
   };
 
