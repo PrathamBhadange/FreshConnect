@@ -372,6 +372,9 @@ export default function Index() {
               <Card
                 key={index}
                 className="cursor-pointer hover:shadow-md transition-shadow"
+                onClick={() => {
+                  navigate(`/marketplace?category=${category.name.toLowerCase()}`);
+                }}
               >
                 <CardContent className="p-6 text-center">
                   <div
