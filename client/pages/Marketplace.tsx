@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { supplierService, type RegisteredSupplier } from "@/services/supplierService";
 import { Button } from "@/components/ui/button";
 import {
   Card,
