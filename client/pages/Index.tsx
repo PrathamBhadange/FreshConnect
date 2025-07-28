@@ -27,6 +27,12 @@ import {
   Leaf,
   Zap,
   Heart,
+  Apple,
+  Carrot,
+  ChefHat,
+  Wheat,
+  Milk,
+  Fish,
 } from "lucide-react";
 
 export default function Index() {
