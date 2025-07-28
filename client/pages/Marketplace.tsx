@@ -290,7 +290,7 @@ export default function Marketplace() {
     return matchesSearch && matchesCategory;
   });
 
-  const allProducts = mockSuppliers.flatMap((supplier) =>
+  const allProducts = allSuppliers.flatMap((supplier) =>
     supplier.products.map((product) => ({
       ...product,
       supplierName: supplier.name,
