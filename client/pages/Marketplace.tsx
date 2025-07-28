@@ -90,8 +90,14 @@ export default function Marketplace() {
   // Handle URL search parameters
   useEffect(() => {
     const searchParam = searchParams.get("search");
+    const categoryParam = searchParams.get("category");
+
     if (searchParam) {
       setSearchQuery(searchParam);
+    }
+
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
     }
   }, [searchParams]);
 
