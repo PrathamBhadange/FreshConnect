@@ -87,6 +87,7 @@ export default function Marketplace() {
   );
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
+  const [registeredSuppliers, setRegisteredSuppliers] = useState<RegisteredSupplier[]>([]);
 
   // Handle URL search parameters
   useEffect(() => {
