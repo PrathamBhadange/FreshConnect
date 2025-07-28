@@ -92,7 +92,7 @@ const App = () => (
               path="/supplier/:supplierId"
               element={
                 <Layout>
-                  <SupplierStore />
+                  <SupplierStoreEnhanced />
                 </Layout>
               }
             />
