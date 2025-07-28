@@ -402,7 +402,7 @@ export default function Index() {
                       category.color,
                     )}
                   >
-                    <Heart className="h-6 w-6" />
+                    <category.icon className="h-6 w-6" />
                   </div>
                   <h3 className="font-semibold">{category.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1">
