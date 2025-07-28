@@ -263,6 +263,126 @@ export default function SupplierDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Market Information */}
+        <div className="lg:col-span-3 mb-6">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <Store className="h-5 w-5" />
+                    Market Information
+                  </CardTitle>
+                  <CardDescription>Manage your market presence and details</CardDescription>
+                </div>
+                <Dialog open={isEditMarketOpen} onOpenChange={setIsEditMarketOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline">
+                      <Edit className="mr-2 h-4 w-4" />
+                      Edit Market
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Edit Market Information</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                      <div>
+                        <Label htmlFor="marketName">Market Name</Label>
+                        <Input
+                          id="marketName"
+                          value={marketInfo.name}
+                          onChange={(e) => setMarketInfo({...marketInfo, name: e.target.value})}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="location">Location</Label>
+                        <Input
+                          id="location"
+                          value={marketInfo.location}
+                          onChange={(e) => setMarketInfo({...marketInfo, location: e.target.value})}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="description">Description</Label>
+                        <Textarea
+                          id="description"
+                          value={marketInfo.description}
+                          onChange={(e) => setMarketInfo({...marketInfo, description: e.target.value})}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="hours">Operating Hours</Label>
+                          <Input
+                            id="hours"
+                            value={marketInfo.operatingHours}
+                            onChange={(e) => setMarketInfo({...marketInfo, operatingHours: e.target.value})}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="radius">Delivery Radius</Label>
+                          <Input
+                            id="radius"
+                            value={marketInfo.deliveryRadius}
+                            onChange={(e) => setMarketInfo({...marketInfo, deliveryRadius: e.target.value})}
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="minOrder">Minimum Order (₹)</Label>
+                        <Input
+                          id="minOrder"
+                          value={marketInfo.minimumOrder}
+                          onChange={(e) => setMarketInfo({...marketInfo, minimumOrder: e.target.value})}
+                        />
+                      </div>
+                      <Button onClick={() => {
+                        setIsEditMarketOpen(false);
+                        alert("Market information updated successfully!");
+                      }} className="w-full">
+                        Update Market Info
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Store className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Market Name</span>
+                  </div>
+                  <p className="font-semibold">{marketInfo.name}</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Location</span>
+                  </div>
+                  <p className="font-semibold">{marketInfo.location}</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Operating Hours</span>
+                  </div>
+                  <p className="font-semibold">{marketInfo.operatingHours}</p>
+                </div>
+              </div>
+              <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+                <p className="text-sm">{marketInfo.description}</p>
+                <div className="flex gap-4 mt-2 text-sm text-muted-foreground">
+                  <span>Delivery: {marketInfo.deliveryRadius}</span>
+                  <span>Min Order: ₹{marketInfo.minimumOrder}</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Products Section */}
         <div className="lg:col-span-2">
           <Card>
@@ -417,7 +537,7 @@ export default function SupplierDashboard() {
                     </div>
                     <p className="text-sm font-medium">{order.customerName}</p>
                     <p className="text-sm text-muted-foreground mb-2">
-                      {order.items.length} items • ₹{order.total}
+                      {order.items.length} items �� ₹{order.total}
                     </p>
                     {order.status === 'pending' && (
                       <Button size="sm" onClick={() => confirmOrder(order.id)}>
