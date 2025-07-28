@@ -151,11 +151,7 @@ const App = () => (
               path="/supplier-signup"
               element={
                 <Layout>
-                  <PlaceholderPage
-                    title="Supplier Registration"
-                    description="Register as a fresh produce supplier"
-                    icon={<Store className="h-12 w-12 text-supplier" />}
-                  />
+                  <SupplierSignup />
                 </Layout>
               }
             />
