@@ -14,6 +14,7 @@ import SupplierStore from "./pages/SupplierStore";
 import Messages from "./pages/Messages";
 import Map from "./pages/Map";
 import SupplierDashboard from "./pages/SupplierDashboard";
+import SupplierSignup from "./pages/SupplierSignup";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 import {
