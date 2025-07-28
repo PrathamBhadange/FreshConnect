@@ -109,31 +109,37 @@ export default function Index() {
       name: "Fruits",
       count: "150+ suppliers",
       color: "bg-red-100 text-red-700",
+      icon: Apple,
     },
     {
       name: "Vegetables",
       count: "200+ suppliers",
       color: "bg-green-100 text-green-700",
+      icon: Carrot,
     },
     {
       name: "Spices",
       count: "80+ suppliers",
       color: "bg-yellow-100 text-yellow-700",
+      icon: ChefHat,
     },
     {
       name: "Grains",
       count: "60+ suppliers",
       color: "bg-amber-100 text-amber-700",
+      icon: Wheat,
     },
     {
       name: "Dairy",
       count: "45+ suppliers",
       color: "bg-blue-100 text-blue-700",
+      icon: Milk,
     },
     {
       name: "Meat",
       count: "30+ suppliers",
       color: "bg-pink-100 text-pink-700",
+      icon: Fish,
     },
   ];
 
