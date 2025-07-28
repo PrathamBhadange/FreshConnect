@@ -13,6 +13,7 @@ import Marketplace from "./pages/Marketplace";
 import SupplierStore from "./pages/SupplierStore";
 import Messages from "./pages/Messages";
 import Map from "./pages/Map";
+import SupplierDashboard from "./pages/SupplierDashboard";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 import {
