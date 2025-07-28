@@ -89,7 +89,7 @@ export default function Marketplace() {
   const [showCart, setShowCart] = useState(false);
   const [registeredSuppliers, setRegisteredSuppliers] = useState<RegisteredSupplier[]>([]);
 
-  // Handle URL search parameters
+  // Handle URL search parameters and load registered suppliers
   useEffect(() => {
     const searchParam = searchParams.get("search");
     const categoryParam = searchParams.get("category");
@@ -101,6 +101,11 @@ export default function Marketplace() {
     if (categoryParam) {
       setSelectedCategory(categoryParam);
     }
+
+    // Load registered suppliers
+    const loadedSuppliers = supplierService.getRegisteredSuppliers();
+    setRegisteredSuppliers(loadedSuppliers);
+    console.log(`Loaded ${loadedSuppliers.length} registered suppliers`);
   }, [searchParams]);
 
   // Mock data - in real app, this would come from API
