@@ -18,6 +18,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { toast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,6 +53,24 @@ import {
   Info,
   Truck,
   Store,
+  Heart,
+  Share2,
+  Bookmark,
+  Edit3,
+  Settings,
+  MoreVertical,
+  Users,
+  Award,
+  ThumbsUp,
+  TrendingUp,
+  Shield,
+  Gift,
+  Zap,
+  Target,
+  Camera,
+  Bell,
+  Menu,
+  X,
 } from "lucide-react";
 
 interface Product {
@@ -85,6 +118,11 @@ export default function SupplierStore() {
   const [messageSubject, setMessageSubject] = useState("");
   const [messageContent, setMessageContent] = useState("");
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+  const [isSupplierMenuOpen, setIsSupplierMenuOpen] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   // Mock data - in real app, this would come from API
   useEffect(() => {
@@ -284,7 +322,111 @@ export default function SupplierStore() {
                     </p>
                   </div>
 
-                  <div className="flex gap-2">
+                  {/* Amazon-style Action Icons */}
+                  <div className="flex items-center gap-2">
+                    {/* Supplier Menu */}
+                    <DropdownMenu open={isSupplierMenuOpen} onOpenChange={setIsSupplierMenuOpen}>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <Menu className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-56">
+                        <DropdownMenuLabel className="font-normal">
+                          <div className="flex flex-col space-y-1">
+                            <p className="text-sm font-medium leading-none">{supplier.name}</p>
+                            <p className="text-xs leading-none text-muted-foreground">Supplier Options</p>
+                          </div>
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => setIsEditMode(true)}>
+                          <Edit3 className="mr-2 h-4 w-4" />
+                          Edit Store
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => console.log('View Analytics')}>
+                          <TrendingUp className="mr-2 h-4 w-4" />
+                          View Analytics
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => console.log('Manage Inventory')}>
+                          <Settings className="mr-2 h-4 w-4" />
+                          Manage Inventory
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setShowNotifications(!showNotifications)}>
+                          <Bell className="mr-2 h-4 w-4" />
+                          Notifications
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => console.log('Store Settings')}>
+                          <Shield className="mr-2 h-4 w-4" />
+                          Store Settings
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    {/* Interactive Icons */}
+                    <TooltipProvider>
+                      <div className="flex gap-1">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => {
+                                setIsFollowing(!isFollowing);
+                                console.log(isFollowing ? 'Unfollowed supplier' : 'Following supplier');
+                              }}
+                              className={isFollowing ? 'bg-red-50 text-red-600 border-red-200' : ''}
+                            >
+                              <Heart className={`h-4 w-4 ${isFollowing ? 'fill-current' : ''}`} />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>{isFollowing ? 'Unfollow' : 'Follow'} this supplier</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => {
+                                setIsBookmarked(!isBookmarked);
+                                console.log(isBookmarked ? 'Removed bookmark' : 'Bookmarked supplier');
+                              }}
+                              className={isBookmarked ? 'bg-blue-50 text-blue-600 border-blue-200' : ''}
+                            >
+                              <Bookmark className={`h-4 w-4 ${isBookmarked ? 'fill-current' : ''}`} />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>{isBookmarked ? 'Remove bookmark' : 'Bookmark'} this supplier</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => {
+                                navigator.share && navigator.share({
+                                  title: supplier.name,
+                                  text: supplier.description,
+                                  url: window.location.href,
+                                }) || console.log('Shared supplier store');
+                              }}
+                            >
+                              <Share2 className="h-4 w-4" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Share this supplier</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </TooltipProvider>
+
                     <Dialog
                       open={isMessageDialogOpen}
                       onOpenChange={setIsMessageDialogOpen}
@@ -366,7 +508,8 @@ export default function SupplierStore() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                {/* Enhanced Stats with Amazon-style metrics */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm mb-4">
                   <div className="flex items-center gap-2">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <span className="font-medium">{supplier.rating}</span>
@@ -385,6 +528,28 @@ export default function SupplierStore() {
                   <div className="flex items-center gap-2">
                     <Truck className="h-4 w-4" />
                     <span>Min ₹{supplier.minimumOrder}</span>
+                  </div>
+                </div>
+
+                {/* Additional Amazon-style Stats */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                  <div className="flex items-center gap-2 text-green-600">
+                    <ThumbsUp className="h-4 w-4" />
+                    <span className="font-medium">98%</span>
+                    <span className="text-muted-foreground">Positive</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-blue-600">
+                    <Users className="h-4 w-4" />
+                    <span className="font-medium">2.5k+</span>
+                    <span className="text-muted-foreground">Orders</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-purple-600">
+                    <Award className="h-4 w-4" />
+                    <span className="font-medium">Top Rated</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-orange-600">
+                    <Zap className="h-4 w-4" />
+                    <span className="font-medium">Fast Delivery</span>
                   </div>
                 </div>
 
