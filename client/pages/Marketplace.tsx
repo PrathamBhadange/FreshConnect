@@ -442,7 +442,11 @@ export default function Marketplace() {
           <Button
             variant={viewMode === "suppliers" ? "default" : "outline"}
             size="sm"
-            onClick={() => setViewMode("suppliers")}
+            onClick={() => {
+              setViewMode("suppliers");
+              console.log(`Switched to suppliers view: ${filteredSuppliers.length} suppliers`);
+            }}
+            className="transition-all duration-200"
           >
             <Store className="mr-2 h-4 w-4" />
             Suppliers ({filteredSuppliers.length})
@@ -450,23 +454,49 @@ export default function Marketplace() {
           <Button
             variant={viewMode === "products" ? "default" : "outline"}
             size="sm"
-            onClick={() => setViewMode("products")}
+            onClick={() => {
+              setViewMode("products");
+              console.log(`Switched to products view: ${filteredProducts.length} products`);
+            }}
+            className="transition-all duration-200"
           >
             <ShoppingCart className="mr-2 h-4 w-4" />
             Products ({filteredProducts.length})
           </Button>
 
+          {/* Clear Filters Button */}
+          {(selectedCategory !== "all" || searchQuery.trim()) && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setSelectedCategory("all");
+                setSearchQuery("");
+                console.log("Filters cleared");
+              }}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X className="mr-2 h-4 w-4" />
+              Clear Filters
+            </Button>
+          )}
+
           {/* Cart Button */}
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setShowCart(!showCart)}
-            className="relative"
+            onClick={() => {
+              setShowCart(!showCart);
+              console.log(`Cart ${showCart ? 'closed' : 'opened'}: ${getTotalItems()} items`);
+            }}
+            className={`relative transition-all duration-200 ${
+              getTotalItems() > 0 ? 'ring-2 ring-orange-200 bg-orange-50' : ''
+            }`}
           >
             <ShoppingCart className="mr-2 h-4 w-4" />
             Cart
             {getTotalItems() > 0 && (
-              <Badge className="absolute -top-2 -right-2 h-5 w-5 p-0 text-xs">
+              <Badge className="absolute -top-2 -right-2 h-5 w-5 p-0 text-xs animate-pulse">
                 {getTotalItems()}
               </Badge>
             )}
