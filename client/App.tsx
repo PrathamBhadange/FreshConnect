@@ -162,11 +162,7 @@ const App = () => (
               path="/supplier-dashboard"
               element={
                 <Layout>
-                  <PlaceholderPage
-                    title="Supplier Dashboard"
-                    description="Manage your products and orders"
-                    icon={<Store className="h-12 w-12 text-supplier" />}
-                  />
+                  <SupplierDashboard />
                 </Layout>
               }
             />
