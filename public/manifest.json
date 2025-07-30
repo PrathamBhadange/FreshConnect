@@ -1,0 +1,172 @@
+{
+  "name": "FreshConnect - Professional Marketplace",
+  "short_name": "FreshConnect",
+  "description": "Professional marketplace connecting street food vendors with quality suppliers for fresh ingredients",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#10b981",
+  "background_color": "#ffffff",
+  "lang": "en-IN",
+  "scope": "/",
+  "categories": ["business", "food", "marketplace", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "FreshConnect Marketplace Desktop View"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "FreshConnect Marketplace Mobile View"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse Suppliers",
+      "short_name": "Suppliers",
+      "description": "Browse verified suppliers",
+      "url": "/marketplace?view=suppliers",
+      "icons": [
+        {
+          "src": "/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Search Products",
+      "short_name": "Products",
+      "description": "Search for products",
+      "url": "/marketplace?view=products",
+      "icons": [
+        {
+          "src": "/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "My Orders",
+      "short_name": "Orders",
+      "description": "View order history",
+      "url": "/orders",
+      "icons": [
+        {
+          "src": "/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "short_name": "Messages",
+      "description": "Chat with suppliers",
+      "url": "/messages",
+      "icons": [
+        {
+          "src": "/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "protocol_handlers": [
+    {
+      "protocol": "web+freshconnect",
+      "url": "/?action=%s"
+    }
+  ],
+  "edge_side_includes": [
+    {
+      "src": "/api/*"
+    }
+  ],
+  "splash_pages": null,
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "files",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  },
+  "file_handlers": [
+    {
+      "action": "/import",
+      "accept": {
+        "text/csv": [".csv"],
+        "application/json": [".json"]
+      }
+    }
+  ]
+}
