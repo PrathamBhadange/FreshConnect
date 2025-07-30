@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Marketplace from "./pages/Marketplace";
+import MarketplacePro from "./pages/MarketplacePro";
 import SupplierStore from "./pages/SupplierStore";
 import SupplierStoreEnhanced from "./pages/SupplierStoreEnhanced";
 import Messages from "./pages/Messages";
