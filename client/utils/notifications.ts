@@ -1,5 +1,4 @@
 import { toast } from '@/components/ui/use-toast';
-import { CheckCircle, AlertCircle, Info, AlertTriangle, X } from 'lucide-react';
 
 export interface NotificationOptions {
   title?: string;
@@ -18,14 +17,6 @@ export const showSuccess = (message: string, options?: NotificationOptions) => {
     description: message,
     duration: options?.duration || 5000,
     className: "border-green-200 bg-green-50",
-    action: options?.action ? (
-      <button
-        onClick={options.action.onClick}
-        className="inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-      >
-        {options.action.label}
-      </button>
-    ) : undefined,
   });
 };
 
@@ -36,14 +27,6 @@ export const showError = (message: string, options?: NotificationOptions) => {
     description: message,
     duration: options?.duration || 8000,
     variant: "destructive",
-    action: options?.action ? (
-      <button
-        onClick={options.action.onClick}
-        className="inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-      >
-        {options.action.label}
-      </button>
-    ) : undefined,
   });
 };
 
@@ -54,14 +37,6 @@ export const showWarning = (message: string, options?: NotificationOptions) => {
     description: message,
     duration: options?.duration || 6000,
     className: "border-yellow-200 bg-yellow-50",
-    action: options?.action ? (
-      <button
-        onClick={options.action.onClick}
-        className="inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-      >
-        {options.action.label}
-      </button>
-    ) : undefined,
   });
 };
 
@@ -72,14 +47,6 @@ export const showInfo = (message: string, options?: NotificationOptions) => {
     description: message,
     duration: options?.duration || 5000,
     className: "border-blue-200 bg-blue-50",
-    action: options?.action ? (
-      <button
-        onClick={options.action.onClick}
-        className="inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-      >
-        {options.action.label}
-      </button>
-    ) : undefined,
   });
 };
 
@@ -89,11 +56,7 @@ export const notifications = {
   supplierRegistered: (supplierName: string) => 
     showSuccess(`Welcome ${supplierName}! Your supplier account has been created successfully.`, {
       title: "Registration Complete",
-      duration: 7000,
-      action: {
-        label: "Go to Dashboard",
-        onClick: () => window.location.href = "/supplier-dashboard"
-      }
+      duration: 7000
     }),
 
   supplierUpdated: () => 
@@ -106,11 +69,7 @@ export const notifications = {
     showSuccess(`Order placed successfully! Total: ₹${orderTotal}`, {
       title: "Order Confirmed",
       description: `You will receive a confirmation call from ${supplierName} shortly.`,
-      duration: 8000,
-      action: {
-        label: "View Orders",
-        onClick: () => window.location.href = "/orders"
-      }
+      duration: 8000
     }),
 
   orderCancelled: () => 
@@ -160,11 +119,7 @@ export const notifications = {
   // Error notifications
   networkError: () => 
     showError("Network connection error. Please check your internet connection.", {
-      title: "Connection Failed",
-      action: {
-        label: "Retry",
-        onClick: () => window.location.reload()
-      }
+      title: "Connection Failed"
     }),
 
   validationError: (errors: string[]) => 
@@ -175,11 +130,7 @@ export const notifications = {
 
   serverError: () => 
     showError("Something went wrong on our end. Please try again later.", {
-      title: "Server Error",
-      action: {
-        label: "Contact Support",
-        onClick: () => window.location.href = "/contact"
-      }
+      title: "Server Error"
     }),
 
   // Loading states
@@ -224,11 +175,7 @@ export const notifications = {
 
   paymentFailed: () => 
     showError("Payment failed. Please try again or use a different payment method.", {
-      title: "Payment Failed",
-      action: {
-        label: "Retry Payment",
-        onClick: () => window.location.reload()
-      }
+      title: "Payment Failed"
     }),
 
   // Share notifications
@@ -272,9 +219,8 @@ export const showBatchNotification = (
 // Progressive notifications for long operations
 export const progressiveNotification = {
   start: (message: string) => {
-    const id = Date.now().toString();
     showInfo(`${message}...`, { duration: 2000 });
-    return id;
+    return Date.now().toString();
   },
   
   update: (message: string) => {
