@@ -25,9 +25,38 @@ interface SupplierFormData {
   minimumOrder: string;
   categories: string[];
   
+  // Payment Details
+  upiId: string;
+  qrCodeData: string;
+  acceptedPaymentMethods: string[];
+  
   // Terms
   agreeToTerms: boolean;
   agreeToQuality: boolean;
+}
+
+interface ProductWithDiscount {
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  unit: string;
+  stock: number;
+  image: string;
+  category: string;
+  fresh: boolean;
+  description?: string;
+  discount?: {
+    percentage: number;
+    validUntil?: string;
+    minQuantity?: number;
+    type: 'percentage' | 'fixed' | 'bulk';
+  };
+  bulkPricing?: {
+    minQuantity: number;
+    price: number;
+    discount: number;
+  }[];
 }
 
 interface RegisteredSupplier {
@@ -39,7 +68,7 @@ interface RegisteredSupplier {
   distance: string;
   deliveryTime: string;
   categories: string[];
-  products: any[];
+  products: ProductWithDiscount[];
   verified: boolean;
   image: string;
   location: string;
@@ -50,6 +79,16 @@ interface RegisteredSupplier {
   operatingHours: string;
   deliveryRadius: string;
   registeredAt: string;
+  paymentInfo: {
+    upiId: string;
+    qrCodeData: string;
+    acceptedPaymentMethods: string[];
+    bankDetails?: {
+      accountNumber: string;
+      ifscCode: string;
+      accountHolderName: string;
+    };
+  };
 }
 
 // Simulate a storage service (in real app would use database)
@@ -78,7 +117,7 @@ class SupplierStorageService {
       distance: this.calculateDistance(formData.city),
       deliveryTime: this.calculateDeliveryTime(formData.deliveryRadius),
       categories: this.mapCategoriesForDisplay(formData.categories),
-      products: this.generateDefaultProducts(formData.categories),
+      products: this.generateDefaultProductsWithDiscounts(formData.categories),
       verified: true, // Auto-verify for demo
       image: this.getSupplierImage(formData.categories),
       location: `${formData.city}, ${formData.state}`,
@@ -88,7 +127,17 @@ class SupplierStorageService {
       businessType: formData.businessType,
       operatingHours: formData.operatingHours,
       deliveryRadius: formData.deliveryRadius,
-      registeredAt: new Date().toISOString()
+      registeredAt: new Date().toISOString(),
+      paymentInfo: {
+        upiId: formData.upiId,
+        qrCodeData: formData.qrCodeData || this.generateQRCodeData(formData.upiId, formData.shopName),
+        acceptedPaymentMethods: formData.acceptedPaymentMethods,
+        bankDetails: formData.bankAccount && formData.ifscCode ? {
+          accountNumber: formData.bankAccount,
+          ifscCode: formData.ifscCode,
+          accountHolderName: formData.fullName
+        } : undefined
+      }
     };
 
     // Save to storage
@@ -136,79 +185,128 @@ class SupplierStorageService {
     return categories.map(cat => mapping[cat] || cat);
   }
 
-  private generateDefaultProducts(categories: string[]): any[] {
-    const productTemplates: { [key: string]: any[] } = {
+  private generateDefaultProductsWithDiscounts(categories: string[]): ProductWithDiscount[] {
+    const productTemplates: { [key: string]: ProductWithDiscount[] } = {
       'Fresh Vegetables': [
         {
           id: 'veg_1',
           name: 'Fresh Tomatoes',
-          price: 45,
+          price: 34,
+          originalPrice: 40,
           unit: 'kg',
           stock: 100,
           image: 'https://images.unsplash.com/photo-1546470427-227e13439cd0?w=300&h=300&fit=crop&crop=center',
           category: 'Vegetables',
-          fresh: true
+          fresh: true,
+          discount: {
+            percentage: 15,
+            validUntil: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+            type: 'percentage'
+          },
+          bulkPricing: [
+            { minQuantity: 10, price: 32, discount: 20 },
+            { minQuantity: 25, price: 30, discount: 25 }
+          ]
         },
         {
           id: 'veg_2',
           name: 'Organic Onions',
-          price: 38,
+          price: 30,
+          originalPrice: 35,
           unit: 'kg', 
           stock: 150,
           image: 'https://images.unsplash.com/photo-1508313880080-c4bec8ca91a4?w=300&h=300&fit=crop&crop=center',
           category: 'Vegetables',
-          fresh: true
+          fresh: true,
+          discount: {
+            percentage: 14,
+            type: 'percentage'
+          },
+          bulkPricing: [
+            { minQuantity: 15, price: 28, discount: 20 },
+            { minQuantity: 30, price: 26, discount: 26 }
+          ]
         }
       ],
       'Fresh Fruits': [
         {
           id: 'fruit_1',
           name: 'Fresh Apples',
-          price: 125,
+          price: 105,
+          originalPrice: 125,
           unit: 'kg',
           stock: 80,
           image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300&h=300&fit=crop&crop=center',
           category: 'Fruits',
-          fresh: true
+          fresh: true,
+          discount: {
+            percentage: 16,
+            validUntil: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+            type: 'percentage'
+          },
+          bulkPricing: [
+            { minQuantity: 5, price: 100, discount: 20 },
+            { minQuantity: 10, price: 95, discount: 24 }
+          ]
         },
         {
           id: 'fruit_2',
           name: 'Sweet Oranges',
-          price: 95,
+          price: 80,
+          originalPrice: 95,
           unit: 'kg',
           stock: 120,
           image: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=300&h=300&fit=crop&crop=center',
           category: 'Fruits',
-          fresh: true
+          fresh: true,
+          discount: {
+            percentage: 16,
+            type: 'percentage'
+          }
         }
       ],
       'Spices & Masalas': [
         {
           id: 'spice_1',
           name: 'Garam Masala',
-          price: 300,
+          price: 255,
+          originalPrice: 300,
           unit: 'kg',
           stock: 50,
           image: 'https://images.unsplash.com/photo-1599909533047-f58b8d68fa44?w=300&h=300&fit=crop&crop=center',
           category: 'Spices',
-          fresh: false
+          fresh: false,
+          discount: {
+            percentage: 15,
+            type: 'percentage'
+          },
+          bulkPricing: [
+            { minQuantity: 2, price: 240, discount: 20 },
+            { minQuantity: 5, price: 225, discount: 25 }
+          ]
         }
       ],
       'Dairy Products': [
         {
           id: 'dairy_1',
           name: 'Fresh Milk',
-          price: 60,
+          price: 52,
+          originalPrice: 60,
           unit: 'liter',
           stock: 200,
           image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&h=300&fit=crop&crop=center',
           category: 'Dairy',
-          fresh: true
+          fresh: true,
+          discount: {
+            percentage: 13,
+            minQuantity: 5,
+            type: 'bulk'
+          }
         }
       ]
     };
 
-    let products: any[] = [];
+    let products: ProductWithDiscount[] = [];
     categories.forEach(category => {
       const templates = productTemplates[category];
       if (templates) {
@@ -223,12 +321,17 @@ class SupplierStorageService {
       {
         id: `default_${Date.now()}`,
         name: 'Quality Product',
-        price: 100,
+        price: 85,
+        originalPrice: 100,
         unit: 'kg',
         stock: 50,
         image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=300&fit=crop&crop=center',
         category: 'General',
-        fresh: true
+        fresh: true,
+        discount: {
+          percentage: 15,
+          type: 'percentage'
+        }
       }
     ];
   }
@@ -251,10 +354,40 @@ class SupplierStorageService {
     return 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center';
   }
 
+  private generateQRCodeData(upiId: string, merchantName: string): string {
+    // Generate UPI QR code data format
+    if (!upiId) return '';
+    
+    const amount = ''; // Amount will be filled during payment
+    const transactionId = `TXN${Date.now()}`;
+    const note = `Payment to ${merchantName}`;
+    
+    // UPI QR Code format
+    return `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&tn=${encodeURIComponent(note)}&mc=0000&tid=${transactionId}&tr=${transactionId}`;
+  }
+
   // Get a specific supplier by ID
   getSupplierById(id: string): RegisteredSupplier | null {
     const suppliers = this.getRegisteredSuppliers();
     return suppliers.find(supplier => supplier.id === id) || null;
+  }
+
+  // Update supplier payment info
+  updateSupplierPaymentInfo(supplierId: string, paymentInfo: any): boolean {
+    try {
+      const suppliers = this.getRegisteredSuppliers();
+      const supplierIndex = suppliers.findIndex(supplier => supplier.id === supplierId);
+      
+      if (supplierIndex !== -1) {
+        suppliers[supplierIndex].paymentInfo = { ...suppliers[supplierIndex].paymentInfo, ...paymentInfo };
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(suppliers));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Failed to update payment info:', error);
+      return false;
+    }
   }
 
   // Clear all registered suppliers (for testing)
@@ -264,4 +397,4 @@ class SupplierStorageService {
 }
 
 export const supplierService = new SupplierStorageService();
-export type { SupplierFormData, RegisteredSupplier };
+export type { SupplierFormData, RegisteredSupplier, ProductWithDiscount };
