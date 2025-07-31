@@ -504,6 +504,20 @@ export default function SupplierSignup() {
                   ))}
                 </div>
               </div>
+              <div>
+                <p className="text-sm"><strong>Payment Methods:</strong></p>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {formData.acceptedPaymentMethods.map(method => (
+                    <Badge key={method} variant="outline" className="text-xs">{method}</Badge>
+                  ))}
+                </div>
+                {formData.upiId && (
+                  <p className="text-sm mt-2"><strong>UPI ID:</strong> {formData.upiId}</p>
+                )}
+                {formData.qrCodeData && (
+                  <p className="text-sm"><strong>QR Payment:</strong> <span className="text-green-600">✅ Setup Complete</span></p>
+                )}
+              </div>
             </div>
             
             <div className="space-y-4">
