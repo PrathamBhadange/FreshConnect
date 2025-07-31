@@ -33,7 +33,7 @@ export default function SupplierSignup() {
     fullName: "",
     email: "",
     phone: "",
-    
+
     // Shop/Business Information
     shopName: "",
     businessType: "",
@@ -42,19 +42,24 @@ export default function SupplierSignup() {
     city: "",
     state: "",
     pincode: "",
-    
+
     // Business Details
     gstNumber: "",
     fssaiLicense: "",
     bankAccount: "",
     ifscCode: "",
-    
+
     // Operational Details
     operatingHours: "",
     deliveryRadius: "",
     minimumOrder: "",
     categories: [] as string[],
-    
+
+    // Payment Details
+    upiId: "",
+    qrCodeData: "",
+    acceptedPaymentMethods: [] as string[],
+
     // Terms
     agreeToTerms: false,
     agreeToQuality: false
