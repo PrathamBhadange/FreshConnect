@@ -105,7 +105,7 @@ export default function SupplierSignup() {
   };
 
   const handleSubmit = () => {
-    if (currentStep < 4) {
+    if (currentStep < 5) {
       setCurrentStep(currentStep + 1);
     } else {
       try {
@@ -113,7 +113,7 @@ export default function SupplierSignup() {
         const registeredSupplier = supplierService.registerSupplier(formData);
         console.log("Supplier registered successfully:", registeredSupplier);
 
-        alert(`🎉 Registration Successful!\n\nWelcome to FreshConnect, ${formData.shopName}!\nYour supplier account has been created and you're now visible to vendors.\n\nSupplier ID: ${registeredSupplier.id}\n\nWhat's next:\n• You'll appear in marketplace search results\n• Vendors can now discover your products\n• Start receiving orders from local vendors`);
+        alert(`🎉 Registration Successful!\n\nWelcome to FreshConnect, ${formData.shopName}!\nYour supplier account has been created and you're now visible to vendors.\n\nSupplier ID: ${registeredSupplier.id}\nPayment QR: ${formData.qrCodeData ? 'Setup Complete' : 'Not Setup'}\n\nWhat's next:\n• You'll appear in marketplace search results\n• Vendors can now discover your products\n• Vendors can pay you via QR code\n• Start receiving orders from local vendors`);
 
         // Navigate to dashboard with the new supplier ID
         navigate(`/supplier-dashboard?id=${registeredSupplier.id}`);
