@@ -79,10 +79,29 @@ export default function SupplierSignup() {
   const handleCategoryToggle = (category: string) => {
     setFormData(prev => ({
       ...prev,
-      categories: prev.categories.includes(category) 
+      categories: prev.categories.includes(category)
         ? prev.categories.filter(c => c !== category)
         : [...prev.categories, category]
     }));
+  };
+
+  const handlePaymentMethodToggle = (method: string) => {
+    setFormData(prev => ({
+      ...prev,
+      acceptedPaymentMethods: prev.acceptedPaymentMethods.includes(method)
+        ? prev.acceptedPaymentMethods.filter(m => m !== method)
+        : [...prev.acceptedPaymentMethods, method]
+    }));
+  };
+
+  const generateQRCode = () => {
+    if (formData.upiId && formData.shopName) {
+      const qrData = `upi://pay?pa=${formData.upiId}&pn=${encodeURIComponent(formData.shopName)}&mc=0000`;
+      setFormData(prev => ({ ...prev, qrCodeData: qrData }));
+      alert("QR Code generated successfully! Vendors will see this QR code for payments.");
+    } else {
+      alert("Please enter UPI ID and Shop Name first.");
+    }
   };
 
   const handleSubmit = () => {
