@@ -86,7 +86,7 @@ const App = () => (
               path="/marketplace"
               element={
                 <Layout>
-                  <MarketplacePro />
+                  <MarketplaceEnhanced />
                 </Layout>
               }
             />
