@@ -133,6 +133,8 @@ export default function SupplierSignup() {
       case 3:
         return formData.operatingHours && formData.deliveryRadius && formData.categories.length > 0;
       case 4:
+        return formData.upiId && formData.acceptedPaymentMethods.length > 0;
+      case 5:
         return formData.agreeToTerms && formData.agreeToQuality;
       default:
         return false;
