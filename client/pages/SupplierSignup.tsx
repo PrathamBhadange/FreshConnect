@@ -391,6 +391,93 @@ export default function SupplierSignup() {
 
       case 4:
         return (
+          <div className="space-y-4">
+            <div className="text-center mb-6">
+              <div className="flex h-12 w-12 mx-auto bg-green-500 text-white rounded-lg items-center justify-center mb-2">
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold">Payment Setup</h2>
+              <p className="text-muted-foreground">Setup payment methods for receiving payments</p>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="upiId">UPI ID * (for QR payments)</Label>
+                <Input
+                  id="upiId"
+                  placeholder="yourname@paytm / yourname@gpay"
+                  value={formData.upiId}
+                  onChange={(e) => setFormData({...formData, upiId: e.target.value})}
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Vendors will use this to pay you via QR code
+                </p>
+              </div>
+
+              <div>
+                <Label>Accepted Payment Methods * (Select all that apply)</Label>
+                <div className="grid grid-cols-2 gap-2 mt-2">
+                  {['UPI/QR Code', 'Cash on Delivery', 'Bank Transfer', 'Digital Wallet', 'Credit/Debit Card'].map(method => (
+                    <div key={method} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={method}
+                        checked={formData.acceptedPaymentMethods.includes(method)}
+                        onCheckedChange={() => handlePaymentMethodToggle(method)}
+                      />
+                      <Label htmlFor={method} className="text-sm">{method}</Label>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {formData.acceptedPaymentMethods.map(method => (
+                    <Badge key={method} variant="secondary">{method}</Badge>
+                  ))}
+                </div>
+              </div>
+
+              {formData.upiId && (
+                <div className="space-y-2">
+                  <Label>QR Code for Payments</Label>
+                  <div className="flex items-center gap-4 p-4 border rounded-lg bg-muted/50">
+                    <div className="flex-1">
+                      {formData.qrCodeData ? (
+                        <div className="space-y-2">
+                          <p className="text-sm text-green-600 font-medium">✅ QR Code Generated</p>
+                          <p className="text-xs text-muted-foreground">
+                            Vendors will scan this QR code to pay you directly
+                          </p>
+                          <div className="text-xs font-mono bg-white p-2 rounded border">
+                            {formData.qrCodeData.substring(0, 50)}...
+                          </div>
+                        </div>
+                      ) : (
+                        <div>
+                          <p className="text-sm text-muted-foreground">Generate QR code for payments</p>
+                          <p className="text-xs text-muted-foreground">
+                            This QR code will be shown to vendors for easy payments
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <Button
+                      type="button"
+                      onClick={generateQRCode}
+                      variant={formData.qrCodeData ? "outline" : "default"}
+                      size="sm"
+                    >
+                      {formData.qrCodeData ? "Regenerate QR" : "Generate QR Code"}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+
+      case 5:
+        return (
           <div className="space-y-6">
             <div className="text-center mb-6">
               <CheckCircle className="h-12 w-12 mx-auto text-green-500 mb-2" />
