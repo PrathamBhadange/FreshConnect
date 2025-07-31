@@ -556,15 +556,15 @@ export default function SupplierSignup() {
       {/* Progress Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          {[1, 2, 3, 4].map((step) => (
+          {[1, 2, 3, 4, 5].map((step) => (
             <div key={step} className="flex items-center">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                 step <= currentStep ? 'bg-supplier text-white' : 'bg-muted text-muted-foreground'
               }`}>
                 {step < currentStep ? <CheckCircle className="h-4 w-4" /> : step}
               </div>
-              {step < 4 && (
-                <div className={`w-16 h-1 mx-2 ${
+              {step < 5 && (
+                <div className={`w-12 h-1 mx-2 ${
                   step < currentStep ? 'bg-supplier' : 'bg-muted'
                 }`} />
               )}
@@ -573,10 +573,11 @@ export default function SupplierSignup() {
         </div>
         <div className="text-center">
           <p className="text-sm text-muted-foreground">
-            Step {currentStep} of 4: {
+            Step {currentStep} of 5: {
               currentStep === 1 ? 'Personal Information' :
               currentStep === 2 ? 'Shop Information' :
-              currentStep === 3 ? 'Operational Details' : 'Review & Confirm'
+              currentStep === 3 ? 'Operational Details' :
+              currentStep === 4 ? 'Payment Setup' : 'Review & Confirm'
             }
           </p>
         </div>
