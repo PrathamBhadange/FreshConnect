@@ -265,30 +265,30 @@ export default function IndexEnhanced() {
 
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
-            <Badge variant="secondary" className="mb-4 bg-white/90 text-black">
+            <Badge variant="secondary" className="mb-4 bg-green-100 text-green-800 border border-green-200">
               <Sparkles className="mr-1 h-3 w-3" />
               Connecting Fresh • Building Communities
             </Badge>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-white drop-shadow-lg">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-gray-900">
               Fresh Ingredients,
-              <span className="text-green-400 block">Bulk Solutions</span>
+              <span className="text-green-600 block">Bulk Solutions</span>
             </h1>
 
             {/* Animated Bulk Purchasing Text */}
             <div className="mt-8 h-16 flex items-center justify-center">
-              <div className={`text-lg leading-8 text-yellow-300 max-w-3xl mx-auto drop-shadow font-medium transition-all duration-500 ${
+              <div className={`text-lg leading-8 text-green-700 max-w-3xl mx-auto font-medium transition-all duration-500 ${
                 isAnimating ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'
               }`}>
                 <div className="flex items-center justify-center gap-2">
-                  <Target className="h-5 w-5 text-yellow-400 animate-pulse" />
+                  <Target className="h-5 w-5 text-green-600 animate-pulse" />
                   <span className="capitalize">{animationTexts[currentAnimationText]}</span>
-                  <Zap className="h-5 w-5 text-yellow-400 animate-pulse" />
+                  <Zap className="h-5 w-5 text-green-600 animate-pulse" />
                 </div>
               </div>
             </div>
 
-            <p className="mt-6 text-lg leading-8 text-white/90 max-w-2xl mx-auto drop-shadow">
+            <p className="mt-6 text-lg leading-8 text-gray-700 max-w-2xl mx-auto">
               The marketplace that connects street food vendors with quality
               suppliers. Get fresh ingredients delivered, chat with suppliers,
               and grow your business.
