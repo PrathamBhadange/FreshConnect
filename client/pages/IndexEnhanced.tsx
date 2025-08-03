@@ -258,51 +258,180 @@ export default function IndexEnhanced() {
           }}></div>
         </div>
 
-        {/* Enhanced Floating Vegetables with 3D Effects */}
-        <div className="absolute inset-0 z-5">
-          {/* Tomato - Enhanced with glow */}
-          <div className="absolute top-20 left-10" style={{animationDuration: '3s'}}>
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 flex items-center justify-center shadow-2xl shadow-red-400/30 animate-bounce hover:scale-110 transition-all duration-300 backdrop-blur-sm border border-red-300/20">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-red-300/40 to-transparent"></div>
-              <svg className="w-10 h-10 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C8.5 2 6 4.5 6 8c0 2.5 1.5 4.5 3 6 1.5 1.5 3 3 3 6s1.5 4.5 3 4.5 3-2 3-4.5-1.5-4.5-3-6c1.5-1.5 3-3.5 3-6 0-3.5-2.5-6-6-6z"/>
-              </svg>
+        {/* Mini Realistic Floating Vegetables, Fruits & Groceries */}
+        <div className="absolute inset-0 z-5 opacity-60">
+          {/* Tomato */}
+          <div className="absolute top-20 left-10 animate-bounce" style={{animationDuration: '3s'}}>
+            <div className="text-2xl transform hover:scale-110 transition-all duration-300" title="Fresh Tomato">
+              🍅
             </div>
           </div>
 
-          {/* Carrot - Enhanced with glow */}
-          <div className="absolute top-1/4 right-16" style={{animationDelay: '1s', animationDuration: '4s'}}>
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 flex items-center justify-center shadow-2xl shadow-orange-400/30 animate-bounce hover:scale-110 transition-all duration-300 backdrop-blur-sm border border-orange-300/20">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-300/40 to-transparent"></div>
-              <Carrot className="w-8 h-8 text-white relative z-10" />
+          {/* Carrot */}
+          <div className="absolute top-1/4 right-16 animate-bounce" style={{animationDelay: '1s', animationDuration: '4s'}}>
+            <div className="text-2xl transform hover:scale-110 transition-all duration-300" title="Fresh Carrot">
+              🥕
             </div>
           </div>
 
-          {/* Leafy Green - Enhanced with glow */}
-          <div className="absolute top-1/3 left-1/4" style={{animationDelay: '2s', animationDuration: '3.5s'}}>
-            <div className="w-18 h-18 rounded-full bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center shadow-2xl shadow-green-400/30 animate-bounce hover:scale-110 transition-all duration-300 backdrop-blur-sm border border-green-300/20">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-300/40 to-transparent"></div>
-              <Leaf className="w-9 h-9 text-white relative z-10" />
+          {/* Broccoli */}
+          <div className="absolute top-1/3 left-1/4 animate-bounce" style={{animationDelay: '2s', animationDuration: '3.5s'}}>
+            <div className="text-2xl transform hover:scale-110 transition-all duration-300" title="Fresh Broccoli">
+              🥦
             </div>
           </div>
 
-          {/* Apple - Enhanced with glow */}
-          <div className="absolute bottom-1/3 right-1/4" style={{animationDelay: '0.5s', animationDuration: '3.8s'}}>
-            <div className="w-17 h-17 rounded-full bg-gradient-to-br from-red-500 via-red-600 to-red-700 flex items-center justify-center shadow-2xl shadow-red-500/30 animate-bounce hover:scale-110 transition-all duration-300 backdrop-blur-sm border border-red-400/20">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-red-400/40 to-transparent"></div>
-              <Apple className="w-8 h-8 text-white relative z-10" />
+          {/* Apple */}
+          <div className="absolute bottom-1/3 right-1/4 animate-bounce" style={{animationDelay: '0.5s', animationDuration: '3.8s'}}>
+            <div className="text-2xl transform hover:scale-110 transition-all duration-300" title="Fresh Apple">
+              🍎
             </div>
           </div>
 
-          {/* More enhanced floating vegetables... */}
-          <div className="absolute bottom-20 left-16" style={{animationDelay: '1.5s', animationDuration: '4.2s'}}>
-            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-300 via-purple-400 to-purple-500 flex items-center justify-center shadow-2xl shadow-purple-400/30 animate-bounce hover:scale-110 transition-all duration-300 backdrop-blur-sm border border-purple-300/20">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-200/40 to-transparent"></div>
-              <svg className="w-7 h-7 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="8"/>
-                <circle cx="12" cy="12" r="5"/>
-                <circle cx="12" cy="12" r="2"/>
-              </svg>
+          {/* Onion */}
+          <div className="absolute bottom-20 left-16 animate-bounce" style={{animationDelay: '1.5s', animationDuration: '4.2s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Onion">
+              🧅
+            </div>
+          </div>
+
+          {/* Bell Pepper */}
+          <div className="absolute top-3/4 right-12 animate-bounce" style={{animationDelay: '2.5s', animationDuration: '3.2s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Bell Pepper">
+              🫑
+            </div>
+          </div>
+
+          {/* Corn */}
+          <div className="absolute bottom-1/4 left-12 animate-bounce" style={{animationDelay: '3s', animationDuration: '3.6s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Corn">
+              🌽
+            </div>
+          </div>
+
+          {/* Eggplant */}
+          <div className="absolute top-2/3 left-1/3 animate-bounce" style={{animationDelay: '4s', animationDuration: '4.5s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Eggplant">
+              🍆
+            </div>
+          </div>
+
+          {/* Banana */}
+          <div className="absolute top-16 right-1/3 animate-bounce" style={{animationDelay: '0.8s', animationDuration: '3.4s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Banana">
+              🍌
+            </div>
+          </div>
+
+          {/* Orange */}
+          <div className="absolute bottom-1/2 left-8 animate-bounce" style={{animationDelay: '1.8s', animationDuration: '4.1s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Orange">
+              🍊
+            </div>
+          </div>
+
+          {/* Grapes */}
+          <div className="absolute top-1/2 right-20 animate-bounce" style={{animationDelay: '2.2s', animationDuration: '3.7s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Grapes">
+              🍇
+            </div>
+          </div>
+
+          {/* Potato */}
+          <div className="absolute bottom-2/3 right-8 animate-bounce" style={{animationDelay: '3.5s', animationDuration: '3.9s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Potato">
+              🥔
+            </div>
+          </div>
+
+          {/* Avocado */}
+          <div className="absolute top-1/5 left-20 animate-bounce" style={{animationDelay: '1.2s', animationDuration: '4.3s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Avocado">
+              🥑
+            </div>
+          </div>
+
+          {/* Cucumber */}
+          <div className="absolute bottom-1/5 right-1/3 animate-bounce" style={{animationDelay: '2.8s', animationDuration: '3.3s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Cucumber">
+              🥒
+            </div>
+          </div>
+
+          {/* Strawberry */}
+          <div className="absolute top-3/5 left-6 animate-bounce" style={{animationDelay: '0.3s', animationDuration: '4.4s'}}>
+            <div className="text-xl transform hover:scale-110 transition-all duration-300" title="Fresh Strawberry">
+              🍓
+            </div>
+          </div>
+
+          {/* Lemon */}
+          <div className="absolute bottom-3/5 left-1/5 animate-bounce" style={{animationDelay: '3.2s', animationDuration: '3.1s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Fresh Lemon">
+              🍋
+            </div>
+          </div>
+
+          {/* Pineapple */}
+          <div className="absolute top-4/5 right-1/5 animate-bounce" style={{animationDelay: '1.7s', animationDuration: '4.6s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Fresh Pineapple">
+              🍍
+            </div>
+          </div>
+
+          {/* Bread */}
+          <div className="absolute top-1/6 right-6 animate-bounce" style={{animationDelay: '2.9s', animationDuration: '3.8s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Fresh Bread">
+              🍞
+            </div>
+          </div>
+
+          {/* Milk */}
+          <div className="absolute bottom-1/6 left-1/2 animate-bounce" style={{animationDelay: '0.7s', animationDuration: '4.0s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Fresh Milk">
+              🥛
+            </div>
+          </div>
+
+          {/* Cheese */}
+          <div className="absolute top-2/5 right-1/2 animate-bounce" style={{animationDelay: '3.7s', animationDuration: '3.5s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Fresh Cheese">
+              🧀
+            </div>
+          </div>
+
+          {/* Rice */}
+          <div className="absolute bottom-2/5 right-4 animate-bounce" style={{animationDelay: '1.3s', animationDuration: '4.2s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Rice">
+              🍚
+            </div>
+          </div>
+
+          {/* Chili */}
+          <div className="absolute top-1/8 left-1/2 animate-bounce" style={{animationDelay: '2.1s', animationDuration: '3.6s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Spicy Chili">
+              🌶️
+            </div>
+          </div>
+
+          {/* Garlic */}
+          <div className="absolute bottom-1/8 left-4 animate-bounce" style={{animationDelay: '3.4s', animationDuration: '4.1s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Fresh Garlic">
+              🧄
+            </div>
+          </div>
+
+          {/* Coconut */}
+          <div className="absolute top-7/8 left-1/6 animate-bounce" style={{animationDelay: '0.9s', animationDuration: '3.7s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Fresh Coconut">
+              🥥
+            </div>
+          </div>
+
+          {/* Mango */}
+          <div className="absolute top-1/7 right-1/4 animate-bounce" style={{animationDelay: '2.6s', animationDuration: '4.3s'}}>
+            <div className="text-lg transform hover:scale-110 transition-all duration-300" title="Fresh Mango">
+              🥭
             </div>
           </div>
         </div>
