@@ -700,25 +700,25 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Enhanced CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white relative overflow-hidden">
+      <section className="py-12 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/50 to-green-800/50"></div>
         <div className="container text-center relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-6 sm:text-5xl">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-2xl font-bold mb-3 sm:text-3xl">
               Ready to Transform Your Business?
             </h2>
-            <p className="text-2xl text-white/90 mb-10 font-medium">
+            <p className="text-base text-white/90 mb-6 font-medium">
               Join thousands of vendors and suppliers already using FreshConnect
               to build better businesses.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="lg" variant="secondary" className="px-8 py-4 text-lg font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300" asChild>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button size="default" variant="secondary" className="px-4 py-2 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300" asChild>
                 <Link to="/vendor-signup">
                   <Truck className="mr-2 h-6 w-6" />
                   I'm a Vendor
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="px-8 py-4 text-lg font-semibold border-2 border-white text-white hover:bg-white hover:text-emerald-600 shadow-2xl hover:shadow-3xl transition-all duration-300" asChild>
+              <Button size="default" variant="outline" className="px-4 py-2 text-base font-semibold border border-white text-white hover:bg-white hover:text-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300" asChild>
                 <Link to="/supplier-signup">
                   <Store className="mr-2 h-6 w-6" />
                   I'm a Supplier
@@ -730,20 +730,20 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Enhanced Testimonials Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-10 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-green-50/50"></div>
         <div className="container relative z-10">
-          <div className="text-center mb-20">
-            <Badge variant="secondary" className="mb-6 bg-emerald-100 text-emerald-800 border border-emerald-200">
+          <div className="text-center mb-8">
+            <Badge variant="secondary" className="mb-3 bg-emerald-100 text-emerald-800 border border-emerald-200">
               <Star className="mr-2 h-4 w-4" />
               Success Stories
             </Badge>
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6 bg-gradient-to-r from-gray-900 to-emerald-800 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mb-3 bg-gradient-to-r from-gray-900 to-emerald-800 bg-clip-text text-transparent">
               What Our Users Say
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               {
                 name: "Rajesh Kumar",
@@ -765,16 +765,16 @@ export default function IndexEnhanced() {
               },
             ].map((testimonial, index) => (
               <Card key={index} className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 bg-white/90 backdrop-blur-sm">
-                <CardContent className="p-8">
+                <CardContent className="p-4">
                   <div className="flex items-center mb-6">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
                       <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-gray-600 mb-6 text-lg font-medium">"{testimonial.content}"</p>
+                  <p className="text-gray-600 mb-3 text-sm font-medium">"{testimonial.content}"</p>
                   <div>
-                    <p className="font-bold text-lg">{testimonial.name}</p>
-                    <p className="text-emerald-600 font-medium">{testimonial.role}</p>
+                    <p className="font-bold text-base">{testimonial.name}</p>
+                    <p className="text-sm text-emerald-600 font-medium">{testimonial.role}</p>
                   </div>
                 </CardContent>
               </Card>
