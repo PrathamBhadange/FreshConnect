@@ -615,24 +615,24 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Enhanced Categories Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-10 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 to-emerald-50/50"></div>
         <div className="container relative z-10">
-          <div className="text-center mb-20">
-            <Badge variant="secondary" className="mb-6 bg-emerald-100 text-emerald-800 border border-emerald-200">
+          <div className="text-center mb-8">
+            <Badge variant="secondary" className="mb-3 bg-emerald-100 text-emerald-800 border border-emerald-200">
               <Leaf className="mr-2 h-4 w-4" />
               Fresh Categories
             </Badge>
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6 bg-gradient-to-r from-gray-900 to-emerald-800 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mb-3 bg-gradient-to-r from-gray-900 to-emerald-800 bg-clip-text text-transparent">
               Shop by Category
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-medium">
+            <p className="text-base text-gray-600 max-w-2xl mx-auto font-medium">
               Discover fresh ingredients across multiple categories from verified
               suppliers in your area.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {categories.map((category, index) => (
               <Card
                 key={category.id}
@@ -642,14 +642,14 @@ export default function IndexEnhanced() {
                 }
               >
                 <CardHeader className="pb-4">
-                  <div className={`inline-flex w-16 h-16 items-center justify-center rounded-2xl bg-gradient-to-br ${category.gradient} group-hover:${category.hoverGradient} text-white mb-6 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-xl`}>
+                  <div className={`inline-flex w-10 h-10 items-center justify-center rounded-xl bg-gradient-to-br ${category.gradient} group-hover:${category.hoverGradient} text-white mb-3 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg`}>
                     <div className="absolute inset-0 bg-white/20 rounded-2xl"></div>
                     <div className="relative z-10">{category.icon}</div>
                   </div>
-                  <CardTitle className="group-hover:text-emerald-600 transition-colors duration-300 text-xl">
+                  <CardTitle className="group-hover:text-emerald-600 transition-colors duration-300 text-base">
                     {category.name}
                   </CardTitle>
-                  <CardDescription className="text-base">{category.description}</CardDescription>
+                  <CardDescription className="text-sm">{category.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center text-emerald-600 group-hover:text-emerald-700 font-semibold">
