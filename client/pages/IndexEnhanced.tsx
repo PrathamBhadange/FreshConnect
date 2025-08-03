@@ -339,11 +339,11 @@ export default function IndexEnhanced() {
                 />
 
                 {showSuggestions && suggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-sm border border-gray-200 rounded-lg shadow-xl z-50">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-green-200 rounded-lg shadow-xl z-50">
                     {suggestions.map((suggestion, index) => (
                       <button
                         key={index}
-                        className="w-full px-4 py-2 text-left hover:bg-gray-100 first:rounded-t-lg last:rounded-b-lg transition-colors"
+                        className="w-full px-4 py-2 text-left hover:bg-green-50 first:rounded-t-lg last:rounded-b-lg transition-colors"
                         onClick={() => {
                           setSearchQuery(suggestion);
                           handleSearch(suggestion);
@@ -351,8 +351,8 @@ export default function IndexEnhanced() {
                         }}
                       >
                         <div className="flex items-center gap-2">
-                          <Search className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-black">{suggestion}</span>
+                          <Search className="h-4 w-4 text-green-600" />
+                          <span className="text-gray-900">{suggestion}</span>
                         </div>
                       </button>
                     ))}
