@@ -389,16 +389,22 @@ export default function IndexEnhanced() {
         </div>
 
         {/* Floating Animation Elements */}
-        <div className="absolute bottom-10 left-1/4 animate-pulse opacity-30">
-          <div className="flex items-center gap-2 text-white">
-            <Package className="h-6 w-6" />
+        <div className="absolute bottom-10 left-1/4 animate-pulse opacity-50">
+          <div className="flex items-center gap-2 text-green-600 bg-white/80 rounded-full px-4 py-2 shadow-lg backdrop-blur-sm">
+            <Package className="h-5 w-5" />
             <span className="text-sm font-medium">Bulk Orders</span>
           </div>
         </div>
-        <div className="absolute bottom-20 right-1/4 animate-pulse opacity-30" style={{animationDelay: '1s'}}>
-          <div className="flex items-center gap-2 text-white">
-            <DollarSign className="h-6 w-6" />
+        <div className="absolute bottom-20 right-1/4 animate-pulse opacity-50" style={{animationDelay: '1s'}}>
+          <div className="flex items-center gap-2 text-green-600 bg-white/80 rounded-full px-4 py-2 shadow-lg backdrop-blur-sm">
+            <DollarSign className="h-5 w-5" />
             <span className="text-sm font-medium">Best Prices</span>
+          </div>
+        </div>
+        <div className="absolute top-1/2 right-8 animate-pulse opacity-50" style={{animationDelay: '2s'}}>
+          <div className="flex items-center gap-2 text-green-600 bg-white/80 rounded-full px-4 py-2 shadow-lg backdrop-blur-sm">
+            <Leaf className="h-5 w-5" />
+            <span className="text-sm font-medium">Fresh Daily</span>
           </div>
         </div>
       </section>
