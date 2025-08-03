@@ -664,34 +664,34 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Enhanced Features Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-emerald-50 relative overflow-hidden">
+      <section className="py-10 bg-gradient-to-br from-gray-50 to-emerald-50 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/30 to-green-100/30"></div>
         <div className="container relative z-10">
-          <div className="text-center mb-20">
-            <Badge variant="secondary" className="mb-6 bg-emerald-100 text-emerald-800 border border-emerald-200">
+          <div className="text-center mb-8">
+            <Badge variant="secondary" className="mb-3 bg-emerald-100 text-emerald-800 border border-emerald-200">
               <CheckCircle className="mr-2 h-4 w-4" />
               Why Choose Us
             </Badge>
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6 bg-gradient-to-r from-gray-900 to-emerald-800 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mb-3 bg-gradient-to-r from-gray-900 to-emerald-800 bg-clip-text text-transparent">
               Built for Street Food Success
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-medium">
+            <p className="text-base text-gray-600 max-w-2xl mx-auto font-medium">
               Everything you need to source fresh ingredients and grow your
               street food business.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {features.map((feature, index) => (
               <Card key={index} className="text-center border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 bg-white/90 backdrop-blur-sm">
                 <CardHeader className="pb-4">
-                  <div className={`inline-flex w-20 h-20 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.bgGradient} mb-6 ${feature.color} mx-auto group-hover:scale-110 transition-transform duration-300 shadow-xl`}>
+                  <div className={`inline-flex w-12 h-12 items-center justify-center rounded-xl bg-gradient-to-br ${feature.bgGradient} mb-3 ${feature.color} mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg`}>
                     {feature.icon}
                   </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  <CardTitle className="text-base">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 font-medium">{feature.description}</p>
+                  <p className="text-sm text-gray-600 font-medium">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
