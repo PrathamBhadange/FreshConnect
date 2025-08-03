@@ -228,7 +228,7 @@ export default function IndexEnhanced() {
   return (
     <div className="min-h-screen overflow-hidden">
       {/* Hero Section with Enhanced Background */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-emerald-50 via-white to-green-100">
+      <section className="relative py-8 lg:py-12 bg-gradient-to-br from-emerald-50 via-white to-green-100">
         {/* Advanced Background Effects */}
         <div className="absolute inset-0 z-0">
           {/* Primary gradient overlay */}
@@ -446,7 +446,7 @@ export default function IndexEnhanced() {
               <Heart className="ml-2 h-4 w-4 text-red-500" />
             </Badge>
 
-            <h1 className="text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl text-gray-900 mb-8">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-gray-900 mb-4">
               <span className="bg-gradient-to-r from-gray-900 via-green-800 to-emerald-900 bg-clip-text text-transparent">
                 Fresh Ingredients,
               </span>
@@ -456,21 +456,21 @@ export default function IndexEnhanced() {
             </h1>
 
             {/* Enhanced Animated Bulk Purchasing Text */}
-            <div className="mt-8 h-20 flex items-center justify-center">
+            <div className="mt-4 h-12 flex items-center justify-center">
               <div className={`text-xl leading-8 text-emerald-700 max-w-4xl mx-auto font-semibold transition-all duration-700 ${
                 isAnimating ? 'opacity-0 transform translate-y-6 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
               }`}>
-                <div className="flex items-center justify-center gap-3 p-4 bg-white/60 rounded-2xl backdrop-blur-sm border border-green-200/50 shadow-xl">
-                  <Target className="h-6 w-6 text-emerald-600" />
+                <div className="flex items-center justify-center gap-2 p-2 bg-white/60 rounded-xl backdrop-blur-sm border border-green-200/50 shadow-lg">
+                  <Target className="h-4 w-4 text-emerald-600" />
                   <span className="capitalize bg-gradient-to-r from-emerald-700 to-green-800 bg-clip-text text-transparent">
                     {animationTexts[currentAnimationText]}
                   </span>
-                  <Zap className="h-6 w-6 text-yellow-500" />
+                  <Zap className="h-4 w-4 text-yellow-500" />
                 </div>
               </div>
             </div>
 
-            <p className="mt-8 text-xl leading-9 text-gray-700 max-w-3xl mx-auto font-medium">
+            <p className="mt-4 text-base leading-6 text-gray-700 max-w-2xl mx-auto font-medium">
               The marketplace that connects street food vendors with quality
               suppliers. Get fresh ingredients delivered, chat with suppliers,
               and grow your business with <span className="text-emerald-600 font-bold">confidence</span>.
@@ -478,7 +478,7 @@ export default function IndexEnhanced() {
 
             {/* Enhanced Search Bar */}
             <div
-              className="mt-12 flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto"
+              className="mt-6 flex flex-col sm:flex-row gap-3 justify-center max-w-xl mx-auto"
               ref={searchRef}
             >
               <div className="relative flex-1">
@@ -518,7 +518,7 @@ export default function IndexEnhanced() {
                       setShowSuggestions(false);
                     }
                   }}
-                  className="pl-12 pr-4 py-4 text-lg bg-white/90 border-2 border-emerald-200 text-gray-900 shadow-2xl focus:ring-4 focus:ring-emerald-300/50 rounded-2xl backdrop-blur-sm hover:shadow-3xl transition-all duration-300"
+                  className="pl-10 pr-3 py-2 text-base bg-white/90 border border-emerald-200 text-gray-900 shadow-lg focus:ring-2 focus:ring-emerald-300/50 rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300"
                 />
 
                 {showSuggestions && suggestions.length > 0 && (
@@ -543,8 +543,8 @@ export default function IndexEnhanced() {
 
               <Button
                 onClick={() => handleSearch()}
-                size="lg"
-                className="px-8 py-4 text-lg bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 rounded-2xl"
+                size="default"
+                className="px-4 py-2 text-base bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
               >
                 <Search className="mr-2 h-5 w-5" />
                 Search Now
@@ -552,7 +552,7 @@ export default function IndexEnhanced() {
             </div>
 
             {/* Enhanced Quick Action Buttons */}
-            <div className="mt-10 flex flex-wrap gap-4 justify-center">
+            <div className="mt-6 flex flex-wrap gap-3 justify-center">
               <Button variant="outline" className="bg-white/80 text-emerald-700 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-400 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
                 <MapPin className="mr-2 h-4 w-4" />
                 Find Nearby Suppliers
