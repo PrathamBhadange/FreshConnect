@@ -183,32 +183,83 @@ export default function IndexEnhanced() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with New Background */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
-        {/* New Background Image - Street Food Market */}
+      {/* Hero Section with Fresh White/Green Background */}
+      <section className="relative overflow-hidden py-20 lg:py-32 bg-gradient-to-br from-white via-green-50 to-green-100">
+        {/* Fresh Background Pattern */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1555992336-03a23c7ce637?w=1920&h=1080&fit=crop&crop=center&q=80"
-            alt="Bustling street food market with vendors and suppliers"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-green-900/30 via-transparent to-blue-900/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 via-white/90 to-green-100/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-green-200/20 via-transparent to-green-300/10"></div>
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-5" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, #10b981 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}></div>
         </div>
 
-        {/* Animated Background Elements */}
+        {/* Floating Vegetables Animation */}
         <div className="absolute inset-0 z-5">
-          <div className="absolute top-20 left-10 animate-bounce opacity-20">
-            <div className="w-16 h-16 bg-green-500 rounded-full animate-pulse" />
+          {/* Tomato */}
+          <div className="absolute top-20 left-10 animate-bounce opacity-60" style={{animationDuration: '3s'}}>
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C8.5 2 6 4.5 6 8c0 2.5 1.5 4.5 3 6 1.5 1.5 3 3 3 6s1.5 4.5 3 4.5 3-2 3-4.5-1.5-4.5-3-6c1.5-1.5 3-3.5 3-6 0-3.5-2.5-6-6-6z"/>
+              </svg>
+            </div>
           </div>
-          <div className="absolute bottom-20 right-10 animate-bounce opacity-20" style={{animationDelay: '1s'}}>
-            <div className="w-12 h-12 bg-orange-500 rounded-full animate-pulse" />
+
+          {/* Carrot */}
+          <div className="absolute top-1/4 right-16 animate-bounce opacity-60" style={{animationDelay: '1s', animationDuration: '4s'}}>
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg">
+              <Carrot className="w-6 h-6 text-white" />
+            </div>
           </div>
-          <div className="absolute top-1/3 right-20 animate-bounce opacity-20" style={{animationDelay: '2s'}}>
-            <div className="w-8 h-8 bg-red-500 rounded-full animate-pulse" />
+
+          {/* Leafy Green */}
+          <div className="absolute top-1/3 left-1/4 animate-bounce opacity-60" style={{animationDelay: '2s', animationDuration: '3.5s'}}>
+            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg">
+              <Leaf className="w-7 h-7 text-white" />
+            </div>
           </div>
-          <div className="absolute bottom-1/3 left-20 animate-bounce opacity-20" style={{animationDelay: '0.5s'}}>
-            <div className="w-10 h-10 bg-blue-500 rounded-full animate-pulse" />
+
+          {/* Apple */}
+          <div className="absolute bottom-1/3 right-1/4 animate-bounce opacity-60" style={{animationDelay: '0.5s', animationDuration: '3.8s'}}>
+            <div className="w-13 h-13 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg">
+              <Apple className="w-6 h-6 text-white" />
+            </div>
+          </div>
+
+          {/* Onion */}
+          <div className="absolute bottom-20 left-16 animate-bounce opacity-60" style={{animationDelay: '1.5s', animationDuration: '4.2s'}}>
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-300 to-purple-500 flex items-center justify-center shadow-lg">
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8"/>
+                <circle cx="12" cy="12" r="5"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+            </div>
+          </div>
+
+          {/* Chili Pepper */}
+          <div className="absolute top-3/4 right-12 animate-bounce opacity-60" style={{animationDelay: '2.5s', animationDuration: '3.2s'}}>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-lg">
+              <ChefHat className="w-4 h-4 text-white" />
+            </div>
+          </div>
+
+          {/* Corn */}
+          <div className="absolute bottom-1/4 left-12 animate-bounce opacity-60" style={{animationDelay: '3s', animationDuration: '3.6s'}}>
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg">
+              <Wheat className="w-5 h-5 text-white" />
+            </div>
+          </div>
+
+          {/* Eggplant */}
+          <div className="absolute top-2/3 left-1/3 animate-bounce opacity-60" style={{animationDelay: '4s', animationDuration: '4.5s'}}>
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center shadow-lg">
+              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2c-2 0-4 1-4 3v8c0 4 2 6 4 6s4-2 4-6V5c0-2-2-3-4-3z"/>
+              </svg>
+            </div>
           </div>
         </div>
 
