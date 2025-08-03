@@ -234,12 +234,12 @@ export default function IndexEnhanced() {
           {/* Primary gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/90 via-white/95 to-green-100/90"></div>
           
-          {/* Animated gradient mesh */}
-          <div className="absolute inset-0 bg-gradient-to-r from-green-200/20 via-emerald-300/10 to-teal-200/15 animate-pulse"></div>
-          
+          {/* Gradient mesh */}
+          <div className="absolute inset-0 bg-gradient-to-r from-green-200/20 via-emerald-300/10 to-teal-200/15"></div>
+
           {/* Radial gradients for depth */}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-green-300/30 to-transparent rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-emerald-400/25 to-transparent rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-green-300/30 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-emerald-400/25 to-transparent rounded-full blur-3xl"></div>
           
           {/* Interactive mouse follow effect */}
           <div 
@@ -436,35 +436,21 @@ export default function IndexEnhanced() {
           </div>
         </div>
 
-        {/* Particle Animation Background */}
-        <div className="absolute inset-0 z-1">
-          {Array.from({ length: 15 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-2 h-2 bg-green-400/20 rounded-full animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
-              }}
-            />
-          ))}
-        </div>
+
 
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
-            <Badge variant="secondary" className="mb-6 bg-white/80 text-emerald-800 border border-emerald-200 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
-              <Sparkles className="mr-2 h-4 w-4 animate-pulse" />
+            <Badge variant="secondary" className="mb-6 bg-white/80 text-emerald-800 border border-emerald-200 backdrop-blur-sm shadow-lg">
+              <Sparkles className="mr-2 h-4 w-4" />
               <span className="font-semibold">Connecting Fresh • Building Communities</span>
-              <Heart className="ml-2 h-4 w-4 text-red-500 animate-pulse" />
+              <Heart className="ml-2 h-4 w-4 text-red-500" />
             </Badge>
 
             <h1 className="text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl text-gray-900 mb-8">
               <span className="bg-gradient-to-r from-gray-900 via-green-800 to-emerald-900 bg-clip-text text-transparent">
                 Fresh Ingredients,
               </span>
-              <span className="block bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent animate-pulse">
+              <span className="block bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 Bulk Solutions
               </span>
             </h1>
@@ -475,11 +461,11 @@ export default function IndexEnhanced() {
                 isAnimating ? 'opacity-0 transform translate-y-6 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
               }`}>
                 <div className="flex items-center justify-center gap-3 p-4 bg-white/60 rounded-2xl backdrop-blur-sm border border-green-200/50 shadow-xl">
-                  <Target className="h-6 w-6 text-emerald-600 animate-spin" style={{animationDuration: '3s'}} />
+                  <Target className="h-6 w-6 text-emerald-600" />
                   <span className="capitalize bg-gradient-to-r from-emerald-700 to-green-800 bg-clip-text text-transparent">
                     {animationTexts[currentAnimationText]}
                   </span>
-                  <Zap className="h-6 w-6 text-yellow-500 animate-bounce" />
+                  <Zap className="h-6 w-6 text-yellow-500" />
                 </div>
               </div>
             </div>
@@ -583,23 +569,23 @@ export default function IndexEnhanced() {
           </div>
         </div>
 
-        {/* Enhanced Floating Animation Elements */}
-        <div className="absolute bottom-10 left-1/4 animate-pulse opacity-70">
-          <div className="flex items-center gap-3 text-emerald-600 bg-white/90 rounded-full px-6 py-3 shadow-2xl backdrop-blur-sm border border-emerald-200/50 hover:scale-105 transition-all duration-300">
+        {/* Floating Information Elements */}
+        <div className="absolute bottom-10 left-1/4 opacity-70">
+          <div className="flex items-center gap-3 text-emerald-600 bg-white/90 rounded-full px-6 py-3 shadow-2xl backdrop-blur-sm border border-emerald-200/50">
             <Package className="h-6 w-6" />
             <span className="text-sm font-bold">Bulk Orders</span>
             <Gift className="h-5 w-5 text-orange-500" />
           </div>
         </div>
-        <div className="absolute bottom-20 right-1/4 animate-pulse opacity-70" style={{animationDelay: '1s'}}>
-          <div className="flex items-center gap-3 text-emerald-600 bg-white/90 rounded-full px-6 py-3 shadow-2xl backdrop-blur-sm border border-emerald-200/50 hover:scale-105 transition-all duration-300">
+        <div className="absolute bottom-20 right-1/4 opacity-70">
+          <div className="flex items-center gap-3 text-emerald-600 bg-white/90 rounded-full px-6 py-3 shadow-2xl backdrop-blur-sm border border-emerald-200/50">
             <DollarSign className="h-6 w-6" />
             <span className="text-sm font-bold">Best Prices</span>
             <Award className="h-5 w-5 text-yellow-500" />
           </div>
         </div>
-        <div className="absolute top-1/2 right-8 animate-pulse opacity-70" style={{animationDelay: '2s'}}>
-          <div className="flex items-center gap-3 text-emerald-600 bg-white/90 rounded-full px-6 py-3 shadow-2xl backdrop-blur-sm border border-emerald-200/50 hover:scale-105 transition-all duration-300">
+        <div className="absolute top-1/2 right-8 opacity-70">
+          <div className="flex items-center gap-3 text-emerald-600 bg-white/90 rounded-full px-6 py-3 shadow-2xl backdrop-blur-sm border border-emerald-200/50">
             <Leaf className="h-6 w-6" />
             <span className="text-sm font-bold">Fresh Daily</span>
             <Flame className="h-5 w-5 text-red-500" />
