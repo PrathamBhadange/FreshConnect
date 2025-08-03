@@ -594,20 +594,20 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Enhanced Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-emerald-50 via-white to-green-50 relative overflow-hidden">
+      <section className="py-8 bg-gradient-to-r from-emerald-50 via-white to-green-50 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/30 to-green-100/30"></div>
         <div className="container relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {stats.map((stat, index) => (
               <div key={index} className="text-center group">
-                <div className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br ${stat.gradient} text-white rounded-2xl mb-6 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-2xl`}>
+                <div className={`inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br ${stat.gradient} text-white rounded-xl mb-3 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg`}>
                   <div className="absolute inset-0 bg-white/20 rounded-2xl"></div>
                   <div className="relative z-10">{stat.icon}</div>
                 </div>
-                <div className="text-4xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors duration-300">
+                <div className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors duration-300">
                   {stat.value}
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
