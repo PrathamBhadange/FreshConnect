@@ -335,7 +335,7 @@ export default function IndexEnhanced() {
                       setShowSuggestions(false);
                     }
                   }}
-                  className="pl-10 bg-white/95 backdrop-blur-sm border-0 text-black shadow-xl"
+                  className="pl-10 bg-white border border-green-200 text-gray-900 shadow-lg focus:ring-2 focus:ring-green-300"
                 />
 
                 {showSuggestions && suggestions.length > 0 && (
