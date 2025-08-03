@@ -372,15 +372,15 @@ export default function IndexEnhanced() {
 
             {/* Quick Action Buttons */}
             <div className="mt-8 flex flex-wrap gap-4 justify-center">
-              <Button variant="outline" className="bg-white/90 text-black border-0 hover:bg-white">
+              <Button variant="outline" className="bg-white text-green-700 border-green-200 hover:bg-green-50 hover:border-green-300">
                 <MapPin className="mr-2 h-4 w-4" />
                 Find Nearby Suppliers
               </Button>
-              <Button variant="outline" className="bg-white/90 text-black border-0 hover:bg-white">
+              <Button variant="outline" className="bg-white text-green-700 border-green-200 hover:bg-green-50 hover:border-green-300">
                 <Package className="mr-2 h-4 w-4" />
                 Bulk Orders
               </Button>
-              <Button variant="outline" className="bg-white/90 text-black border-0 hover:bg-white">
+              <Button variant="outline" className="bg-white text-green-700 border-green-200 hover:bg-green-50 hover:border-green-300">
                 <Timer className="mr-2 h-4 w-4" />
                 Express Delivery
               </Button>
