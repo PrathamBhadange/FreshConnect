@@ -295,7 +295,7 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-emerald-50 via-white to-green-50">
+      <section className="py-16 bg-gradient-to-r from-green-100 via-emerald-100 to-green-200">
         <div className="container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -303,10 +303,10 @@ export default function IndexEnhanced() {
                 <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${stat.gradient} text-white rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                   {stat.icon}
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                <div className="text-3xl font-bold text-green-900 mb-2 group-hover:text-green-600 transition-colors">
                   {stat.value}
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-green-700 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
