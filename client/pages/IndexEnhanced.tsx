@@ -396,24 +396,24 @@ export default function IndexEnhanced() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white">
+      <section className="py-20 bg-white">
         <div className="container text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
               Ready to Transform Your Business?
             </h2>
-            <p className="text-xl text-white/90 mb-8">
+            <p className="text-xl text-gray-700 mb-10 font-medium">
               Join thousands of vendors and suppliers already using FreshConnect
               to build better businesses.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" asChild>
+              <Button size="lg" className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300" asChild>
                 <Link to="/vendor-signup">
                   <Truck className="mr-2 h-5 w-5" />
                   I'm a Vendor
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-green-600" asChild>
+              <Button size="lg" variant="outline" className="border-green-500 text-green-600 hover:bg-green-50 hover:border-green-600 shadow-lg hover:shadow-xl transition-all duration-300" asChild>
                 <Link to="/supplier-signup">
                   <Store className="mr-2 h-5 w-5" />
                   I'm a Supplier
