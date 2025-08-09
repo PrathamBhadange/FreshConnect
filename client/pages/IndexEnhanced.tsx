@@ -361,17 +361,17 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br from-green-50/40 to-emerald-100/60">
+      <section className="py-20 bg-gradient-to-br from-green-200/70 to-emerald-200/90">
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-4 bg-green-100 text-green-800 border border-green-200">
               <CheckCircle className="mr-1 h-3 w-3" />
               Why Choose Us
             </Badge>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4 text-green-900">
               Built for Street Food Success
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-green-700 max-w-2xl mx-auto">
               Everything you need to source fresh ingredients and grow your
               street food business.
             </p>
@@ -379,15 +379,15 @@ export default function IndexEnhanced() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center border border-green-100 bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <Card key={index} className="text-center border border-green-200 bg-green-50/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <div className={`inline-flex w-16 h-16 items-center justify-center rounded-full bg-green-50 mb-4 ${feature.color} mx-auto`}>
+                  <div className={`inline-flex w-16 h-16 items-center justify-center rounded-full bg-green-100 mb-4 ${feature.color} mx-auto`}>
                     {feature.icon}
                   </div>
-                  <CardTitle className="text-lg">{feature.title}</CardTitle>
+                  <CardTitle className="text-lg text-green-800">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <p className="text-green-600">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
