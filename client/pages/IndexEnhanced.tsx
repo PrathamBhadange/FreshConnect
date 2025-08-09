@@ -168,10 +168,10 @@ export default function IndexEnhanced() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-16 lg:py-24 bg-gradient-to-br from-emerald-50 via-white to-green-100">
+      <section className="relative py-16 lg:py-24 bg-gradient-to-br from-green-100 via-emerald-50 to-green-200">
         {/* Clean Background */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/90 via-white/95 to-green-100/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-green-100/95 via-emerald-50/90 to-green-200/95"></div>
           <div className="absolute inset-0 opacity-5" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, #10b981 1px, transparent 0)`,
             backgroundSize: '40px 40px'
@@ -180,13 +180,13 @@ export default function IndexEnhanced() {
 
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
-            <Badge variant="secondary" className="mb-6 bg-white/80 text-emerald-800 border border-emerald-200">
+            <Badge variant="secondary" className="mb-6 bg-green-100/90 text-green-800 border border-green-300">
               <Sparkles className="mr-2 h-4 w-4" />
               <span className="font-semibold">Connecting Fresh • Building Communities</span>
             </Badge>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-gray-900 via-green-800 to-emerald-900 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-green-900 mb-6">
+              <span className="bg-gradient-to-r from-green-800 via-emerald-800 to-green-900 bg-clip-text text-transparent">
                 Fresh Ingredients,
               </span>
               <span className="block bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -194,7 +194,7 @@ export default function IndexEnhanced() {
               </span>
             </h1>
 
-            <p className="mt-6 text-lg leading-8 text-gray-700 max-w-3xl mx-auto font-medium">
+            <p className="mt-6 text-lg leading-8 text-green-800 max-w-3xl mx-auto font-medium">
               The marketplace that connects street food vendors with quality
               suppliers. Get fresh ingredients delivered, chat with suppliers,
               and grow your business with <span className="text-emerald-600 font-bold">confidence</span>.
