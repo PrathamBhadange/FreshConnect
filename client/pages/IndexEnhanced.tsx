@@ -168,10 +168,10 @@ export default function IndexEnhanced() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-16 lg:py-24 bg-gradient-to-br from-green-100 via-white to-green-200">
+      <section className="relative py-16 lg:py-24 bg-gradient-to-br from-emerald-50 via-white to-green-100">
         {/* Clean Background */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-green-100/95 via-white/95 to-green-200/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/90 via-white/95 to-green-100/90"></div>
           <div className="absolute inset-0 opacity-5" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, #10b981 1px, transparent 0)`,
             backgroundSize: '40px 40px'
@@ -180,7 +180,7 @@ export default function IndexEnhanced() {
 
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
-            <Badge variant="secondary" className="mb-6 bg-green-100/90 text-green-800 border border-green-300">
+            <Badge variant="secondary" className="mb-6 bg-white/80 text-green-800 border border-green-200">
               <Sparkles className="mr-2 h-4 w-4" />
               <span className="font-semibold">Connecting Fresh • Building Communities</span>
             </Badge>
@@ -242,7 +242,7 @@ export default function IndexEnhanced() {
                       setShowSuggestions(false);
                     }
                   }}
-                  className="pl-12 pr-4 py-3 text-lg bg-green-50/95 border border-green-300 text-green-900 shadow-lg focus:ring-2 focus:ring-green-400/50 rounded-xl"
+                  className="pl-12 pr-4 py-3 text-lg bg-white/90 border border-green-200 text-green-900 shadow-lg focus:ring-2 focus:ring-green-300/50 rounded-xl"
                 />
 
                 {showSuggestions && suggestions.length > 0 && (
@@ -277,15 +277,15 @@ export default function IndexEnhanced() {
 
             {/* Quick Action Buttons */}
             <div className="mt-8 flex flex-wrap gap-4 justify-center">
-              <Button variant="outline" className="bg-green-100/80 text-green-700 border-green-300 hover:bg-green-200 hover:border-green-400">
+              <Button variant="outline" className="bg-white/80 text-green-700 border-green-200 hover:bg-green-50 hover:border-green-300">
                 <MapPin className="mr-2 h-4 w-4" />
                 Find Nearby Suppliers
               </Button>
-              <Button variant="outline" className="bg-green-100/80 text-green-700 border-green-300 hover:bg-green-200 hover:border-green-400">
+              <Button variant="outline" className="bg-white/80 text-green-700 border-green-200 hover:bg-green-50 hover:border-green-300">
                 <Package className="mr-2 h-4 w-4" />
                 Bulk Orders
               </Button>
-              <Button variant="outline" className="bg-green-100/80 text-green-700 border-green-300 hover:bg-green-200 hover:border-green-400">
+              <Button variant="outline" className="bg-white/80 text-green-700 border-green-200 hover:bg-green-50 hover:border-green-300">
                 <Timer className="mr-2 h-4 w-4" />
                 Express Delivery
               </Button>
@@ -295,7 +295,7 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-green-100 via-white to-green-200">
+      <section className="py-16 bg-gradient-to-r from-emerald-50 via-white to-green-50">
         <div className="container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -361,7 +361,7 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br from-green-100 via-white to-green-100">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-emerald-50">
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-4 bg-green-100 text-green-800 border border-green-200">
