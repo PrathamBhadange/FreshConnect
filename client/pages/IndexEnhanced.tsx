@@ -396,7 +396,7 @@ export default function IndexEnhanced() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white">
         <div className="container text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold mb-4">
@@ -413,7 +413,7 @@ export default function IndexEnhanced() {
                   I'm a Vendor
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-600" asChild>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-green-600" asChild>
                 <Link to="/supplier-signup">
                   <Store className="mr-2 h-5 w-5" />
                   I'm a Supplier
@@ -425,14 +425,14 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-green-50/20 to-emerald-50/40">
+      <section className="py-20 bg-gradient-to-br from-green-100/50 to-emerald-100/70">
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-4 bg-green-100 text-green-800 border border-green-200">
               <Star className="mr-1 h-3 w-3" />
               Success Stories
             </Badge>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4 text-green-900">
               What Our Users Say
             </h2>
           </div>
@@ -458,17 +458,17 @@ export default function IndexEnhanced() {
                 rating: 5,
               },
             ].map((testimonial, index) => (
-              <Card key={index} className="border border-green-100 bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
+              <Card key={index} className="border border-green-200 bg-green-50/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-4">"{testimonial.content}"</p>
+                  <p className="text-green-700 mb-4">"{testimonial.content}"</p>
                   <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    <p className="font-semibold text-green-800">{testimonial.name}</p>
+                    <p className="text-sm text-green-600">{testimonial.role}</p>
                   </div>
                 </CardContent>
               </Card>
