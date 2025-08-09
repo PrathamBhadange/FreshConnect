@@ -314,17 +314,17 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-gradient-to-br from-green-50/30 to-emerald-50/50">
+      <section className="py-20 bg-gradient-to-br from-green-100/60 to-emerald-100/80">
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-4 bg-green-100 text-green-800 border border-green-200">
               <Leaf className="mr-1 h-3 w-3" />
               Fresh Categories
             </Badge>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4 text-green-900">
               Shop by Category
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-green-700 max-w-2xl mx-auto">
               Discover fresh ingredients across multiple categories from verified
               suppliers in your area.
             </p>
@@ -334,7 +334,7 @@ export default function IndexEnhanced() {
             {categories.map((category, index) => (
               <Card
                 key={category.id}
-                className="group cursor-pointer border-2 border-green-100 bg-white/80 backdrop-blur-sm hover:border-emerald-200 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                className="group cursor-pointer border-2 border-green-200 bg-green-50/90 backdrop-blur-sm hover:border-green-300 transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 onClick={() =>
                   navigate(`/marketplace?category=${category.id}`)
                 }
@@ -343,13 +343,13 @@ export default function IndexEnhanced() {
                   <div className={`inline-flex w-12 h-12 items-center justify-center rounded-lg bg-gradient-to-br ${category.gradient} text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
                     {category.icon}
                   </div>
-                  <CardTitle className="group-hover:text-emerald-600 transition-colors">
+                  <CardTitle className="group-hover:text-green-600 transition-colors text-green-800">
                     {category.name}
                   </CardTitle>
-                  <CardDescription>{category.description}</CardDescription>
+                  <CardDescription className="text-green-600">{category.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center text-sm text-emerald-600 group-hover:text-emerald-700">
+                  <div className="flex items-center text-sm text-green-600 group-hover:text-green-700">
                     <span>Browse products</span>
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </div>
