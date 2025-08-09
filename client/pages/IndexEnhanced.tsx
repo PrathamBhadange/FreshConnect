@@ -168,10 +168,10 @@ export default function IndexEnhanced() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-16 lg:py-24 bg-gradient-to-br from-green-100 via-emerald-50 to-green-200">
+      <section className="relative py-16 lg:py-24 bg-gradient-to-br from-green-100 via-white to-green-200">
         {/* Clean Background */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-green-100/95 via-emerald-50/90 to-green-200/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-green-100/95 via-white/95 to-green-200/95"></div>
           <div className="absolute inset-0 opacity-5" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, #10b981 1px, transparent 0)`,
             backgroundSize: '40px 40px'
@@ -295,7 +295,7 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-green-100 via-emerald-100 to-green-200">
+      <section className="py-16 bg-gradient-to-r from-green-100 via-white to-green-200">
         <div className="container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -314,7 +314,7 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-gradient-to-br from-green-100/60 to-emerald-100/80">
+      <section className="py-20 bg-white">
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-4 bg-green-100 text-green-800 border border-green-200">
@@ -334,7 +334,7 @@ export default function IndexEnhanced() {
             {categories.map((category, index) => (
               <Card
                 key={category.id}
-                className="group cursor-pointer border-2 border-green-200 bg-green-50/90 backdrop-blur-sm hover:border-green-300 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                className="group cursor-pointer border-2 border-green-200 bg-white hover:border-green-300 transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 onClick={() =>
                   navigate(`/marketplace?category=${category.id}`)
                 }
@@ -361,7 +361,7 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br from-green-200/70 to-emerald-200/90">
+      <section className="py-20 bg-gradient-to-br from-green-100 via-white to-green-100">
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-4 bg-green-100 text-green-800 border border-green-200">
@@ -379,7 +379,7 @@ export default function IndexEnhanced() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center border border-green-200 bg-green-50/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <Card key={index} className="text-center border border-green-200 bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <CardHeader>
                   <div className={`inline-flex w-16 h-16 items-center justify-center rounded-full bg-green-100 mb-4 ${feature.color} mx-auto`}>
                     {feature.icon}
@@ -425,7 +425,7 @@ export default function IndexEnhanced() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-green-100/50 to-emerald-100/70">
+      <section className="py-20 bg-white">
         <div className="container">
           <div className="text-center mb-16">
             <Badge variant="secondary" className="mb-4 bg-green-100 text-green-800 border border-green-200">
@@ -458,7 +458,7 @@ export default function IndexEnhanced() {
                 rating: 5,
               },
             ].map((testimonial, index) => (
-              <Card key={index} className="border border-green-200 bg-green-50/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
+              <Card key={index} className="border border-green-200 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
