@@ -242,7 +242,7 @@ export default function IndexEnhanced() {
                       setShowSuggestions(false);
                     }
                   }}
-                  className="pl-12 pr-4 py-3 text-lg bg-white/90 border border-emerald-200 text-gray-900 shadow-lg focus:ring-2 focus:ring-emerald-300/50 rounded-xl"
+                  className="pl-12 pr-4 py-3 text-lg bg-green-50/95 border border-green-300 text-green-900 shadow-lg focus:ring-2 focus:ring-green-400/50 rounded-xl"
                 />
 
                 {showSuggestions && suggestions.length > 0 && (
@@ -258,7 +258,7 @@ export default function IndexEnhanced() {
                         }}
                       >
                         <Search className="h-4 w-4 text-emerald-600" />
-                        <span className="text-gray-900 font-medium">{suggestion}</span>
+                        <span className="text-green-900 font-medium">{suggestion}</span>
                       </button>
                     ))}
                   </div>
@@ -268,7 +268,7 @@ export default function IndexEnhanced() {
               <Button
                 onClick={() => handleSearch()}
                 size="lg"
-                className="px-6 py-3 text-lg bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                className="px-6 py-3 text-lg bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
               >
                 <Search className="mr-2 h-5 w-5" />
                 Search Now
@@ -277,15 +277,15 @@ export default function IndexEnhanced() {
 
             {/* Quick Action Buttons */}
             <div className="mt-8 flex flex-wrap gap-4 justify-center">
-              <Button variant="outline" className="bg-white/80 text-emerald-700 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-400">
+              <Button variant="outline" className="bg-green-100/80 text-green-700 border-green-300 hover:bg-green-200 hover:border-green-400">
                 <MapPin className="mr-2 h-4 w-4" />
                 Find Nearby Suppliers
               </Button>
-              <Button variant="outline" className="bg-white/80 text-emerald-700 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-400">
+              <Button variant="outline" className="bg-green-100/80 text-green-700 border-green-300 hover:bg-green-200 hover:border-green-400">
                 <Package className="mr-2 h-4 w-4" />
                 Bulk Orders
               </Button>
-              <Button variant="outline" className="bg-white/80 text-emerald-700 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-400">
+              <Button variant="outline" className="bg-green-100/80 text-green-700 border-green-300 hover:bg-green-200 hover:border-green-400">
                 <Timer className="mr-2 h-4 w-4" />
                 Express Delivery
               </Button>
